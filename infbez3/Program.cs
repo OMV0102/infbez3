@@ -85,7 +85,7 @@ namespace infbez3
             }
             catch (Exception error)
             {
-
+                MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return heshString;
