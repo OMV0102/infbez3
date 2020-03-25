@@ -33,6 +33,7 @@ namespace infbez3
 
     public static class alg
     {
+        // функция для хэширования массива байт заданным алгоритмом, на выходе 16-ричная строка
         public static string HeshAlg(Byte[] arrayByte_in, string selectedAlgHesh)
         {
             byte[] arrayByte_out = new byte[0]; // Выходная последовательность байт после хеширования
@@ -90,6 +91,8 @@ namespace infbez3
 
             return heshString;
         }
+
+
     }
 
 }

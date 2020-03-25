@@ -39,49 +39,9 @@ namespace infbez3
         }
 
         // кнопка ПРОЧИТАТЬ ИЗ ФАЙЛА при ХЭШИРОВАНИИ
-        private void btn_choice_filein_Click(object sender, EventArgs e)
+        private void btn_choice_fileinHesh_Click(object sender, EventArgs e)
         {
-            // нажимаем кнопку очистить
-            this.btn_clear_Hesh_byte_in_Click(null, null);
 
-            string tmp = "";
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Выбрать файл ..."; // Заголовок окна
-            ofd.InitialDirectory = Application.StartupPath; // Папка проекта
-
-            if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
-            {
-                // читаем байты из файла
-                if (ofd.FileName.Length > 0) // Если путь не нулевой
-                {
-                    if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
-                    {
-                        // Считали байты из файла
-                        global.Hesh_byte_in = File.ReadAllBytes(ofd.FileName);
-                        this.txt_byte_in_num.Text = global.Hesh_byte_in.Length.ToString(); // Вывели кол-во считанный байт
-                        this.txt_hesh_file_in.Text = ofd.FileName; // вывели путь в textbox
-
-                        // если автохэширование вкл
-                        if(this.checkBox_autoHesh.Checked == true)
-                        {
-                            // кнопка хэшировать
-                            this.btn_Hesh_get_Click(null, null);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Файла {" + ofd.FileName + "} не существует!", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-                else
-                {
-                    this.Enabled = false;
-                    MessageBox.Show("Указан неверный путь!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.Enabled = true;
-                    return;
-                }
-            }
         }
 
         // кнопка ОЧИСТИТЬ у ХЭШИРОВАНИЯ
@@ -128,8 +88,8 @@ namespace infbez3
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.InitialDirectory = Application.StartupPath;
-            sfd.Filter = "Text files(*.txt)|*.txt";
-            sfd.AddExtension = true;
+            sfd.Filter = "Text files(*.txt)|*.txt"; // Сохранять только как текстовые файлы
+            sfd.AddExtension = true;  //Добавить расширение к имени если не указали
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -141,7 +101,15 @@ namespace infbez3
                 this.Enabled = false;
                 MessageBox.Show("Хеш записан в файл:\n" + filename, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Enabled = true;
+                this.btn_SimmEncrypt_Click(null, null);
             }
+        }
+
+        // кнопка ШИФРОВАТЬ Симметрично
+        private void btn_SimmEncrypt_Click(object sender, EventArgs e)
+        {
+            AesExample.example();
+           
         }
     }
 }
