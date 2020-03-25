@@ -29,7 +29,6 @@ namespace infbez3
     {
         // Блок переменный для хэширования
         public static byte[] Hesh_byte_in; // Входной массив байтов для хэширования
-        public static string selectedHeshName = "";
     }
 
     public static class alg
@@ -39,48 +38,55 @@ namespace infbez3
             byte[] arrayByte_out = new byte[0]; // Выходная последовательность байт после хеширования
             string heshString = ""; // Хеш строка (16 ричный вид)
 
-            switch (selectedAlgHesh) // Получение хеша определенным алгоритмом
+            try
             {
-                case "MD5":
-                    MD5 md5 = MD5.Create();
-                    arrayByte_out = md5.ComputeHash(arrayByte_in);
-                    md5.Dispose();
-                    break;
 
-                case "RIPEMD160":
-                    RIPEMD160 ripemd160 = RIPEMD160.Create();
-                    arrayByte_out = ripemd160.ComputeHash(arrayByte_in);
-                    ripemd160.Dispose();
-                    break;
+                switch (selectedAlgHesh) // Получение хеша определенным алгоритмом
+                {
+                    case "MD5":
+                        MD5 md5 = MD5.Create();
+                        arrayByte_out = md5.ComputeHash(arrayByte_in);
+                        md5.Dispose();
+                        break;
 
-                case "SHA1":
-                    SHA1 sha1 = SHA1.Create();
-                    arrayByte_out = sha1.ComputeHash(arrayByte_in);
-                    sha1.Dispose();
-                    break;
+                    case "RIPEMD160":
+                        RIPEMD160 ripemd160 = RIPEMD160.Create();
+                        arrayByte_out = ripemd160.ComputeHash(arrayByte_in);
+                        ripemd160.Dispose();
+                        break;
 
-                case "SHA256":
-                    SHA256 sha256 = SHA256.Create();
-                    arrayByte_out = sha256.ComputeHash(arrayByte_in);
-                    sha256.Dispose();
-                    break;
+                    case "SHA1":
+                        SHA1 sha1 = SHA1.Create();
+                        arrayByte_out = sha1.ComputeHash(arrayByte_in);
+                        sha1.Dispose();
+                        break;
 
-                case "SHA384":
-                    SHA384 sha384 = SHA384.Create();
-                    arrayByte_out = sha384.ComputeHash(arrayByte_in);
-                    sha384.Dispose();
-                    break;
+                    case "SHA256":
+                        SHA256 sha256 = SHA256.Create();
+                        arrayByte_out = sha256.ComputeHash(arrayByte_in);
+                        sha256.Dispose();
+                        break;
 
-                case "SHA512":
-                    SHA512 sha512 = SHA512.Create();
-                    arrayByte_out = sha512.ComputeHash(arrayByte_in);
-                    sha512.Dispose();
-                    break;
+                    case "SHA384":
+                        SHA384 sha384 = SHA384.Create();
+                        arrayByte_out = sha384.ComputeHash(arrayByte_in);
+                        sha384.Dispose();
+                        break;
 
-                default: break;
+                    case "SHA512":
+                        SHA512 sha512 = SHA512.Create();
+                        arrayByte_out = sha512.ComputeHash(arrayByte_in);
+                        sha512.Dispose();
+                        break;
+
+                    default: break;
+                }
+                heshString = BitConverter.ToString(arrayByte_out).Replace("-", "");
             }
-            heshString = BitConverter.ToString(arrayByte_out).Replace("-", "");
+            catch (Exception error)
+            {
 
+            }
 
             return heshString;
         }
