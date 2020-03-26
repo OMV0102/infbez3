@@ -404,7 +404,6 @@
             this.comboBox_SimmAlg.FormattingEnabled = true;
             this.comboBox_SimmAlg.Items.AddRange(new object[] {
             "AES",
-            "DES",
             "3DES"});
             this.comboBox_SimmAlg.Location = new System.Drawing.Point(56, 270);
             this.comboBox_SimmAlg.MaxDropDownItems = 10;

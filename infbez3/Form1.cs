@@ -25,7 +25,9 @@ namespace infbez3
         {
             this.checkBox_autoHesh.Checked = false; // автохэширование выкл по дефолту
             this.btn_clear_Hesh_byte_in_Click(null, null); // очистили входные поля (кнопка очистить)
-            this.comboBox_HeshAlg.SelectedIndex = 0; // 
+            this.comboBox_HeshAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм хэширования
+            //======================================
+            this.comboBox_SimmAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм Симм. шифрования
         }
 
         // ВЫБОР метода хэширования
@@ -108,8 +110,16 @@ namespace infbez3
         // кнопка ШИФРОВАТЬ Симметрично
         private void btn_SimmEncrypt_Click(object sender, EventArgs e)
         {
-            AesExample.example();
-           
+            //AesExample.example();
+
+            byte[] myMessage = new byte[3] { 97, 98, 99 }; // допустим мое сообщение из 3 байт
+
+            byte[] messageEncrypt;
+            byte[] messageDecrypt;
+
+            messageEncrypt = alg.SimmAlg(myMessage, new byte[0], new byte[0], comboBox_SimmAlg.SelectedItem.ToString(), true);
+            
+
         }
     }
 }

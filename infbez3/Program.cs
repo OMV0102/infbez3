@@ -25,12 +25,6 @@ namespace infbez3
         }
     }
 
-    public static class global
-    {
-        // Блок переменный для хэширования
-        public static byte[] Hesh_byte_in; // Входной массив байтов для хэширования
-    }
-
     public static class alg
     {
         // функция для хэширования массива байт заданным алгоритмом, на выходе 16-ричная строка
@@ -91,7 +85,93 @@ namespace infbez3
 
             return heshString;
         }
+        
+        
+        public static Byte[] SimmAlg(Byte[] arrayByte_in, Byte[] key, Byte[] iv, string selectedAlgSimm, bool EncryptIsTrue)
+        {
+            byte[] arrayByte_out = new byte[0]; // Выходная последовательность байт после шифрования/расшифровки
+            ICryptoTransform cryptoTransform = null;
 
+            try
+            {
+
+                switch (selectedAlgSimm) // Получение хеша определенным алгоритмом
+                {
+                    case "AES":
+                        AesCng aescng = new AesCng(); // объект класса у алгоритма AES
+                        if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
+                         {
+                            if (key == null || key.Length != 32) // если ключ не по формату
+                            {
+                                aescng.GenerateKey(); // генерируем ключ
+                                global.Simm_byte_key = aescng.Key;
+                            }
+                            else
+                                aescng.Key = key; // иначе присваиваем ключ из аргумента
+
+                            if (iv == null || iv.Length != 16) // если вектор не по формату
+                            {
+                                aescng.GenerateIV(); // генерируем вектор инициализации
+                                global.Simm_byte_iv = aescng.IV;
+                            }
+                            else
+                                aescng.IV = iv; // иначе присваиваем вектор из аргумента
+                            // создали объект-шифратор с ключом и вектором
+                            cryptoTransform = aescng.CreateEncryptor(aescng.Key, aescng.IV); 
+                            // зашифровали сообщение
+                            arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
+
+                        }
+                        else  // если вызвали для РАСшифровки AES
+                        {
+
+                        }
+                        aescng.Dispose(); // освобождаем ресурсы
+                        cryptoTransform.Dispose(); // освобождаем ресурсы
+                        break;
+
+                    case "3DES":
+                        TripleDESCng tripledescng = new TripleDESCng(); // объект класса у алгоритма AES
+                        if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
+                        {
+                            if (key == null || key.Length != 32) // если ключ не по формату
+                            {
+                                tripledescng.GenerateKey(); // генерируем ключ
+                                global.Simm_byte_key = tripledescng.Key;
+                            }
+                            else
+                                tripledescng.Key = key; // иначе присваиваем ключ из аргумента
+
+                            if (iv == null || iv.Length != 16) // если вектор не по формату
+                            {
+                                tripledescng.GenerateIV(); // генерируем вектор инициализации
+                                global.Simm_byte_iv = tripledescng.IV;
+                            }
+                            else
+                                tripledescng.IV = iv; // иначе присваиваем вектор из аргумента
+                            // создали объект-шифратор с ключом и вектором
+                            cryptoTransform = tripledescng.CreateEncryptor(tripledescng.Key, tripledescng.IV);
+                            // зашифровали сообщение
+                            arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
+
+                        }
+                        else  // если вызвали для РАСшифровки 3DES
+                        {
+
+                        }
+                        tripledescng.Dispose(); // освобождаем ресурсы
+                        cryptoTransform.Dispose(); // освобождаем ресурсы
+                        break;
+
+                    default: break;
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return arrayByte_out;
+        }
 
     }
 
