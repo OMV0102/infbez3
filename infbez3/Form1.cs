@@ -43,7 +43,45 @@ namespace infbez3
         // кнопка ПРОЧИТАТЬ ИЗ ФАЙЛА при ХЭШИРОВАНИИ
         private void btn_choice_fileinHesh_Click(object sender, EventArgs e)
         {
+            string tmp = "";
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Выбрать файл ..."; // Заголовок окна
+            ofd.InitialDirectory = Application.StartupPath; // Папка проекта
 
+            if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
+            {
+                // читаем байты из файла
+                if (ofd.FileName.Length > 0) // Если путь не нулевой
+                {
+                    if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
+                    {
+                        // Считали байты из файла
+                        global.Hesh_byte_in = File.ReadAllBytes(ofd.FileName);
+                        this.txt_byte_in_num.Text = global.Hesh_byte_in.Length.ToString(); // Вывели кол-во считанный байт
+                        this.txt_hesh_file_in.Text = ofd.FileName; // вывели путь в textbox
+                        this.toolTip.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
+
+                        // если автохэширование вкл
+                        if (this.checkBox_autoHesh.Checked == true)
+                        {
+                            // кнопка хэшировать
+                            this.btn_Hesh_get_Click(null, null);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Файла {" + ofd.FileName + "} не существует!", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Указан неверный путь!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
+            }
         }
 
         // кнопка ОЧИСТИТЬ у ХЭШИРОВАНИЯ
@@ -56,6 +94,9 @@ namespace infbez3
                 global.Hesh_byte_in = new byte[0]; // выделили память под входной массив байт у хэширования
             // Кол-во считанных байт для хэширование 0
             this.txt_byte_in_num.Text = (0).ToString();
+            // Очистили входной файл
+            this.txt_hesh_file_in.Text = "";
+            this.toolTip.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
             // Очистили хеш на форме
             this.txt_Hesh_out.Text = "";
 
@@ -110,8 +151,6 @@ namespace infbez3
         // кнопка ШИФРОВАТЬ Симметрично
         private void btn_SimmEncrypt_Click(object sender, EventArgs e)
         {
-            //AesExample.example();
-
             byte[] myMessage = new byte[3] { 97, 98, 99 }; // допустим мое сообщение из 3 байт
 
             byte[] messageEncrypt;

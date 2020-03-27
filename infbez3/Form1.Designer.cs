@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_Hesh = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,6 +64,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tab_AsimAlg = new System.Windows.Forms.TabPage();
             this.tab_eds = new System.Windows.Forms.TabPage();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
@@ -133,6 +135,7 @@
             this.txt_Hesh_out.Size = new System.Drawing.Size(647, 48);
             this.txt_Hesh_out.TabIndex = 53;
             this.txt_Hesh_out.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip.SetToolTip(this.txt_Hesh_out, "пппппп");
             // 
             // txt_byte_in_num
             // 
@@ -151,6 +154,7 @@
             this.txt_hesh_file_in.Size = new System.Drawing.Size(592, 30);
             this.txt_hesh_file_in.TabIndex = 51;
             this.txt_hesh_file_in.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip.SetToolTip(this.txt_hesh_file_in, "рррр");
             // 
             // btn_Hesh_save
             // 
@@ -532,7 +536,11 @@
             this.tab_eds.Padding = new System.Windows.Forms.Padding(4);
             this.tab_eds.Size = new System.Drawing.Size(833, 429);
             this.tab_eds.TabIndex = 3;
-            this.tab_eds.Text = "ЭЦП";
+            this.tab_eds.Text = "ЭЦП (DSA)";
+            // 
+            // toolTip
+            // 
+            this.toolTip.ShowAlways = true;
             // 
             // Form_main
             // 
@@ -596,6 +604,7 @@
         private System.Windows.Forms.ComboBox comboBox_SimmAlg;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 
