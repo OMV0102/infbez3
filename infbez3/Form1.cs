@@ -45,7 +45,6 @@ namespace infbez3
         // кнопка ПРОЧИТАТЬ ИЗ ФАЙЛА при ХЭШИРОВАНИИ
         private void btn_choice_fileinHesh_Click(object sender, EventArgs e)
         {
-            string tmp = "";
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Title = "Выбрать файл ..."; // Заголовок окна
             ofd.InitialDirectory = Application.StartupPath; // Папка проекта
@@ -61,7 +60,7 @@ namespace infbez3
                         global.Hesh_byte_in = File.ReadAllBytes(ofd.FileName);
                         this.txt_byte_in_num.Text = global.Hesh_byte_in.Length.ToString(); // Вывели кол-во считанный байт
                         this.txt_hesh_file_in.Text = ofd.FileName; // вывели путь в textbox
-                        this.toolTip_hesh.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
+                        this.toolTip_hesh_file.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
 
                         // если автохэширование вкл
                         if (this.checkBox_autoHesh.Checked == true)
@@ -98,7 +97,7 @@ namespace infbez3
             this.txt_byte_in_num.Text = (0).ToString();
             // Очистили входной файл
             this.txt_hesh_file_in.Text = "";
-            this.toolTip_hesh.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
+            this.toolTip_hesh_file.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
             // Очистили хеш на форме
             this.txt_Hesh_out.Text = "";
 
