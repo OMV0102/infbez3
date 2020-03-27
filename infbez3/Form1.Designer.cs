@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tab_Hesh = new System.Windows.Forms.TabPage();
+            this.txt_hesh_file_in = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txt_Hesh_out = new System.Windows.Forms.Label();
             this.txt_byte_in_num = new System.Windows.Forms.Label();
-            this.txt_hesh_file_in = new System.Windows.Forms.Label();
             this.btn_Hesh_save = new System.Windows.Forms.Button();
             this.btn_Hesh_get = new System.Windows.Forms.Button();
             this.btn_copy_Hesh = new System.Windows.Forms.Button();
@@ -47,24 +47,28 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tab_SimAlg = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_simm_file_in = new System.Windows.Forms.TextBox();
+            this.comboBox_SimmAlg = new System.Windows.Forms.ComboBox();
+            this.radioBtn_SimmAlg2 = new System.Windows.Forms.RadioButton();
+            this.radioBtn_SimmAlg1 = new System.Windows.Forms.RadioButton();
             this.label11 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.btn_SimmEncrypt = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.comboBox_SimmAlg = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
             this.tab_AsimAlg = new System.Windows.Forms.TabPage();
             this.tab_eds = new System.Windows.Forms.TabPage();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_hesh = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_simm = new System.Windows.Forms.ToolTip(this.components);
+            this.label10 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
@@ -92,10 +96,10 @@
             // 
             this.tab_Hesh.AutoScroll = true;
             this.tab_Hesh.BackColor = System.Drawing.Color.LightGray;
+            this.tab_Hesh.Controls.Add(this.txt_hesh_file_in);
             this.tab_Hesh.Controls.Add(this.label3);
             this.tab_Hesh.Controls.Add(this.txt_Hesh_out);
             this.tab_Hesh.Controls.Add(this.txt_byte_in_num);
-            this.tab_Hesh.Controls.Add(this.txt_hesh_file_in);
             this.tab_Hesh.Controls.Add(this.btn_Hesh_save);
             this.tab_Hesh.Controls.Add(this.btn_Hesh_get);
             this.tab_Hesh.Controls.Add(this.btn_copy_Hesh);
@@ -117,6 +121,16 @@
             this.tab_Hesh.TabIndex = 0;
             this.tab_Hesh.Text = "Хэширование";
             // 
+            // txt_hesh_file_in
+            // 
+            this.txt_hesh_file_in.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txt_hesh_file_in.Location = new System.Drawing.Point(22, 85);
+            this.txt_hesh_file_in.Name = "txt_hesh_file_in";
+            this.txt_hesh_file_in.ReadOnly = true;
+            this.txt_hesh_file_in.Size = new System.Drawing.Size(588, 29);
+            this.txt_hesh_file_in.TabIndex = 99;
+            this.txt_hesh_file_in.TabStop = false;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -135,7 +149,6 @@
             this.txt_Hesh_out.Size = new System.Drawing.Size(647, 48);
             this.txt_Hesh_out.TabIndex = 53;
             this.txt_Hesh_out.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip.SetToolTip(this.txt_Hesh_out, "пппппп");
             // 
             // txt_byte_in_num
             // 
@@ -145,16 +158,6 @@
             this.txt_byte_in_num.Size = new System.Drawing.Size(170, 30);
             this.txt_byte_in_num.TabIndex = 52;
             this.txt_byte_in_num.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txt_hesh_file_in
-            // 
-            this.txt_hesh_file_in.BackColor = System.Drawing.Color.White;
-            this.txt_hesh_file_in.Location = new System.Drawing.Point(18, 83);
-            this.txt_hesh_file_in.Name = "txt_hesh_file_in";
-            this.txt_hesh_file_in.Size = new System.Drawing.Size(592, 30);
-            this.txt_hesh_file_in.TabIndex = 51;
-            this.txt_hesh_file_in.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.txt_hesh_file_in, "рррр");
             // 
             // btn_Hesh_save
             // 
@@ -226,6 +229,7 @@
             this.checkBox_autoHesh.TabStop = false;
             this.checkBox_autoHesh.Text = "Авто-хэширование после выбора алгоритма";
             this.checkBox_autoHesh.UseVisualStyleBackColor = true;
+            this.checkBox_autoHesh.CheckedChanged += new System.EventHandler(this.checkBox_autoHesh_CheckedChanged);
             // 
             // label2
             // 
@@ -310,21 +314,24 @@
             // 
             this.tab_SimAlg.AutoScroll = true;
             this.tab_SimAlg.BackColor = System.Drawing.Color.LightGray;
+            this.tab_SimAlg.Controls.Add(this.label13);
+            this.tab_SimAlg.Controls.Add(this.label8);
+            this.tab_SimAlg.Controls.Add(this.txt_simm_file_in);
+            this.tab_SimAlg.Controls.Add(this.comboBox_SimmAlg);
+            this.tab_SimAlg.Controls.Add(this.radioBtn_SimmAlg2);
+            this.tab_SimAlg.Controls.Add(this.radioBtn_SimmAlg1);
             this.tab_SimAlg.Controls.Add(this.label11);
             this.tab_SimAlg.Controls.Add(this.button3);
             this.tab_SimAlg.Controls.Add(this.btn_SimmEncrypt);
             this.tab_SimAlg.Controls.Add(this.button5);
             this.tab_SimAlg.Controls.Add(this.checkBox1);
-            this.tab_SimAlg.Controls.Add(this.comboBox_SimmAlg);
-            this.tab_SimAlg.Controls.Add(this.label12);
-            this.tab_SimAlg.Controls.Add(this.label13);
             this.tab_SimAlg.Controls.Add(this.label6);
             this.tab_SimAlg.Controls.Add(this.label7);
-            this.tab_SimAlg.Controls.Add(this.label8);
             this.tab_SimAlg.Controls.Add(this.button1);
             this.tab_SimAlg.Controls.Add(this.label9);
             this.tab_SimAlg.Controls.Add(this.button2);
             this.tab_SimAlg.Controls.Add(this.label10);
+            this.tab_SimAlg.Controls.Add(this.label12);
             this.tab_SimAlg.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tab_SimAlg.Location = new System.Drawing.Point(4, 33);
             this.tab_SimAlg.Margin = new System.Windows.Forms.Padding(4);
@@ -333,6 +340,69 @@
             this.tab_SimAlg.Size = new System.Drawing.Size(833, 429);
             this.tab_SimAlg.TabIndex = 1;
             this.tab_SimAlg.Text = "Симметричные алгоритмы";
+            // 
+            // label8
+            // 
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label8.Enabled = false;
+            this.label8.Location = new System.Drawing.Point(-4, 55);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(841, 2);
+            this.label8.TabIndex = 73;
+            // 
+            // txt_simm_file_in
+            // 
+            this.txt_simm_file_in.Location = new System.Drawing.Point(44, 107);
+            this.txt_simm_file_in.Name = "txt_simm_file_in";
+            this.txt_simm_file_in.ReadOnly = true;
+            this.txt_simm_file_in.Size = new System.Drawing.Size(100, 29);
+            this.txt_simm_file_in.TabIndex = 72;
+            // 
+            // comboBox_SimmAlg
+            // 
+            this.comboBox_SimmAlg.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.comboBox_SimmAlg.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBox_SimmAlg.DisplayMember = "0";
+            this.comboBox_SimmAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_SimmAlg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox_SimmAlg.FormattingEnabled = true;
+            this.comboBox_SimmAlg.Items.AddRange(new object[] {
+            "AES",
+            "3DES"});
+            this.comboBox_SimmAlg.Location = new System.Drawing.Point(117, 13);
+            this.comboBox_SimmAlg.MaxDropDownItems = 10;
+            this.comboBox_SimmAlg.Name = "comboBox_SimmAlg";
+            this.comboBox_SimmAlg.Size = new System.Drawing.Size(211, 32);
+            this.comboBox_SimmAlg.TabIndex = 63;
+            this.comboBox_SimmAlg.TabStop = false;
+            // 
+            // radioBtn_SimmAlg2
+            // 
+            this.radioBtn_SimmAlg2.AutoSize = true;
+            this.radioBtn_SimmAlg2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioBtn_SimmAlg2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioBtn_SimmAlg2.Location = new System.Drawing.Point(640, 13);
+            this.radioBtn_SimmAlg2.Name = "radioBtn_SimmAlg2";
+            this.radioBtn_SimmAlg2.Size = new System.Drawing.Size(182, 29);
+            this.radioBtn_SimmAlg2.TabIndex = 71;
+            this.radioBtn_SimmAlg2.Text = "Расшифровка";
+            this.radioBtn_SimmAlg2.UseVisualStyleBackColor = true;
+            this.radioBtn_SimmAlg2.CheckedChanged += new System.EventHandler(this.radioBtn_SimmAlg2_CheckedChanged);
+            // 
+            // radioBtn_SimmAlg1
+            // 
+            this.radioBtn_SimmAlg1.AutoSize = true;
+            this.radioBtn_SimmAlg1.Checked = true;
+            this.radioBtn_SimmAlg1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioBtn_SimmAlg1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioBtn_SimmAlg1.Location = new System.Drawing.Point(464, 13);
+            this.radioBtn_SimmAlg1.Name = "radioBtn_SimmAlg1";
+            this.radioBtn_SimmAlg1.Size = new System.Drawing.Size(170, 29);
+            this.radioBtn_SimmAlg1.TabIndex = 70;
+            this.radioBtn_SimmAlg1.TabStop = true;
+            this.radioBtn_SimmAlg1.Text = "Шифрование";
+            this.radioBtn_SimmAlg1.UseVisualStyleBackColor = true;
+            this.radioBtn_SimmAlg1.CheckedChanged += new System.EventHandler(this.radioBtn_SimmAlg1_CheckedChanged);
             // 
             // label11
             // 
@@ -398,54 +468,24 @@
             this.checkBox1.Text = "Авто-шифрование после выбора алгоритма";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // comboBox_SimmAlg
-            // 
-            this.comboBox_SimmAlg.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.comboBox_SimmAlg.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox_SimmAlg.DisplayMember = "0";
-            this.comboBox_SimmAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_SimmAlg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBox_SimmAlg.FormattingEnabled = true;
-            this.comboBox_SimmAlg.Items.AddRange(new object[] {
-            "AES",
-            "3DES"});
-            this.comboBox_SimmAlg.Location = new System.Drawing.Point(56, 270);
-            this.comboBox_SimmAlg.MaxDropDownItems = 10;
-            this.comboBox_SimmAlg.Name = "comboBox_SimmAlg";
-            this.comboBox_SimmAlg.Size = new System.Drawing.Size(211, 32);
-            this.comboBox_SimmAlg.TabIndex = 63;
-            this.comboBox_SimmAlg.TabStop = false;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(52, 239);
+            this.label12.Location = new System.Drawing.Point(8, 16);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(228, 24);
+            this.label12.Size = new System.Drawing.Size(103, 24);
             this.label12.TabIndex = 64;
-            this.label12.Text = "Алгоритм хэширования:";
-            // 
-            // label13
-            // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label13.Enabled = false;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(10, 214);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(815, 210);
-            this.label13.TabIndex = 70;
+            this.label12.Text = "Алгоритм:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(261, 24);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(17, 73);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(188, 31);
+            this.label6.Size = new System.Drawing.Size(195, 25);
             this.label6.TabIndex = 61;
-            this.label6.Text = "Шифрование";
+            this.label6.Text = "Входные данные";
             // 
             // label7
             // 
@@ -455,15 +495,6 @@
             this.label7.Size = new System.Drawing.Size(170, 30);
             this.label7.TabIndex = 60;
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(19, 88);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(592, 30);
-            this.label8.TabIndex = 59;
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button1
             // 
@@ -500,18 +531,6 @@
             this.button2.Text = "Прочитать из файла";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label10.Enabled = false;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(10, 10);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(815, 200);
-            this.label10.TabIndex = 62;
-            // 
             // tab_AsimAlg
             // 
             this.tab_AsimAlg.AutoScroll = true;
@@ -538,9 +557,28 @@
             this.tab_eds.TabIndex = 3;
             this.tab_eds.Text = "ЭЦП (DSA)";
             // 
-            // toolTip
+            // toolTip_hesh
             // 
-            this.toolTip.ShowAlways = true;
+            this.toolTip_hesh.ShowAlways = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(380, 16);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 24);
+            this.label10.TabIndex = 74;
+            this.label10.Text = "Режим:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(560, 73);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(261, 25);
+            this.label13.TabIndex = 75;
+            this.label13.Text = "Обработанные данные";
             // 
             // Form_main
             // 
@@ -583,7 +621,6 @@
         private System.Windows.Forms.Button btn_copy_Hesh;
         private System.Windows.Forms.Button btn_Hesh_get;
         private System.Windows.Forms.Button btn_Hesh_save;
-        private System.Windows.Forms.Label txt_hesh_file_in;
         private System.Windows.Forms.Label txt_Hesh_out;
         private System.Windows.Forms.Label txt_byte_in_num;
         private System.Windows.Forms.Label label3;
@@ -591,11 +628,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btn_SimmEncrypt;
@@ -603,8 +638,15 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox comboBox_SimmAlg;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ToolTip toolTip_hesh;
+        private System.Windows.Forms.RadioButton radioBtn_SimmAlg1;
+        private System.Windows.Forms.RadioButton radioBtn_SimmAlg2;
+        private System.Windows.Forms.TextBox txt_hesh_file_in;
+        private System.Windows.Forms.TextBox txt_simm_file_in;
+        private System.Windows.Forms.ToolTip toolTip_simm;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

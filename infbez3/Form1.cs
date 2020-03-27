@@ -28,6 +28,8 @@ namespace infbez3
             this.comboBox_HeshAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм хэширования
             //======================================
             this.comboBox_SimmAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм Симм. шифрования
+            this.radioBtn_SimmAlg1.Checked = true; // режим шифрования при запуске на форме
+            global.Simm_EncryptOrDecrypt = true; // режим шифрования при запуске 
         }
 
         // ВЫБОР метода хэширования
@@ -59,7 +61,7 @@ namespace infbez3
                         global.Hesh_byte_in = File.ReadAllBytes(ofd.FileName);
                         this.txt_byte_in_num.Text = global.Hesh_byte_in.Length.ToString(); // Вывели кол-во считанный байт
                         this.txt_hesh_file_in.Text = ofd.FileName; // вывели путь в textbox
-                        this.toolTip.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
+                        this.toolTip_hesh.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
 
                         // если автохэширование вкл
                         if (this.checkBox_autoHesh.Checked == true)
@@ -96,7 +98,7 @@ namespace infbez3
             this.txt_byte_in_num.Text = (0).ToString();
             // Очистили входной файл
             this.txt_hesh_file_in.Text = "";
-            this.toolTip.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
+            this.toolTip_hesh.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
             // Очистили хеш на форме
             this.txt_Hesh_out.Text = "";
 
@@ -151,14 +153,26 @@ namespace infbez3
         // кнопка ШИФРОВАТЬ Симметрично
         private void btn_SimmEncrypt_Click(object sender, EventArgs e)
         {
-            byte[] myMessage = new byte[3] { 97, 98, 99 }; // допустим мое сообщение из 3 байт
+            global.Simm_byte_in = new byte[3] { 97, 98, 99 }; // допустим мое сообщение из 3 байт
 
             byte[] messageEncrypt;
             byte[] messageDecrypt;
 
-            messageEncrypt = alg.SimmAlg(myMessage, new byte[0], new byte[0], comboBox_SimmAlg.SelectedItem.ToString(), true);
+            messageEncrypt = alg.SimmAlg(global.Simm_byte_in, new byte[0], new byte[0], comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
             
 
+        }
+
+        // кнопка режим Симметричного Шифрования
+        private void radioBtn_SimmAlg1_CheckedChanged(object sender, EventArgs e)
+        {
+            global.Simm_EncryptOrDecrypt = true;
+        }
+
+        // кнопка режим Симметричной Расшифровки
+        private void radioBtn_SimmAlg2_CheckedChanged(object sender, EventArgs e)
+        {
+            global.Simm_EncryptOrDecrypt = false;
         }
     }
 }

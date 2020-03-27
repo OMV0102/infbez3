@@ -14,8 +14,11 @@ namespace infbez3
     public static class global
     {
         public static byte[] Hesh_byte_in; // Входной массив байтов для хэширования
+        //=================================
         public static byte[] Simm_byte_in; // Входной массив байтов для Симметричного ШИФРОВАНИЯ
+        public static byte[] Simm_byte_out; // ВЫходной массив байтов после Симметричного ШИФРОВАНИЯ
         public static byte[] Simm_byte_key; // Ключ для Симметричного ШИФРОВАНИЯ
         public static byte[] Simm_byte_iv; // Вектор инициализации для Симметричного ШИФРОВАНИЯ
+        public static bool Simm_EncryptOrDecrypt; // Режим либо шифроуем либо расшифровываем для Симметричного ШИФРОВАНИЯ
     }
 }
