@@ -571,7 +571,7 @@
             this.btn_simm_entryKeyIV.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_simm_entryKeyIV.Location = new System.Drawing.Point(85, 374);
             this.btn_simm_entryKeyIV.Name = "btn_simm_entryKeyIV";
-            this.btn_simm_entryKeyIV.Size = new System.Drawing.Size(206, 48);
+            this.btn_simm_entryKeyIV.Size = new System.Drawing.Size(257, 48);
             this.btn_simm_entryKeyIV.TabIndex = 77;
             this.btn_simm_entryKeyIV.TabStop = false;
             this.btn_simm_entryKeyIV.Tag = "";
@@ -638,10 +638,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tab_Hesh;
-        private System.Windows.Forms.TabPage tab_SimAlg;
         private System.Windows.Forms.TabPage tab_AsimAlg;
         private System.Windows.Forms.TabPage tab_eds;
         private System.Windows.Forms.ComboBox comboBox_HeshAlg;
@@ -678,10 +675,12 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label_caption2;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btn_simm_entryKeyIV;
         private System.Windows.Forms.RichTextBox txt_simm_text_in;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.Button btn_simm_entryKeyIV;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tab_SimAlg;
     }
 }
 

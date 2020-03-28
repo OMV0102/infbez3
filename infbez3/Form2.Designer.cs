@@ -82,7 +82,7 @@
             // 
             this.txt_iv.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txt_iv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_iv.Location = new System.Drawing.Point(214, 197);
+            this.txt_iv.Location = new System.Drawing.Point(246, 197);
             this.txt_iv.MaxLength = 32;
             this.txt_iv.Name = "txt_iv";
             this.txt_iv.Size = new System.Drawing.Size(490, 26);
@@ -110,9 +110,9 @@
             this.label2.Location = new System.Drawing.Point(24, 200);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(189, 20);
+            this.label2.Size = new System.Drawing.Size(219, 20);
             this.label2.TabIndex = 85;
-            this.label2.Text = "Вектор инициализации:";
+            this.label2.Text = "Вектор инициализации (IV):";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btn_generate_key
@@ -133,7 +133,7 @@
             this.btn_generate_iv.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_generate_iv.BackgroundImage")));
             this.btn_generate_iv.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_generate_iv.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_generate_iv.Location = new System.Drawing.Point(710, 192);
+            this.btn_generate_iv.Location = new System.Drawing.Point(743, 192);
             this.btn_generate_iv.Name = "btn_generate_iv";
             this.btn_generate_iv.Size = new System.Drawing.Size(35, 35);
             this.btn_generate_iv.TabIndex = 87;

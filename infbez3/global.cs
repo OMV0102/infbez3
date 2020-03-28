@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.ComponentModel;
 using System.Collections;
 using System.Text;
+using System.Drawing;
 
 namespace infbez3
 {

@@ -220,8 +220,10 @@ namespace infbez3
         // кнопка Ввод ключа и IV
         private void btn_simm_entryKeyIV_Click(object sender, EventArgs e)
         {
-            Form2 form2 = new Form2(comboBox_SimmAlg.SelectedItem.ToString());
-            form2.ShowDialog(this);
+            Form2 form = new Form2(comboBox_SimmAlg.SelectedItem.ToString());
+            form.Owner = this;
+            form.form1_btn_simm_entryKeyIV = this.btn_simm_entryKeyIV;
+            form.ShowDialog(this);
         }
     }
 }

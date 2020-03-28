@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.ComponentModel;
 using System.Collections;
 using System.Text;
+using System.Drawing;
 
 namespace infbez3
 {
@@ -22,6 +23,7 @@ namespace infbez3
         public static AesCng aescng;
         public static TripleDESCng tripledes;
         public static string AlgName;
+        public Button form1_btn_simm_entryKeyIV;
 
 
         // при загрузке формы для ввода ключа и IV
@@ -29,17 +31,47 @@ namespace infbez3
         {
             aescng = new AesCng();
             tripledes = new TripleDESCng();
+            if (AlgName == "AES")
+            {
+                txt_key.MaxLength = 64;
+                txt_iv.MaxLength = 32;
+            }
 
-
+            if (AlgName == "3DES")
+            {
+                txt_key.MaxLength = 48;
+                txt_iv.MaxLength = 16;
+            }
         }
 
         private void btn_confirm_entry_Click(object sender, EventArgs e)
         {
-            Form form = this.Owner; // получили объект родительской формы
-            if()
+            //Form form = this.Owner; // получили объект родительской формы
+            //Form_main form = this.Owner; // получили объект родительской формы
+            if(txt_key.Text.Length == txt_key.MaxLength)
+            {
+                if (txt_iv.Text.Length == txt_iv.MaxLength)
+                {
+                    global.Simm_byte_key = alg.StringHEXToByteArray(txt_key.Text); // Запомнили ключ
+                    global.Simm_byte_iv = alg.StringHEXToByteArray(txt_iv.Text); // Запомнили IV
+
+                    form1_btn_simm_entryKeyIV.Text = "Ввести ключ и IV (введен)";
+                    form1_btn_simm_entryKeyIV.ForeColor = Color.FromKnownColor(KnownColor.Green);
+
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Число символов в IV должно быть " + txt_iv.MaxLength.ToString() + "!\nОтредактируйте IV или сгенерируйте случайно.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Число символов в ключе должно быть " + txt_key.MaxLength.ToString() + "!\nОтредактируйте ключ или сгенерируйте случайно.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+            }
 
             
-            this.Close();
+            //this.Close();
         }
 
         // Генерировать ключ
