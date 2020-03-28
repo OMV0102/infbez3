@@ -27,5 +27,20 @@ namespace infbez3
         {
             this.Close();
         }
+
+        // 
+        private void checkBox_keyShow_CheckedChanged(object sender, EventArgs e)
+        {
+            if(this.checkBox_keyShow.Checked == true)
+            {
+                this.checkBox_keyShow.Text = "Ключ виден";
+                this.txt_key.PasswordChar = '\0';
+            }
+            else
+            {
+                this.checkBox_keyShow.Text = "Ключ скрыт";
+                this.txt_key.PasswordChar = '*';
+            }
+        }
     }
 }

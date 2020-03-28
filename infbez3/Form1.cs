@@ -166,8 +166,8 @@ namespace infbez3
         {
             global.Simm_EncryptOrDecrypt = true;
             this.btn_SimmEncrypt.Text = "Шифровать  ⇶";
-            this.label_caption1.Text = "Зашифрованные данные";
-            this.label_caption2.Text = "Расшифрованные данные";
+            this.label_caption1.Text = "Входные данные";
+            this.label_caption2.Text = "Зашифрованные данные";
         }
 
         // кнопка режим Симметричной Расшифровки
@@ -175,8 +175,8 @@ namespace infbez3
         {
             global.Simm_EncryptOrDecrypt = false;
             this.btn_SimmEncrypt.Text = "Расшифровать  ⇶";
-            this.label_caption1.Text = "Расшифрованные данные"; 
-            this.label_caption2.Text = "Зашифрованные данные";
+            this.label_caption2.Text = "Расшифрованные данные"; 
+            this.label_caption1.Text = "Зашифрованные данные";
         }
 
         // кнопка ПРОЧИТАТЬ ИЗ ФАЙЛА при СИММ. Шифровании
