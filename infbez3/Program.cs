@@ -173,6 +173,21 @@ namespace infbez3
             return arrayByte_out;
         }
 
+        // Переводит 16-ричную строку в байты
+        public static byte[] StringHEXToByteArray(string strHEX)
+        {
+            int N = strHEX.Length;
+            byte[] bytes = new byte[N / 2];
+            for (int i = 0; i < N; i += 2)
+                bytes[i / 2] = Convert.ToByte(strHEX.Substring(i, 2), 16);
+            return bytes;
+        }
+
+        // Переводит байты в значение 16 ричной строки
+        public static string ByteArrayTOStringHEX(byte[] byteArr)
+        {
+            return BitConverter.ToString(byteArr).Replace("-", "").ToUpper();
+        }
     }
 
 }
