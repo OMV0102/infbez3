@@ -28,8 +28,7 @@ namespace infbez3
             this.comboBox_HeshAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм хэширования
             //======================================
             this.comboBox_SimmAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм Симм. шифрования
-            this.radioBtn_SimmAlg1.Checked = true; // режим шифрования при запуске на форме
-            global.Simm_EncryptOrDecrypt = true; // режим шифрования при запуске 
+            this.radioBtn_SimmAlg1.Checked = true; ; // режим шифрования при запуске
         }
 
         // ВЫБОР метода хэширования
@@ -58,7 +57,7 @@ namespace infbez3
                     {
                         // Считали байты из файла
                         global.Hesh_byte_in = File.ReadAllBytes(ofd.FileName);
-                        this.txt_byte_in_num.Text = global.Hesh_byte_in.Length.ToString(); // Вывели кол-во считанный байт
+                        this.txt_hesh_byte_in_num.Text = global.Hesh_byte_in.Length.ToString(); // Вывели кол-во считанный байт
                         this.txt_hesh_file_in.Text = ofd.FileName; // вывели путь в textbox
                         this.toolTip_hesh_file.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
 
@@ -94,7 +93,7 @@ namespace infbez3
             else
                 global.Hesh_byte_in = new byte[0]; // выделили память под входной массив байт у хэширования
             // Кол-во считанных байт для хэширование 0
-            this.txt_byte_in_num.Text = (0).ToString();
+            this.txt_hesh_byte_in_num.Text = (0).ToString();
             // Очистили входной файл
             this.txt_hesh_file_in.Text = "";
             this.toolTip_hesh_file.SetToolTip(this.txt_hesh_file_in, this.txt_hesh_file_in.Text);
@@ -157,7 +156,7 @@ namespace infbez3
             byte[] messageEncrypt;
             byte[] messageDecrypt;
 
-            messageEncrypt = alg.SimmAlg(global.Simm_byte_in, new byte[0], new byte[0], comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
+            messageEncrypt = alg.SimmAlg(global.Simm_byte_in, null, null, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
             
 
         }
@@ -166,12 +165,63 @@ namespace infbez3
         private void radioBtn_SimmAlg1_CheckedChanged(object sender, EventArgs e)
         {
             global.Simm_EncryptOrDecrypt = true;
+            this.btn_SimmEncrypt.Text = "Шифровать  ⇶";
+            this.label_caption1.Text = "Зашифрованные данные";
+            this.label_caption2.Text = "Расшифрованные данные";
         }
 
         // кнопка режим Симметричной Расшифровки
         private void radioBtn_SimmAlg2_CheckedChanged(object sender, EventArgs e)
         {
             global.Simm_EncryptOrDecrypt = false;
+            this.btn_SimmEncrypt.Text = "Расшифровать  ⇶";
+            this.label_caption1.Text = "Расшифрованные данные"; 
+            this.label_caption2.Text = "Зашифрованные данные";
+        }
+
+        // кнопка ПРОЧИТАТЬ ИЗ ФАЙЛА при СИММ. Шифровании
+        private void btn_choice_fileinSimm_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Выбрать файл ..."; // Заголовок окна
+            ofd.InitialDirectory = Application.StartupPath; // Папка проекта
+
+            if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
+            {
+                // читаем байты из файла
+                if (ofd.FileName.Length > 0) // Если путь не нулевой
+                {
+                    if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
+                    {
+                        // Считали байты из файла
+                        global.Simm_byte_in = File.ReadAllBytes(ofd.FileName);
+                        this.txt_simm_byte_in_num.Text = global.Simm_byte_in.Length.ToString(); // Вывели кол-во считанных байт
+                        this.txt_simm_file_in.Text = ofd.FileName; // вывели путь в textbox
+                        this.toolTip_simm_file.SetToolTip(this.txt_simm_file_in, this.txt_simm_file_in.Text); // текст подсказки запомнили
+                        this.txt_simm_text_in.Text = Encoding.UTF8.GetString(global.Simm_byte_in).Replace('\0', '0');
+                    }
+                    else
+                    {
+                        MessageBox.Show("Файла {" + ofd.FileName + "} не существует!", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Указан неверный путь!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
+            }
+        }
+
+
+        private void btn_simm_entryKeyIV_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Owner = this;
+            form2.ShowDialog(this);
         }
     }
 }
