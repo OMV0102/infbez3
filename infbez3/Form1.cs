@@ -29,8 +29,10 @@ namespace infbez3
             //======================================
             this.comboBox_SimmAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм Симм. шифрования
             this.radioBtn_SimmAlg1.Checked = true; ; // режим шифрования при запуске
-            global.Simm_KeyIV_isEntry = false; // флаг меняем что не введенны ключ и вектор
+            this.btn_simm_clear_Click(null, null); // жмем кнопку очисить
         }
+
+        //=====================================================================
 
         // ВЫБОР метода хэширования
         private void comboBox_HeshAlg_SelectedIndexChanged(object sender, EventArgs e)
@@ -115,7 +117,6 @@ namespace infbez3
         {
             string selectedAlgHesh = comboBox_HeshAlg.SelectedItem.ToString();
             this.txt_Hesh_out.Text = alg.HeshAlg(global.Hesh_byte_in, selectedAlgHesh);
-
         }
 
         // кнопка СОХРАНИТЬ ХЭШ
@@ -143,41 +144,53 @@ namespace infbez3
                 System.IO.File.WriteAllText(filename, txt_Hesh_out.Text);
 
                 this.Enabled = false;
-                MessageBox.Show("Хеш записан в файл:\n" + filename, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Хеш записан в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Enabled = true;
                 this.btn_SimmEncrypt_Click(null, null);
             }
         }
-
-        // кнопка ШИФРОВАТЬ Симметрично
+        
+        //=============================================================
+        
+            // кнопка ШИФРОВАТЬ Симметрично
         private void btn_SimmEncrypt_Click(object sender, EventArgs e)
         {
-            global.Simm_byte_in = new byte[3] { 97, 98, 99 }; // допустим мое сообщение из 3 байт
+            if (this.txt_simm_byte_in_num.Text != "0")
+            {
 
-            byte[] messageEncrypt;
-            byte[] messageDecrypt;
 
-            messageEncrypt = alg.SimmAlg(global.Simm_byte_in, null, null, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
-            
-
+                global.Simm_byte_out = alg.SimmAlg(global.Simm_byte_in, global.Simm_byte_key, global.Simm_byte_iv, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
+                this.txt_simm_text_out.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_out);
+            }
+            else
+            {
+                this.Enabled = false;
+                MessageBox.Show("Сначала укажите входные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Enabled = true;
+                return;
+            }
         }
 
         // кнопка режим Симметричного Шифрования
         private void radioBtn_SimmAlg1_CheckedChanged(object sender, EventArgs e)
         {
             global.Simm_EncryptOrDecrypt = true;
-            this.btn_SimmEncrypt.Text = "Шифровать  ⇶";
+            this.btn_SimmEncrypt.Text = "🡻 Шифровать 🡻";
             this.label_caption1.Text = "Входные данные";
             this.label_caption2.Text = "Зашифрованные данные";
+            this.label_simm_onText_out.Text = "Примерный вид зашифрованных данных:";
+            this.label_simm_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных)";
         }
 
         // кнопка режим Симметричной Расшифровки
         private void radioBtn_SimmAlg2_CheckedChanged(object sender, EventArgs e)
         {
             global.Simm_EncryptOrDecrypt = false;
-            this.btn_SimmEncrypt.Text = "Расшифровать  ⇶";
+            this.btn_SimmEncrypt.Text = "🡻 Расшифровать 🡻";
             this.label_caption2.Text = "Расшифрованные данные"; 
             this.label_caption1.Text = "Зашифрованные данные";
+            this.label_simm_onText_out.Text = "Расшифрованные данные:";
+            this.label_simm_underText_out.Text = "(В файл данные сохраняться в текстовом виде)";
         }
 
         // кнопка ПРОЧИТАТЬ ИЗ ФАЙЛА при СИММ. Шифровании
@@ -203,7 +216,9 @@ namespace infbez3
                     }
                     else
                     {
+                        this.Enabled = false;
                         MessageBox.Show("Файла {" + ofd.FileName + "} не существует!", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Enabled = true;
                         return;
                     }
                 }
@@ -217,7 +232,6 @@ namespace infbez3
             }
         }
 
-
         // кнопка Ввод ключа и IV
         private void btn_simm_entryKeyIV_Click(object sender, EventArgs e)
         {
@@ -230,6 +244,7 @@ namespace infbez3
         // если меняем алгоритм СИММетричного ШИФРОВАНИЯ
         private void comboBox_SimmAlg_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //========очистка ключа======
             // меняем кнопку ввод ключа на обычную
             this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV (не введенны)";
             this.btn_simm_entryKeyIV.ForeColor = Color.FromKnownColor(KnownColor.Black);
@@ -238,12 +253,30 @@ namespace infbez3
             global.Simm_byte_iv = new byte[0];
             // флаг меняем что не введенны
             global.Simm_KeyIV_isEntry = false;
+            //===================================
         }
 
         // кнопка ОЧИСТИТЬ у СИММетричного ШИФРОВАНИЯ
         private void btn_simm_clear_Click(object sender, EventArgs e)
         {
-
+            //========очистка ключа======
+            // меняем кнопку ввод ключа на обычную
+            this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV (не введенны)";
+            this.btn_simm_entryKeyIV.ForeColor = Color.FromKnownColor(KnownColor.Black);
+            // очищаем ключ и вектор
+            global.Simm_byte_key = new byte[0];
+            global.Simm_byte_iv = new byte[0];
+            // флаг меняем что не введенны
+            global.Simm_KeyIV_isEntry = false;
+            //===================================
+            // входные данные стираем
+            global.Simm_byte_in = new byte[0];
+            this.txt_simm_text_in.Text = "";
+            this.txt_simm_file_in.Text = "";
+            this.txt_simm_byte_in_num.Text = "0";
+            // ВЫходные данные стираем
+            global.Simm_byte_out = new byte[0];
+            this.txt_simm_text_out.Text = "";
         }
     }
 }

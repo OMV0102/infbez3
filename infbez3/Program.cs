@@ -101,19 +101,17 @@ namespace infbez3
                     case "AES":
                         AesCng aescng = new AesCng(); // объект класса у алгоритма AES
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
-                         {
+                        {
                             if (key == null || key.Length != 32) // если ключ не по формату
                             {
-                                aescng.GenerateKey(); // генерируем ключ
-                                global.Simm_byte_key = aescng.Key;
+                                return null; // выход из алгоритма
                             }
                             else
                                 aescng.Key = key; // иначе присваиваем ключ из аргумента
 
                             if (iv == null || iv.Length != 16) // если вектор не по формату
                             {
-                                aescng.GenerateIV(); // генерируем вектор инициализации
-                                global.Simm_byte_iv = aescng.IV;
+                                return null; // выход из алгоритма
                             }
                             else
                                 aescng.IV = iv; // иначе присваиваем вектор из аргумента
@@ -135,18 +133,16 @@ namespace infbez3
                         TripleDESCng tripledescng = new TripleDESCng(); // объект класса у алгоритма AES
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
                         {
-                            if (key == null || key.Length != 32) // если ключ не по формату
+                            if (key == null || key.Length != 24) // если ключ не по формату
                             {
-                                tripledescng.GenerateKey(); // генерируем ключ
-                                global.Simm_byte_key = tripledescng.Key;
+                                return null; // выход из алгоритма
                             }
                             else
                                 tripledescng.Key = key; // иначе присваиваем ключ из аргумента
 
-                            if (iv == null || iv.Length != 16) // если вектор не по формату
+                            if (iv == null || iv.Length != 8) // если вектор не по формату
                             {
-                                tripledescng.GenerateIV(); // генерируем вектор инициализации
-                                global.Simm_byte_iv = tripledescng.IV;
+                                return null; // выход из алгоритма
                             }
                             else
                                 tripledescng.IV = iv; // иначе присваиваем вектор из аргумента
