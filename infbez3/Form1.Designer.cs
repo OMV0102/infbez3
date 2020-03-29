@@ -58,7 +58,7 @@
             this.comboBox_SimmAlg = new System.Windows.Forms.ComboBox();
             this.radioBtn_SimmAlg2 = new System.Windows.Forms.RadioButton();
             this.radioBtn_SimmAlg1 = new System.Windows.Forms.RadioButton();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_simm_saveKeyIV = new System.Windows.Forms.Button();
             this.btn_SimmEncrypt = new System.Windows.Forms.Button();
             this.label_caption1 = new System.Windows.Forms.Label();
             this.txt_simm_byte_in_num = new System.Windows.Forms.Label();
@@ -132,6 +132,7 @@
             this.txt_hesh_file_in.Location = new System.Drawing.Point(22, 85);
             this.txt_hesh_file_in.Name = "txt_hesh_file_in";
             this.txt_hesh_file_in.ReadOnly = true;
+            this.txt_hesh_file_in.ShortcutsEnabled = false;
             this.txt_hesh_file_in.Size = new System.Drawing.Size(626, 29);
             this.txt_hesh_file_in.TabIndex = 99;
             this.txt_hesh_file_in.TabStop = false;
@@ -328,7 +329,7 @@
             this.tab_SimAlg.Controls.Add(this.comboBox_SimmAlg);
             this.tab_SimAlg.Controls.Add(this.radioBtn_SimmAlg2);
             this.tab_SimAlg.Controls.Add(this.radioBtn_SimmAlg1);
-            this.tab_SimAlg.Controls.Add(this.button3);
+            this.tab_SimAlg.Controls.Add(this.btn_simm_saveKeyIV);
             this.tab_SimAlg.Controls.Add(this.btn_SimmEncrypt);
             this.tab_SimAlg.Controls.Add(this.label_caption1);
             this.tab_SimAlg.Controls.Add(this.txt_simm_byte_in_num);
@@ -376,12 +377,13 @@
             this.btn_simm_saveData.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_simm_saveData.Location = new System.Drawing.Point(494, 312);
             this.btn_simm_saveData.Name = "btn_simm_saveData";
-            this.btn_simm_saveData.Size = new System.Drawing.Size(254, 38);
+            this.btn_simm_saveData.Size = new System.Drawing.Size(271, 38);
             this.btn_simm_saveData.TabIndex = 84;
             this.btn_simm_saveData.TabStop = false;
             this.btn_simm_saveData.Tag = "";
             this.btn_simm_saveData.Text = "Сохранить шифр в файл";
             this.btn_simm_saveData.UseVisualStyleBackColor = false;
+            this.btn_simm_saveData.Click += new System.EventHandler(this.btn_simm_saveData_Click);
             // 
             // txt_simm_text_out
             // 
@@ -392,6 +394,7 @@
             this.txt_simm_text_out.Name = "txt_simm_text_out";
             this.txt_simm_text_out.ReadOnly = true;
             this.txt_simm_text_out.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.txt_simm_text_out.ShortcutsEnabled = false;
             this.txt_simm_text_out.Size = new System.Drawing.Size(381, 84);
             this.txt_simm_text_out.TabIndex = 82;
             this.txt_simm_text_out.TabStop = false;
@@ -406,6 +409,7 @@
             this.txt_simm_text_in.Name = "txt_simm_text_in";
             this.txt_simm_text_in.ReadOnly = true;
             this.txt_simm_text_in.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.txt_simm_text_in.ShortcutsEnabled = false;
             this.txt_simm_text_in.Size = new System.Drawing.Size(381, 84);
             this.txt_simm_text_in.TabIndex = 79;
             this.txt_simm_text_in.TabStop = false;
@@ -490,28 +494,28 @@
             this.radioBtn_SimmAlg1.UseVisualStyleBackColor = true;
             this.radioBtn_SimmAlg1.CheckedChanged += new System.EventHandler(this.radioBtn_SimmAlg1_CheckedChanged);
             // 
-            // button3
+            // btn_simm_saveKeyIV
             // 
-            this.button3.BackColor = System.Drawing.Color.Transparent;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(508, 365);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(231, 38);
-            this.button3.TabIndex = 68;
-            this.button3.TabStop = false;
-            this.button3.Tag = "";
-            this.button3.Text = "Сохранить хэш в файл";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btn_simm_saveKeyIV.BackColor = System.Drawing.Color.Transparent;
+            this.btn_simm_saveKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_simm_saveKeyIV.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_simm_saveKeyIV.Location = new System.Drawing.Point(508, 365);
+            this.btn_simm_saveKeyIV.Name = "btn_simm_saveKeyIV";
+            this.btn_simm_saveKeyIV.Size = new System.Drawing.Size(231, 38);
+            this.btn_simm_saveKeyIV.TabIndex = 68;
+            this.btn_simm_saveKeyIV.TabStop = false;
+            this.btn_simm_saveKeyIV.Tag = "";
+            this.btn_simm_saveKeyIV.Text = "Сохранить ключ в файл";
+            this.btn_simm_saveKeyIV.UseVisualStyleBackColor = false;
             // 
             // btn_SimmEncrypt
             // 
             this.btn_SimmEncrypt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_SimmEncrypt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SimmEncrypt.Font = new System.Drawing.Font("Microsoft PhagsPa", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_SimmEncrypt.Location = new System.Drawing.Point(494, 106);
+            this.btn_SimmEncrypt.Location = new System.Drawing.Point(464, 106);
             this.btn_SimmEncrypt.Name = "btn_SimmEncrypt";
-            this.btn_SimmEncrypt.Size = new System.Drawing.Size(245, 51);
+            this.btn_SimmEncrypt.Size = new System.Drawing.Size(297, 51);
             this.btn_SimmEncrypt.TabIndex = 67;
             this.btn_SimmEncrypt.TabStop = false;
             this.btn_SimmEncrypt.Tag = "";
@@ -706,7 +710,7 @@
         private System.Windows.Forms.Button btn_simm_clear;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_choice_fileinSimm;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_simm_saveKeyIV;
         private System.Windows.Forms.Button btn_SimmEncrypt;
         private System.Windows.Forms.ComboBox comboBox_SimmAlg;
         private System.Windows.Forms.Label label12;
