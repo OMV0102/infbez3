@@ -318,7 +318,6 @@
             // tab_SimAlg
             // 
             this.tab_SimAlg.BackColor = System.Drawing.Color.LightGray;
-            this.tab_SimAlg.Controls.Add(this.label_simm_underText_out);
             this.tab_SimAlg.Controls.Add(this.label_simm_onText_out);
             this.tab_SimAlg.Controls.Add(this.btn_simm_saveData);
             this.tab_SimAlg.Controls.Add(this.txt_simm_text_out);
@@ -342,6 +341,7 @@
             this.tab_SimAlg.Controls.Add(this.label14);
             this.tab_SimAlg.Controls.Add(this.label7);
             this.tab_SimAlg.Controls.Add(this.label6);
+            this.tab_SimAlg.Controls.Add(this.label_simm_underText_out);
             this.tab_SimAlg.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tab_SimAlg.Location = new System.Drawing.Point(4, 33);
             this.tab_SimAlg.Margin = new System.Windows.Forms.Padding(4);
@@ -353,11 +353,10 @@
             // 
             // label_simm_underText_out
             // 
-            this.label_simm_underText_out.AutoSize = true;
-            this.label_simm_underText_out.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_simm_underText_out.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_simm_underText_out.Location = new System.Drawing.Point(428, 274);
             this.label_simm_underText_out.Name = "label_simm_underText_out";
-            this.label_simm_underText_out.Size = new System.Drawing.Size(380, 18);
+            this.label_simm_underText_out.Size = new System.Drawing.Size(400, 62);
             this.label_simm_underText_out.TabIndex = 86;
             this.label_simm_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных)";
             // 
@@ -375,7 +374,7 @@
             this.btn_simm_saveData.BackColor = System.Drawing.Color.LightGray;
             this.btn_simm_saveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_simm_saveData.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_simm_saveData.Location = new System.Drawing.Point(494, 312);
+            this.btn_simm_saveData.Location = new System.Drawing.Point(464, 339);
             this.btn_simm_saveData.Name = "btn_simm_saveData";
             this.btn_simm_saveData.Size = new System.Drawing.Size(271, 38);
             this.btn_simm_saveData.TabIndex = 84;
@@ -499,7 +498,7 @@
             this.btn_simm_saveKeyIV.BackColor = System.Drawing.Color.Transparent;
             this.btn_simm_saveKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_simm_saveKeyIV.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_simm_saveKeyIV.Location = new System.Drawing.Point(508, 365);
+            this.btn_simm_saveKeyIV.Location = new System.Drawing.Point(575, 379);
             this.btn_simm_saveKeyIV.Name = "btn_simm_saveKeyIV";
             this.btn_simm_saveKeyIV.Size = new System.Drawing.Size(231, 38);
             this.btn_simm_saveKeyIV.TabIndex = 68;

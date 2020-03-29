@@ -159,16 +159,20 @@ namespace infbez3
             {
                 if(global.Simm_KeyIV_isEntry == true)// Если введен ключ и вектор
                 {
+                    // вызываем функцию шифрования и получаем байты шифра
+                    global.Simm_byte_out = alg.SimmAlg(global.Simm_byte_in, global.Simm_byte_key, global.Simm_byte_iv, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
+                   
+
+                    // Вывести выходные байты 
                     if (global.Simm_EncryptOrDecrypt) // Если шифруем
                     {
-                        // вызываем функцию шифрования и получаем байты шифра
-                        global.Simm_byte_out = alg.SimmAlg(global.Simm_byte_in, global.Simm_byte_key, global.Simm_byte_iv, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
-                        // выведи байты на форму виде 16-ричной строки
+                         // вывели байты на форму виде 16-ричной строки
                         this.txt_simm_text_out.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_out);
                     }
                     else // Если расшифровываем
                     {
-
+                        // вывели байты на форму виде строки с кодировкой UTF8
+                        this.txt_simm_text_out.Text = Encoding.UTF8.GetString(global.Simm_byte_out);
                     }
                 }
                 else
@@ -196,7 +200,7 @@ namespace infbez3
             this.label_caption1.Text = "Входные данные";
             this.label_caption2.Text = "Зашифрованные данные";
             this.label_simm_onText_out.Text = "Примерный вид зашифрованных данных:";
-            this.label_simm_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных)";
+            this.label_simm_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных,\n но с таким же расширением, что и входной файл)";
             this.btn_simm_saveData.Text = "Сохранить шифр в файл";
             btn_simm_clear_Click(null, null); // Очистить всё при переключении
         }
@@ -209,7 +213,7 @@ namespace infbez3
             this.label_caption2.Text = "Расшифрованные данные"; 
             this.label_caption1.Text = "Зашифрованные данные";
             this.label_simm_onText_out.Text = "Расшифрованные данные:";
-            this.label_simm_underText_out.Text = "(В файл данные сохраняться в текстовом виде)";
+            this.label_simm_underText_out.Text = "(В файл данные сохраняться в виде байт, но при открытие\n файл будет отображаться корректно так как будет сохранен\n с таким же расширеним, что и шифрованный файл)";
             this.btn_simm_saveData.Text = "Сохранить данные в файл";
             btn_simm_clear_Click(null, null); // Очистить всё при переключении
         }
