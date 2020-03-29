@@ -147,7 +147,6 @@ namespace infbez3
                 this.Enabled = false;
                 MessageBox.Show("Хеш записан в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Enabled = true;
-                this.btn_SimmEncrypt_Click(null, null);
             }
             sfd.Dispose();
         }
@@ -175,7 +174,7 @@ namespace infbez3
                         else // Если расшифровываем
                         {
                             // вывели байты на форму виде строки с кодировкой UTF8
-                            this.txt_simm_text_out.Text = Encoding.UTF8.GetString(global.Simm_byte_out);
+                            this.txt_simm_text_out.Text = Encoding.UTF8.GetString(global.Simm_byte_out).Replace("\0", "0");
                         }
                     }
                     catch (Exception error)
@@ -211,6 +210,7 @@ namespace infbez3
             this.label_simm_onText_out.Text = "Примерный вид зашифрованных данных:";
             this.label_simm_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных,\n но с таким же расширением, что и входной файл)";
             this.btn_simm_saveData.Text = "Сохранить шифр в файл";
+            this.btn_choice_fileinSimm.Text = "Выбрать файл с данными";
             btn_simm_clear_Click(null, null); // Очистить всё при переключении
         }
 
@@ -224,6 +224,7 @@ namespace infbez3
             this.label_simm_onText_out.Text = "Расшифрованные данные:";
             this.label_simm_underText_out.Text = "(В файл данные сохраняться в виде байт, но при открытие\n файл будет отображаться корректно так как будет сохранен\n с таким же расширеним, что и шифрованный файл)";
             this.btn_simm_saveData.Text = "Сохранить данные в файл";
+            this.btn_choice_fileinSimm.Text = "Выбрать файл с шифром";
             btn_simm_clear_Click(null, null); // Очистить всё при переключении
         }
 
@@ -319,6 +320,53 @@ namespace infbez3
             global.Simm_file_extension = "";
         }
 
+        // Сохранить ключ IV в файл у СИММ шифрования
+        private void btn_simm_saveKeyIV_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Если ключ или IV  пусты 
+                if (global.Simm_byte_key.Length == 0 || global.Simm_byte_iv.Length == 0)
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Ключ или IV пусты!\nСначала введите ключ и IV.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Title = "Выберите папку и введите название файла (БЕЗ расширения) ...";
+                sfd.InitialDirectory = Application.StartupPath;
+                sfd.Filter = "Text files(*.txt)|*.txt"; // Сохранять только как текстовые файлы
+                sfd.AddExtension = true;  //Добавить расширение к имени если не указали
+                
+                DialogResult res = sfd.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    // получаем выбранный файл
+                    string filename = sfd.FileName;
+                    // массив с двумя строками с ключом и IV
+                    string[] KeyAndIV = new string[2]
+                    {
+                        alg.ByteArrayTOStringHEX(global.Simm_byte_key),
+                        alg.ByteArrayTOStringHEX(global.Simm_byte_iv)
+                    };
+                    // сохраняем байты в файл
+                    File.WriteAllLines(filename, KeyAndIV, Encoding.UTF8);
+
+                    this.Enabled = false;
+                    MessageBox.Show("Ключ и IV записаны в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Enabled = true;
+                }
+                sfd.Dispose();
+            }
+            catch(Exception error)
+            {
+                MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
         // Сохранить шифр/текст в файл у СИММ шифрования
         private void btn_simm_saveData_Click(object sender, EventArgs e)
         {
@@ -337,11 +385,13 @@ namespace infbez3
                 }
 
                 SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Title = "Выберите папку и введите название файла (БЕЗ расширения) ...";
                 sfd.InitialDirectory = Application.StartupPath;
-                sfd.Filter = "Files(*" + global.Simm_file_extension + "|*" + global.Simm_file_extension; // Сохранять только c расширением как и у входного файла
+                sfd.Filter = "Files(*" + global.Simm_file_extension + ")|*" + global.Simm_file_extension; // Сохранять только c расширением как и у входного файла
                 sfd.AddExtension = true;  //Добавить расширение к имени если не указали
 
-                if (sfd.ShowDialog() == DialogResult.OK)
+                DialogResult res = sfd.ShowDialog();
+                if (res == DialogResult.OK)
                 {
                     // получаем выбранный файл
                     string filename = sfd.FileName;
@@ -349,22 +399,16 @@ namespace infbez3
                     System.IO.File.WriteAllBytes(filename, global.Simm_byte_out);
 
                     this.Enabled = false;
-                    MessageBox.Show("ЗАПИСАН записан в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("ЗАПИСАН в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Enabled = true;
-                    this.btn_SimmEncrypt_Click(null, null); // ААААААААААА ШТО ЭТО
                 }
+                sfd.Dispose();
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-        }
-
-        // Сохранить ключ IV в файл у СИММ шифрования
-        private void btn_simm_saveKeyIV_Click(object sender, EventArgs e)
-        {
-
         }
         //===========================================================================
 

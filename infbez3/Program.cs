@@ -91,11 +91,10 @@ namespace infbez3
         public static Byte[] SimmAlg(Byte[] arrayByte_in, Byte[] key, Byte[] iv, string selectedAlgSimm, bool EncryptIsTrue)
         {
             byte[] arrayByte_out = new byte[0]; // Выходная последовательность байт после шифрования/расшифровки
-            ICryptoTransform cryptoTransform = null;
+            ICryptoTransform cryptoTransform;
 
             try
             {
-
                 switch (selectedAlgSimm) // Получение хеша определенным алгоритмом
                 {
                     case "AES":
@@ -104,16 +103,17 @@ namespace infbez3
                         aescng.IV = iv; // присваиваем вектор из аргумента
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
                         {
-                            // создали объект-шифратор с ключом и вектором
-                            cryptoTransform = aescng.CreateEncryptor(aescng.Key, aescng.IV); 
+                            // создали объект-шифратор
+                            cryptoTransform = aescng.CreateEncryptor();
                         }
                         else  // если вызвали для РАСшифровки AES
                         {
-                            // создали объект-расшифратор с ключом и вектором
-                            cryptoTransform = aescng.CreateDecryptor(aescng.Key, aescng.IV);
+                            // создали объект-расшифратор
+                            cryptoTransform = aescng.CreateDecryptor();
                         }
-                        // зашифровали сообщение
+                        // получили байты на выходе
                         arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
+                        //cryptoTransform.TransformBlock(arrayByte_in, 0, arrayByte_in.Length, arrayByte_out, 0);
 
                         aescng.Dispose(); // освобождаем ресурсы
                         cryptoTransform.Dispose(); // освобождаем ресурсы
@@ -125,15 +125,15 @@ namespace infbez3
                         tripledescng.IV = iv; //  присваиваем вектор из аргумента
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
                         {
-                            // создали объект-шифратор с ключом и вектором
-                            cryptoTransform = tripledescng.CreateEncryptor(tripledescng.Key, tripledescng.IV);
+                            // создали объект-шифратор
+                            cryptoTransform = tripledescng.CreateEncryptor();
                         }
                         else  // если вызвали для РАСшифровки 3DES
                         {
-                            // создали объект-шифратор с ключом и вектором
-                            cryptoTransform = tripledescng.CreateDecryptor(tripledescng.Key, tripledescng.IV);
+                            // создали объект-расшифратор
+                            cryptoTransform = tripledescng.CreateDecryptor();
                         }
-                        // зашифровали сообщение
+                        // получили байты на выходе
                         arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
 
                         tripledescng.Dispose(); // освобождаем ресурсы
@@ -145,7 +145,12 @@ namespace infbez3
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (EncryptIsTrue == true) // если шифрование
+                    MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //MessageBox.Show("Ключ или вектор инициализации не подходят", "Ошибка шифрования", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                    MessageBox.Show("Заданные ключ или вектор инициализации не подходят для заданного шифра!\nРасшифровка не возможна.", "Ошибка расшифровки", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             return arrayByte_out;
         }

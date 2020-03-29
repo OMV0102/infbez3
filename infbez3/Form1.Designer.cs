@@ -419,7 +419,7 @@
             this.btn_simm_entryKeyIV.BackColor = System.Drawing.Color.Transparent;
             this.btn_simm_entryKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_simm_entryKeyIV.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_simm_entryKeyIV.Location = new System.Drawing.Point(12, 374);
+            this.btn_simm_entryKeyIV.Location = new System.Drawing.Point(45, 375);
             this.btn_simm_entryKeyIV.Name = "btn_simm_entryKeyIV";
             this.btn_simm_entryKeyIV.Size = new System.Drawing.Size(308, 48);
             this.btn_simm_entryKeyIV.TabIndex = 77;
