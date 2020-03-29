@@ -30,18 +30,27 @@ namespace infbez3
         private void Form2_Load(object sender, EventArgs e)
         {
             // Выделили память и установили длину ключей и IV
+            // в зависимости от алгоритма
             aescng = new AesCng();
             tripledes = new TripleDESCng();
             if (AlgName == "AES")
             {
-                txt_key.MaxLength = 64;
-                txt_iv.MaxLength = 32;
+                this.txt_key.MaxLength = 64;
+                this.txt_iv.MaxLength = 32;
+
             }
 
             if (AlgName == "3DES")
             {
-                txt_key.MaxLength = 48;
-                txt_iv.MaxLength = 16;
+                this.txt_key.MaxLength = 48;
+                this.txt_iv.MaxLength = 16;
+            }
+
+            // если раннее были введенны ключи то вывести их на форму
+            if (global.Simm_KeyIV_isEntry)
+            {
+                this.txt_key.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_key);
+                this.txt_iv.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_iv);
             }
 
             // Инструкция сверху формы

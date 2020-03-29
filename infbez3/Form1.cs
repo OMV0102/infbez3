@@ -155,12 +155,20 @@ namespace infbez3
             // кнопка ШИФРОВАТЬ Симметрично
         private void btn_SimmEncrypt_Click(object sender, EventArgs e)
         {
-            if (this.txt_simm_byte_in_num.Text != "0")
+            if (this.txt_simm_byte_in_num.Text != "0") // Если входные данные не пусты
             {
-
-
-                global.Simm_byte_out = alg.SimmAlg(global.Simm_byte_in, global.Simm_byte_key, global.Simm_byte_iv, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
-                this.txt_simm_text_out.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_out);
+                if(global.Simm_KeyIV_isEntry == true)// Если введен ключ и вектор
+                {
+                    global.Simm_byte_out = alg.SimmAlg(global.Simm_byte_in, global.Simm_byte_key, global.Simm_byte_iv, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
+                    this.txt_simm_text_out.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_out);
+                }
+                else
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Сначала укажите ключ и IV!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
             }
             else
             {
