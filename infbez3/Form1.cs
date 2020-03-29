@@ -85,6 +85,7 @@ namespace infbez3
                     return;
                 }
             }
+            ofd.Dispose();
         }
 
         // кнопка ОЧИСТИТЬ у ХЭШИРОВАНИЯ
@@ -148,6 +149,7 @@ namespace infbez3
                 this.Enabled = true;
                 this.btn_SimmEncrypt_Click(null, null);
             }
+            sfd.Dispose();
         }
         
         //=============================================================
@@ -159,20 +161,27 @@ namespace infbez3
             {
                 if(global.Simm_KeyIV_isEntry == true)// Если введен ключ и вектор
                 {
-                    // вызываем функцию шифрования и получаем байты шифра
-                    global.Simm_byte_out = alg.SimmAlg(global.Simm_byte_in, global.Simm_byte_key, global.Simm_byte_iv, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
-                   
+                    try
+                    {
+                        // вызываем функцию шифрования и получаем байты шифра
+                        global.Simm_byte_out = alg.SimmAlg(global.Simm_byte_in, global.Simm_byte_key, global.Simm_byte_iv, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
 
-                    // Вывести выходные байты 
-                    if (global.Simm_EncryptOrDecrypt) // Если шифруем
-                    {
-                         // вывели байты на форму виде 16-ричной строки
-                        this.txt_simm_text_out.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_out);
+                        // Вывести выходные байты 
+                        if (global.Simm_EncryptOrDecrypt) // Если шифруем
+                        {
+                            // вывели байты на форму виде 16-ричной строки
+                            this.txt_simm_text_out.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_out);
+                        }
+                        else // Если расшифровываем
+                        {
+                            // вывели байты на форму виде строки с кодировкой UTF8
+                            this.txt_simm_text_out.Text = Encoding.UTF8.GetString(global.Simm_byte_out);
+                        }
                     }
-                    else // Если расшифровываем
+                    catch (Exception error)
                     {
-                        // вывели байты на форму виде строки с кодировкой UTF8
-                        this.txt_simm_text_out.Text = Encoding.UTF8.GetString(global.Simm_byte_out);
+                        MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
                 }
                 else
@@ -232,12 +241,15 @@ namespace infbez3
                 {
                     if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
                     {
+                        // очистили ВЫходные байты
+                        global.Simm_byte_out = new byte[0];
                         // Считали байты из файла
                         global.Simm_byte_in = File.ReadAllBytes(ofd.FileName);
                         this.txt_simm_byte_in_num.Text = global.Simm_byte_in.Length.ToString(); // Вывели кол-во считанных байт
-                        this.txt_simm_file_in.Text = ofd.FileName; // вывели путь в textbox
+                        this.txt_simm_file_in.Text = ofd.FileName; // вывели путь к файлу в textbox
                         this.toolTip_simm_file.SetToolTip(this.txt_simm_file_in, this.txt_simm_file_in.Text); // текст подсказки запомнили
-                        this.txt_simm_text_in.Text = Encoding.UTF8.GetString(global.Simm_byte_in).Replace('\0', '0');
+                        this.txt_simm_text_in.Text = Encoding.UTF8.GetString(global.Simm_byte_in).Replace('\0', '0'); // вывели на форму считанное в кодировке UTF8
+                        global.Simm_file_extension = ofd.SafeFileName.Substring(ofd.SafeFileName.LastIndexOf('.'));  // Запомнили расширение считанного файла
                     }
                     else
                     {
@@ -255,6 +267,7 @@ namespace infbez3
                     return;
                 }
             }
+            ofd.Dispose();
         }
 
         // кнопка Ввод ключа и IV
@@ -302,12 +315,59 @@ namespace infbez3
             // ВЫходные данные стираем
             global.Simm_byte_out = new byte[0];
             this.txt_simm_text_out.Text = "";
+            // очистили расширение входного файла
+            global.Simm_file_extension = "";
         }
 
-        // Сохранить шифр/текст в файл
+        // Сохранить шифр/текст в файл у СИММ шифрования
         private void btn_simm_saveData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Если выходные байты пусты 
+                if (global.Simm_byte_out.Length == 0)
+                {
+                    this.Enabled = false;
+                    if (global.Simm_EncryptOrDecrypt == true)
+                        MessageBox.Show("Сначала зашифруйте данные!\nЗатем можете сохранить полученный шифр.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        MessageBox.Show("Сначала расшифруйте шифр!\nЗатем можете сохранить полученные данные.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Enabled = true;
+                    return;
+                }
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.InitialDirectory = Application.StartupPath;
+                sfd.Filter = "Files(*" + global.Simm_file_extension + "|*" + global.Simm_file_extension; // Сохранять только c расширением как и у входного файла
+                sfd.AddExtension = true;  //Добавить расширение к имени если не указали
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    // получаем выбранный файл
+                    string filename = sfd.FileName;
+                    // сохраняем байты в файл
+                    System.IO.File.WriteAllBytes(filename, global.Simm_byte_out);
+
+                    this.Enabled = false;
+                    MessageBox.Show("ЗАПИСАН записан в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Enabled = true;
+                    this.btn_SimmEncrypt_Click(null, null); // ААААААААААА ШТО ЭТО
+                }
+            }
+            catch(Exception error)
+            {
+                MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        // Сохранить ключ IV в файл у СИММ шифрования
+        private void btn_simm_saveKeyIV_Click(object sender, EventArgs e)
         {
 
         }
+        //===========================================================================
+
+
     }
 }

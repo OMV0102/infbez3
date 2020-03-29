@@ -374,7 +374,7 @@
             this.btn_simm_saveData.BackColor = System.Drawing.Color.LightGray;
             this.btn_simm_saveData.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_simm_saveData.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_simm_saveData.Location = new System.Drawing.Point(464, 339);
+            this.btn_simm_saveData.Location = new System.Drawing.Point(490, 339);
             this.btn_simm_saveData.Name = "btn_simm_saveData";
             this.btn_simm_saveData.Size = new System.Drawing.Size(271, 38);
             this.btn_simm_saveData.TabIndex = 84;
@@ -498,14 +498,15 @@
             this.btn_simm_saveKeyIV.BackColor = System.Drawing.Color.Transparent;
             this.btn_simm_saveKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_simm_saveKeyIV.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_simm_saveKeyIV.Location = new System.Drawing.Point(575, 379);
+            this.btn_simm_saveKeyIV.Location = new System.Drawing.Point(490, 380);
             this.btn_simm_saveKeyIV.Name = "btn_simm_saveKeyIV";
-            this.btn_simm_saveKeyIV.Size = new System.Drawing.Size(231, 38);
+            this.btn_simm_saveKeyIV.Size = new System.Drawing.Size(271, 38);
             this.btn_simm_saveKeyIV.TabIndex = 68;
             this.btn_simm_saveKeyIV.TabStop = false;
             this.btn_simm_saveKeyIV.Tag = "";
-            this.btn_simm_saveKeyIV.Text = "Сохранить ключ в файл";
+            this.btn_simm_saveKeyIV.Text = "Сохранить ключ и IV в файл";
             this.btn_simm_saveKeyIV.UseVisualStyleBackColor = false;
+            this.btn_simm_saveKeyIV.Click += new System.EventHandler(this.btn_simm_saveKeyIV_Click);
             // 
             // btn_SimmEncrypt
             // 

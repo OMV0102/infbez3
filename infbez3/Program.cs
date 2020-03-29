@@ -100,62 +100,42 @@ namespace infbez3
                 {
                     case "AES":
                         AesCng aescng = new AesCng(); // объект класса у алгоритма AES
+                        aescng.Key = key; // присваиваем ключ из аргумента
+                        aescng.IV = iv; // присваиваем вектор из аргумента
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
                         {
-                            if (key == null || key.Length != 32) // если ключ не по формату
-                            {
-                                return null; // выход из алгоритма
-                            }
-                            else
-                                aescng.Key = key; // иначе присваиваем ключ из аргумента
-
-                            if (iv == null || iv.Length != 16) // если вектор не по формату
-                            {
-                                return null; // выход из алгоритма
-                            }
-                            else
-                                aescng.IV = iv; // иначе присваиваем вектор из аргумента
                             // создали объект-шифратор с ключом и вектором
                             cryptoTransform = aescng.CreateEncryptor(aescng.Key, aescng.IV); 
-                            // зашифровали сообщение
-                            arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
-
                         }
                         else  // если вызвали для РАСшифровки AES
                         {
-
+                            // создали объект-расшифратор с ключом и вектором
+                            cryptoTransform = aescng.CreateDecryptor(aescng.Key, aescng.IV);
                         }
+                        // зашифровали сообщение
+                        arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
+
                         aescng.Dispose(); // освобождаем ресурсы
                         cryptoTransform.Dispose(); // освобождаем ресурсы
                         break;
 
                     case "3DES":
                         TripleDESCng tripledescng = new TripleDESCng(); // объект класса у алгоритма AES
+                        tripledescng.Key = key; //  присваиваем ключ из аргумента
+                        tripledescng.IV = iv; //  присваиваем вектор из аргумента
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
                         {
-                            if (key == null || key.Length != 24) // если ключ не по формату
-                            {
-                                return null; // выход из алгоритма
-                            }
-                            else
-                                tripledescng.Key = key; // иначе присваиваем ключ из аргумента
-
-                            if (iv == null || iv.Length != 8) // если вектор не по формату
-                            {
-                                return null; // выход из алгоритма
-                            }
-                            else
-                                tripledescng.IV = iv; // иначе присваиваем вектор из аргумента
                             // создали объект-шифратор с ключом и вектором
                             cryptoTransform = tripledescng.CreateEncryptor(tripledescng.Key, tripledescng.IV);
-                            // зашифровали сообщение
-                            arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
-
                         }
                         else  // если вызвали для РАСшифровки 3DES
                         {
-
+                            // создали объект-шифратор с ключом и вектором
+                            cryptoTransform = tripledescng.CreateDecryptor(tripledescng.Key, tripledescng.IV);
                         }
+                        // зашифровали сообщение
+                        arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
+
                         tripledescng.Dispose(); // освобождаем ресурсы
                         cryptoTransform.Dispose(); // освобождаем ресурсы
                         break;

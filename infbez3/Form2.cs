@@ -206,6 +206,7 @@ namespace infbez3
                     return;
                 }
             }
+            ofd.Dispose();
         }
 
         // При закрытии формы
