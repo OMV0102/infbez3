@@ -21,5 +21,6 @@ namespace infbez3
         public static byte[] Simm_byte_key; // Ключ для Симметричного ШИФРОВАНИЯ
         public static byte[] Simm_byte_iv; // Вектор инициализации для Симметричного ШИФРОВАНИЯ
         public static bool Simm_EncryptOrDecrypt; // Режим либо шифроуем либо расшифровываем для Симметричного ШИФРОВАНИЯ
+        public static bool Simm_KeyIV_isEntry; // Введенн ли ключ и  вектор или нет
     }
 }

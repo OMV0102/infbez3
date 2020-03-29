@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.label_simm_entryKeyIV = new System.Windows.Forms.Label();
             this.btn_confirm_entry = new System.Windows.Forms.Button();
@@ -37,16 +38,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_generate_key = new System.Windows.Forms.Button();
             this.btn_generate_iv = new System.Windows.Forms.Button();
+            this.btn_loadKeyIV = new System.Windows.Forms.Button();
+            this.toolTip_LoadKeyIV = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label_simm_entryKeyIV
             // 
             this.label_simm_entryKeyIV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_simm_entryKeyIV.ForeColor = System.Drawing.Color.Maroon;
-            this.label_simm_entryKeyIV.Location = new System.Drawing.Point(5, 7);
+            this.label_simm_entryKeyIV.Location = new System.Drawing.Point(5, 4);
             this.label_simm_entryKeyIV.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label_simm_entryKeyIV.Name = "label_simm_entryKeyIV";
-            this.label_simm_entryKeyIV.Size = new System.Drawing.Size(668, 123);
+            this.label_simm_entryKeyIV.Size = new System.Drawing.Size(693, 148);
             this.label_simm_entryKeyIV.TabIndex = 79;
             this.label_simm_entryKeyIV.Text = resources.GetString("label_simm_entryKeyIV.Text");
             // 
@@ -141,11 +144,35 @@
             this.btn_generate_iv.UseVisualStyleBackColor = true;
             this.btn_generate_iv.Click += new System.EventHandler(this.btn_generate_iv_Click);
             // 
+            // btn_loadKeyIV
+            // 
+            this.btn_loadKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_loadKeyIV.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Green;
+            this.btn_loadKeyIV.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LimeGreen;
+            this.btn_loadKeyIV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_loadKeyIV.Location = new System.Drawing.Point(858, 200);
+            this.btn_loadKeyIV.Margin = new System.Windows.Forms.Padding(6);
+            this.btn_loadKeyIV.Name = "btn_loadKeyIV";
+            this.btn_loadKeyIV.Size = new System.Drawing.Size(173, 51);
+            this.btn_loadKeyIV.TabIndex = 88;
+            this.btn_loadKeyIV.TabStop = false;
+            this.btn_loadKeyIV.Text = "Загрузить ключ и IV из файла";
+            this.btn_loadKeyIV.UseVisualStyleBackColor = true;
+            this.btn_loadKeyIV.Click += new System.EventHandler(this.btn_loadKeyIV_Click);
+            // 
+            // toolTip_LoadKeyIV
+            // 
+            this.toolTip_LoadKeyIV.AutoPopDelay = 20000;
+            this.toolTip_LoadKeyIV.InitialDelay = 300;
+            this.toolTip_LoadKeyIV.ReshowDelay = 100;
+            this.toolTip_LoadKeyIV.ShowAlways = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 288);
+            this.Controls.Add(this.btn_loadKeyIV);
             this.Controls.Add(this.btn_generate_iv);
             this.Controls.Add(this.btn_generate_key);
             this.Controls.Add(this.label2);
@@ -160,6 +187,7 @@
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ШИФРОВАНИЕ: Ввод ключа (Key) и вектора инициализации (IV)";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -175,5 +203,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_generate_key;
         private System.Windows.Forms.Button btn_generate_iv;
+        private System.Windows.Forms.Button btn_loadKeyIV;
+        private System.Windows.Forms.ToolTip toolTip_LoadKeyIV;
     }
 }

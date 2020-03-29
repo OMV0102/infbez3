@@ -118,12 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label_simm_entryKeyIV.Text" xml:space="preserve">
-    <value>&gt; Ключом могут быть любые цифры и латинские буквы.
-&gt; Длина ключа должна быть обязательно равна 32 знакам!
+    <value>&gt; Ключом могут быть только 16-ричные цифры (0-9, A-F).
+&gt; Длина ключа должна быть обязательно равна NN знакам!
 
-&gt; В векторе могут быть любые цифры и латинские буквы.
-&gt; Длина должна быть обязательно равна 16 знакам!
-&gt; Вектор инициализации рекомендуется заполнить случайным набором!</value>
+&gt; В векторе могут быть только 16-ричные цифры (0-9, A-F).
+&gt; Длина должна быть обязательно равна NN знакам!
+
+&gt; Стрелки - случайное заполнение.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btn_generate_key.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -1396,4 +1397,7 @@
         YII=
 </value>
   </data>
+  <metadata name="toolTip_LoadKeyIV.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

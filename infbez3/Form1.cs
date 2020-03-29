@@ -29,6 +29,7 @@ namespace infbez3
             //======================================
             this.comboBox_SimmAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм Симм. шифрования
             this.radioBtn_SimmAlg1.Checked = true; ; // режим шифрования при запуске
+            global.Simm_KeyIV_isEntry = false; // флаг меняем что не введенны ключ и вектор
         }
 
         // ВЫБОР метода хэширования
@@ -222,8 +223,27 @@ namespace infbez3
         {
             Form2 form = new Form2(comboBox_SimmAlg.SelectedItem.ToString());
             form.Owner = this;
-            form.form1_btn_simm_entryKeyIV = this.btn_simm_entryKeyIV;
+            form.form1_btn_simm_entryKeyIV = this.btn_simm_entryKeyIV; // передали ссылку на управление кнопкой
             form.ShowDialog(this);
+        }
+
+        // если меняем алгоритм СИММетричного ШИФРОВАНИЯ
+        private void comboBox_SimmAlg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // меняем кнопку ввод ключа на обычную
+            this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV (не введенны)";
+            this.btn_simm_entryKeyIV.ForeColor = Color.FromKnownColor(KnownColor.Black);
+            // очищаем ключ и вектор
+            global.Simm_byte_key = new byte[0];
+            global.Simm_byte_iv = new byte[0];
+            // флаг меняем что не введенны
+            global.Simm_KeyIV_isEntry = false;
+        }
+
+        // кнопка ОЧИСТИТЬ у СИММетричного ШИФРОВАНИЯ
+        private void btn_simm_clear_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

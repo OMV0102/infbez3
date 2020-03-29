@@ -44,9 +44,11 @@
             this.btn_choice_fileinHesh = new System.Windows.Forms.Button();
             this.comboBox_HeshAlg = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tab_SimAlg = new System.Windows.Forms.TabPage();
+            this.txt_simm_text_in = new System.Windows.Forms.RichTextBox();
+            this.btn_simm_entryKeyIV = new System.Windows.Forms.Button();
             this.label_caption2 = new System.Windows.Forms.Label();
             this.txt_simm_file_in = new System.Windows.Forms.TextBox();
             this.comboBox_SimmAlg = new System.Windows.Forms.ComboBox();
@@ -57,21 +59,19 @@
             this.btn_SimmEncrypt = new System.Windows.Forms.Button();
             this.label_caption1 = new System.Windows.Forms.Label();
             this.txt_simm_byte_in_num = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_simm_clear = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.btn_choice_fileinSimm = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.tab_AsimAlg = new System.Windows.Forms.TabPage();
             this.tab_eds = new System.Windows.Forms.TabPage();
             this.toolTip_hesh_file = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip_simm_file = new System.Windows.Forms.ToolTip(this.components);
-            this.btn_simm_entryKeyIV = new System.Windows.Forms.Button();
-            this.txt_simm_text_in = new System.Windows.Forms.RichTextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
@@ -287,18 +287,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Алгоритм хэширования:";
             // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Enabled = false;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(10, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(815, 200);
-            this.label4.TabIndex = 55;
-            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -310,6 +298,18 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(815, 210);
             this.label5.TabIndex = 56;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.Enabled = false;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(10, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(815, 200);
+            this.label4.TabIndex = 55;
             // 
             // tab_SimAlg
             // 
@@ -326,7 +326,7 @@
             this.tab_SimAlg.Controls.Add(this.btn_SimmEncrypt);
             this.tab_SimAlg.Controls.Add(this.label_caption1);
             this.tab_SimAlg.Controls.Add(this.txt_simm_byte_in_num);
-            this.tab_SimAlg.Controls.Add(this.button1);
+            this.tab_SimAlg.Controls.Add(this.btn_simm_clear);
             this.tab_SimAlg.Controls.Add(this.label9);
             this.tab_SimAlg.Controls.Add(this.btn_choice_fileinSimm);
             this.tab_SimAlg.Controls.Add(this.label10);
@@ -343,6 +343,35 @@
             this.tab_SimAlg.Size = new System.Drawing.Size(833, 429);
             this.tab_SimAlg.TabIndex = 1;
             this.tab_SimAlg.Text = "Симметричные алгоритмы";
+            // 
+            // txt_simm_text_in
+            // 
+            this.txt_simm_text_in.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.txt_simm_text_in.DetectUrls = false;
+            this.txt_simm_text_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_simm_text_in.Location = new System.Drawing.Point(12, 266);
+            this.txt_simm_text_in.Name = "txt_simm_text_in";
+            this.txt_simm_text_in.ReadOnly = true;
+            this.txt_simm_text_in.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.txt_simm_text_in.Size = new System.Drawing.Size(381, 84);
+            this.txt_simm_text_in.TabIndex = 79;
+            this.txt_simm_text_in.TabStop = false;
+            this.txt_simm_text_in.Text = "";
+            // 
+            // btn_simm_entryKeyIV
+            // 
+            this.btn_simm_entryKeyIV.BackColor = System.Drawing.Color.Transparent;
+            this.btn_simm_entryKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_simm_entryKeyIV.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_simm_entryKeyIV.Location = new System.Drawing.Point(53, 373);
+            this.btn_simm_entryKeyIV.Name = "btn_simm_entryKeyIV";
+            this.btn_simm_entryKeyIV.Size = new System.Drawing.Size(308, 48);
+            this.btn_simm_entryKeyIV.TabIndex = 77;
+            this.btn_simm_entryKeyIV.TabStop = false;
+            this.btn_simm_entryKeyIV.Tag = "";
+            this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV (не введенны)";
+            this.btn_simm_entryKeyIV.UseVisualStyleBackColor = false;
+            this.btn_simm_entryKeyIV.Click += new System.EventHandler(this.btn_simm_entryKeyIV_Click);
             // 
             // label_caption2
             // 
@@ -379,6 +408,7 @@
             this.comboBox_SimmAlg.Size = new System.Drawing.Size(211, 32);
             this.comboBox_SimmAlg.TabIndex = 63;
             this.comboBox_SimmAlg.TabStop = false;
+            this.comboBox_SimmAlg.SelectedIndexChanged += new System.EventHandler(this.comboBox_SimmAlg_SelectedIndexChanged);
             // 
             // radioBtn_SimmAlg2
             // 
@@ -464,18 +494,19 @@
             this.txt_simm_byte_in_num.TabIndex = 60;
             this.txt_simm_byte_in_num.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
+            // btn_simm_clear
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(287, 146);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 35);
-            this.button1.TabIndex = 58;
-            this.button1.TabStop = false;
-            this.button1.Tag = "";
-            this.button1.Text = "Очистить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_simm_clear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_simm_clear.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_simm_clear.Location = new System.Drawing.Point(287, 146);
+            this.btn_simm_clear.Name = "btn_simm_clear";
+            this.btn_simm_clear.Size = new System.Drawing.Size(106, 35);
+            this.btn_simm_clear.TabIndex = 58;
+            this.btn_simm_clear.TabStop = false;
+            this.btn_simm_clear.Tag = "";
+            this.btn_simm_clear.Text = "Очистить";
+            this.btn_simm_clear.UseVisualStyleBackColor = true;
+            this.btn_simm_clear.Click += new System.EventHandler(this.btn_simm_clear_Click);
             // 
             // label9
             // 
@@ -536,6 +567,25 @@
             this.label14.Size = new System.Drawing.Size(2, 370);
             this.label14.TabIndex = 76;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(7, 351);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(399, 18);
+            this.label7.TabIndex = 81;
+            this.label7.Text = "(Если считан не текст, тут могут быть просто символы)";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(8, 243);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(295, 24);
+            this.label6.TabIndex = 80;
+            this.label6.Text = "Примерные считанные данные:";
+            // 
             // tab_AsimAlg
             // 
             this.tab_AsimAlg.BackColor = System.Drawing.Color.LightGray;
@@ -563,54 +613,6 @@
             // toolTip_hesh_file
             // 
             this.toolTip_hesh_file.ShowAlways = true;
-            // 
-            // btn_simm_entryKeyIV
-            // 
-            this.btn_simm_entryKeyIV.BackColor = System.Drawing.Color.Transparent;
-            this.btn_simm_entryKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_simm_entryKeyIV.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_simm_entryKeyIV.Location = new System.Drawing.Point(85, 374);
-            this.btn_simm_entryKeyIV.Name = "btn_simm_entryKeyIV";
-            this.btn_simm_entryKeyIV.Size = new System.Drawing.Size(257, 48);
-            this.btn_simm_entryKeyIV.TabIndex = 77;
-            this.btn_simm_entryKeyIV.TabStop = false;
-            this.btn_simm_entryKeyIV.Tag = "";
-            this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV";
-            this.btn_simm_entryKeyIV.UseVisualStyleBackColor = false;
-            this.btn_simm_entryKeyIV.Click += new System.EventHandler(this.btn_simm_entryKeyIV_Click);
-            // 
-            // txt_simm_text_in
-            // 
-            this.txt_simm_text_in.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.txt_simm_text_in.DetectUrls = false;
-            this.txt_simm_text_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_simm_text_in.Location = new System.Drawing.Point(12, 266);
-            this.txt_simm_text_in.Name = "txt_simm_text_in";
-            this.txt_simm_text_in.ReadOnly = true;
-            this.txt_simm_text_in.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.txt_simm_text_in.Size = new System.Drawing.Size(381, 84);
-            this.txt_simm_text_in.TabIndex = 79;
-            this.txt_simm_text_in.TabStop = false;
-            this.txt_simm_text_in.Text = "";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 243);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(295, 24);
-            this.label6.TabIndex = 80;
-            this.label6.Text = "Примерные считанные данные:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(7, 351);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(399, 18);
-            this.label7.TabIndex = 81;
-            this.label7.Text = "(Если считан не текст, тут могут быть просто символы)";
             // 
             // Form_main
             // 
@@ -657,7 +659,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label_caption1;
         private System.Windows.Forms.Label txt_simm_byte_in_num;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_simm_clear;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_choice_fileinSimm;
         private System.Windows.Forms.Label label11;

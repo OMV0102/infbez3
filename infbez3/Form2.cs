@@ -26,9 +26,10 @@ namespace infbez3
         public Button form1_btn_simm_entryKeyIV;
 
 
-        // при загрузке формы для ввода ключа и IV
+        // при ЗАГРУЗКЕ ФОРМЫ для ввода ключа и IV
         private void Form2_Load(object sender, EventArgs e)
         {
+            // Выделили память и установили длину ключей и IV
             aescng = new AesCng();
             tripledes = new TripleDESCng();
             if (AlgName == "AES")
@@ -42,21 +43,42 @@ namespace infbez3
                 txt_key.MaxLength = 48;
                 txt_iv.MaxLength = 16;
             }
+
+            // Инструкция сверху формы
+            this.label_simm_entryKeyIV.Text = "> Ключом могут быть только 16-ричные цифры (0-9, A-F).\n";
+            this.label_simm_entryKeyIV.Text += "> Длина ключа должна быть обязательно равна " + txt_key.MaxLength + " знакам!\n\n";
+            this.label_simm_entryKeyIV.Text += "> В векторе могут быть только 16-ричные цифры (0-9, A-F).\n";
+            this.label_simm_entryKeyIV.Text += "> Длина должна быть обязательно равна "+ txt_iv.MaxLength + " знакам!\n\n";
+            this.label_simm_entryKeyIV.Text += "> Стрелки - случайное заполнение.";
+
+            // Подсказка у кнопки загрузки ключа
+            this.toolTip_LoadKeyIV.ToolTipTitle = this.btn_loadKeyIV.Text;
+            this.toolTip_LoadKeyIV.ToolTipIcon = ToolTipIcon.Info;
+            this.toolTip_LoadKeyIV.SetToolTip(this.btn_loadKeyIV, "В файле должно быть две строки в 16-ричном виде.\n1-ая строка: Ключ длинной 64 знака.\n2-ая строка: Вектор(IV) длиной 32 знакак.");
+
+            if (global.Simm_EncryptOrDecrypt) // если загрузили для ШИФРОВАНИЯ
+            {
+                this.Text = "ШИФРОВАНИЕ: Ввод ключа (Key) и вектора инициализации (IV)";
+            }
+            else  // если загрузили для РАСШИФРОВКИ
+            {
+                this.Text = "РАСШИФРОВКА: Ввод ключа (Key) и вектора инициализации (IV)";
+            }
         }
 
+        // кнопка ПОДТВЕРДИТЬ
         private void btn_confirm_entry_Click(object sender, EventArgs e)
         {
-            //Form form = this.Owner; // получили объект родительской формы
-            //Form_main form = this.Owner; // получили объект родительской формы
             if(txt_key.Text.Length == txt_key.MaxLength)
             {
                 if (txt_iv.Text.Length == txt_iv.MaxLength)
                 {
                     global.Simm_byte_key = alg.StringHEXToByteArray(txt_key.Text); // Запомнили ключ
                     global.Simm_byte_iv = alg.StringHEXToByteArray(txt_iv.Text); // Запомнили IV
+                    global.Simm_KeyIV_isEntry = true;
 
-                    form1_btn_simm_entryKeyIV.Text = "Ввести ключ и IV (введен)";
-                    form1_btn_simm_entryKeyIV.ForeColor = Color.FromKnownColor(KnownColor.Green);
+                    form1_btn_simm_entryKeyIV.Text = "Изменить ключ и IV (введенно)"; // Изменили название кнопки на основной форме
+                    form1_btn_simm_entryKeyIV.ForeColor = Color.FromKnownColor(KnownColor.Green); // Цвет изменили
 
                     this.Close();
                 }
@@ -69,9 +91,6 @@ namespace infbez3
             {
                 MessageBox.Show("Число символов в ключе должно быть " + txt_key.MaxLength.ToString() + "!\nОтредактируйте ключ или сгенерируйте случайно.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             }
-
-            
-            //this.Close();
         }
 
         // Генерировать ключ
@@ -130,6 +149,62 @@ namespace infbez3
             {
                 e.Handled = true;
             }
+        }
+
+        // кнопка ЗАГРУЗИТЬ ключ и IV из файла
+        private void btn_loadKeyIV_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Выбрать файл ..."; // Заголовок окна
+            ofd.InitialDirectory = Application.StartupPath; // Папка проекта
+
+            if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
+            {
+                // читаем байты из файла
+                if (ofd.FileName.Length > 0) // Если путь не нулевой
+                {
+                    if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
+                    {
+                        string temp1 = "";
+                        string temp2 = "";
+                        using (StreamReader sr = new StreamReader(ofd.FileName, Encoding.UTF8))
+                        {
+                            temp1 = sr.ReadLine();
+                            temp2 = sr.ReadLine();
+                            if(temp1 == null || temp2 == null || temp1.Length != txt_key.MaxLength || temp2.Length != txt_iv.MaxLength)
+                            {
+                                MessageBox.Show("Ошибка считывания данных!\nПосмотрите подсказку при наведении на кнопку загрузки.", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+
+                            // Выводим в форму считанные данные
+                            this.txt_key.Text = temp1;
+                            this.txt_iv.Text = temp2;
+
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Файла {" + ofd.FileName + "} не существует!", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Указан неверный путь!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
+            }
+        }
+
+        // При закрытии формы
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Освободили память от aes и 3des
+            aescng.Dispose();
+            tripledes.Dispose();
         }
     }
 }
