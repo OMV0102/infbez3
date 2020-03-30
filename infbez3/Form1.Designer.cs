@@ -47,7 +47,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tab_SimAlg = new System.Windows.Forms.TabPage();
-            this.label_simm_underText_out = new System.Windows.Forms.Label();
             this.label_simm_onText_out = new System.Windows.Forms.Label();
             this.btn_simm_saveData = new System.Windows.Forms.Button();
             this.txt_simm_text_out = new System.Windows.Forms.RichTextBox();
@@ -71,13 +70,19 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label_simm_underText_out = new System.Windows.Forms.Label();
             this.tab_AsimAlg = new System.Windows.Forms.TabPage();
             this.tab_eds = new System.Windows.Forms.TabPage();
             this.toolTip_hesh_file = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip_simm_file = new System.Windows.Forms.ToolTip(this.components);
+            this.tabControl_eds_make = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage_eds_check = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
+            this.tab_eds.SuspendLayout();
+            this.tabControl_eds_make.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -351,15 +356,6 @@
             this.tab_SimAlg.TabIndex = 1;
             this.tab_SimAlg.Text = "Симметричные алгоритмы";
             // 
-            // label_simm_underText_out
-            // 
-            this.label_simm_underText_out.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_simm_underText_out.Location = new System.Drawing.Point(428, 274);
-            this.label_simm_underText_out.Name = "label_simm_underText_out";
-            this.label_simm_underText_out.Size = new System.Drawing.Size(400, 62);
-            this.label_simm_underText_out.TabIndex = 86;
-            this.label_simm_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных)";
-            // 
             // label_simm_onText_out
             // 
             this.label_simm_onText_out.AutoSize = true;
@@ -495,7 +491,7 @@
             // 
             // btn_simm_saveKeyIV
             // 
-            this.btn_simm_saveKeyIV.BackColor = System.Drawing.Color.Transparent;
+            this.btn_simm_saveKeyIV.BackColor = System.Drawing.Color.LightGray;
             this.btn_simm_saveKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_simm_saveKeyIV.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btn_simm_saveKeyIV.Location = new System.Drawing.Point(490, 380);
@@ -510,6 +506,7 @@
             // 
             // btn_SimmEncrypt
             // 
+            this.btn_SimmEncrypt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.btn_SimmEncrypt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_SimmEncrypt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_SimmEncrypt.Font = new System.Drawing.Font("Microsoft PhagsPa", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -520,7 +517,7 @@
             this.btn_SimmEncrypt.TabStop = false;
             this.btn_SimmEncrypt.Tag = "";
             this.btn_SimmEncrypt.Text = "🡻 Шифровать 🡻";
-            this.btn_SimmEncrypt.UseVisualStyleBackColor = true;
+            this.btn_SimmEncrypt.UseVisualStyleBackColor = false;
             this.btn_SimmEncrypt.Click += new System.EventHandler(this.btn_SimmEncrypt_Click);
             // 
             // label_caption1
@@ -634,6 +631,15 @@
             this.label6.TabIndex = 80;
             this.label6.Text = "Примерные считанные данные:";
             // 
+            // label_simm_underText_out
+            // 
+            this.label_simm_underText_out.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_simm_underText_out.Location = new System.Drawing.Point(428, 274);
+            this.label_simm_underText_out.Name = "label_simm_underText_out";
+            this.label_simm_underText_out.Size = new System.Drawing.Size(400, 62);
+            this.label_simm_underText_out.TabIndex = 86;
+            this.label_simm_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных)";
+            // 
             // tab_AsimAlg
             // 
             this.tab_AsimAlg.BackColor = System.Drawing.Color.LightGray;
@@ -649,6 +655,7 @@
             // tab_eds
             // 
             this.tab_eds.BackColor = System.Drawing.Color.LightGray;
+            this.tab_eds.Controls.Add(this.tabControl_eds_make);
             this.tab_eds.Cursor = System.Windows.Forms.Cursors.Default;
             this.tab_eds.Location = new System.Drawing.Point(4, 33);
             this.tab_eds.Margin = new System.Windows.Forms.Padding(4);
@@ -661,6 +668,40 @@
             // toolTip_hesh_file
             // 
             this.toolTip_hesh_file.ShowAlways = true;
+            // 
+            // tabControl_eds_make
+            // 
+            this.tabControl_eds_make.Controls.Add(this.tabPage1);
+            this.tabControl_eds_make.Controls.Add(this.tabPage_eds_check);
+            this.tabControl_eds_make.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tabControl_eds_make.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl_eds_make.Location = new System.Drawing.Point(4, 4);
+            this.tabControl_eds_make.Name = "tabControl_eds_make";
+            this.tabControl_eds_make.SelectedIndex = 0;
+            this.tabControl_eds_make.Size = new System.Drawing.Size(825, 421);
+            this.tabControl_eds_make.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tabPage1.Location = new System.Drawing.Point(4, 33);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(817, 384);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Подписать документ";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage_eds_check
+            // 
+            this.tabPage_eds_check.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tabPage_eds_check.Location = new System.Drawing.Point(4, 33);
+            this.tabPage_eds_check.Name = "tabPage_eds_check";
+            this.tabPage_eds_check.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_eds_check.Size = new System.Drawing.Size(817, 384);
+            this.tabPage_eds_check.TabIndex = 1;
+            this.tabPage_eds_check.Text = "Проверка подписи";
+            this.tabPage_eds_check.UseVisualStyleBackColor = true;
             // 
             // Form_main
             // 
@@ -683,6 +724,8 @@
             this.tab_Hesh.PerformLayout();
             this.tab_SimAlg.ResumeLayout(false);
             this.tab_SimAlg.PerformLayout();
+            this.tab_eds.ResumeLayout(false);
+            this.tabControl_eds_make.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -734,6 +777,9 @@
         private System.Windows.Forms.RichTextBox txt_simm_text_out;
         private System.Windows.Forms.Label label_simm_onText_out;
         private System.Windows.Forms.Label label_simm_underText_out;
+        private System.Windows.Forms.TabControl tabControl_eds_make;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage_eds_check;
     }
 }
 

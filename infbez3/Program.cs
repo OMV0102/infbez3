@@ -88,6 +88,7 @@ namespace infbez3
         }
 
         // функция для СИММ. Шифрования массива байт заданным алгоритмом и режимом, на выходе массив байт
+        // аргументы: вход. байты; ключ; вектор инициализации; алгоритм AES / 3DES; режим шифруем / расшифровываем
         public static Byte[] SimmAlg(Byte[] arrayByte_in, Byte[] key, Byte[] iv, string selectedAlgSimm, bool EncryptIsTrue)
         {
             byte[] arrayByte_out = new byte[0]; // Выходная последовательность байт после шифрования/расшифровки
