@@ -28,8 +28,12 @@ namespace infbez3
             this.comboBox_HeshAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм хэширования
             //======================================
             this.comboBox_SimmAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм Симм. шифрования
-            this.radioBtn_SimmAlg1.Checked = true; ; // режим шифрования при запуске
-            this.btn_simm_clear_Click(null, null); // жмем кнопку очисить
+            this.radioBtn_SimmAlg1.Checked = true; ; // режим шифрования при запуске Симм. шифрования
+            this.btn_simm_clear_Click(null, null); // жмем кнопку очистить для Симм. шифрования
+            //======================================
+            this.comboBox_AsimAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм Асимм. шифрования
+            this.radioBtn_AsimAlg1.Checked = true; ; // режим шифрования при запуске Асимм. шифрования
+            this.btn_Asim_clear_Click(null, null); // жмем кнопку очистить для Асимм. шифрования
         }
 
         //=====================================================================
@@ -219,8 +223,8 @@ namespace infbez3
         {
             global.Simm_EncryptOrDecrypt = false;
             this.btn_SimmEncrypt.Text = "🡻 Расшифровать 🡻";
-            this.label_simm_caption2.Text = "Расшифрованные данные"; 
             this.label_simm_caption1.Text = "Зашифрованные данные";
+            this.label_simm_caption2.Text = "Расшифрованные данные"; 
             this.label_simm_onText_out.Text = "Расшифрованные данные:";
             this.label_simm_underText_out.Text = "(В файл данные сохраняться в виде байт, но при открытие\n файл будет отображаться корректно так как будет сохранен\n с таким же расширеним, что и шифрованный файл)";
             this.btn_simm_saveData.Text = "Сохранить данные в файл";
@@ -422,19 +426,72 @@ namespace infbez3
         // кнопка режим Асимметричного Шифрования
         private void radioBtn_AsimAlg1_CheckedChanged(object sender, EventArgs e)
         {
-
+            global.Asim_EncryptOrDecrypt = true;
+            this.btn_AsimEncrypt.Text = "🡻 Шифровать 🡻";
+            this.label_Asim_caption1.Text = "Входные данные";
+            this.label_Asim_caption2.Text = "Зашифрованные данные";
+            this.label_Asim_onText_out.Text = "Примерный вид зашифрованных данных:";
+            this.label_Asim_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных,\n но с таким же расширением, что и входной файл)";
+            this.btn_Asim_saveData.Text = "Сохранить шифр в файл";
+            this.btn_choice_fileinAsim.Text = "Выбрать файл с данными";
+            btn_Asim_clear_Click(null, null); // Очистить всё при переключении
         }
 
         // кнопка режим Асимметричной Расшифровки
         private void radioBtn_AsimAlg2_CheckedChanged(object sender, EventArgs e)
         {
-
+            global.Asim_EncryptOrDecrypt = false;
+            this.btn_AsimEncrypt.Text = "🡻 Расшифровать 🡻";
+            this.label_Asim_caption1.Text = "Зашифрованные данные";
+            this.label_Asim_caption2.Text = "Расшифрованные данные";
+            this.label_Asim_onText_out.Text = "Расшифрованные данные:";
+            this.label_Asim_underText_out.Text = "(В файл данные сохраняться в виде байт, но при открытие\n файл будет отображаться корректно так как будет сохранен\n с таким же расширеним, что и шифрованный файл)";
+            this.btn_Asim_saveData.Text = "Сохранить данные в файл";
+            this.btn_choice_fileinAsim.Text = "Выбрать файл с шифром";
+            btn_Asim_clear_Click(null, null); // Очистить всё при переключении
         }
 
         // кнопка ПРОЧИТАТЬ ИЗ ФАЙЛА при Асимм. Шифровании
         private void btn_choice_fileinAsim_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Выбрать файл ..."; // Заголовок окна
+            ofd.InitialDirectory = Application.StartupPath; // Папка проекта
 
+            if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
+            {
+                // читаем байты из файла
+                if (ofd.FileName.Length > 0) // Если путь не нулевой
+                {
+                    if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
+                    {
+                        // очистили ВЫходные байты
+                        global.Asim_byte_out = new byte[0];
+                        // Считали байты из файла
+                        global.Asim_byte_in = File.ReadAllBytes(ofd.FileName);
+                        this.txt_Asim_byte_in_num.Text = global.Asim_byte_in.Length.ToString(); // Вывели кол-во считанных байт
+                        this.txt_Asim_file_in.Text = ofd.FileName; // вывели путь к файлу в textbox
+                        this.toolTip_Asim_file.SetToolTip(this.txt_Asim_file_in, this.txt_Asim_file_in.Text); // текст подсказки запомнили
+                        this.txt_Asim_text_in.Text = Encoding.UTF8.GetString(global.Asim_byte_in).Replace('\0', '0'); // вывели на форму считанное в кодировке UTF8
+                        global.Asim_file_extension = ofd.SafeFileName.Substring(ofd.SafeFileName.LastIndexOf('.'));  // Запомнили расширение считанного файла
+                    }
+                    else
+                    {
+                        this.Enabled = false;
+                        MessageBox.Show("Файла {" + ofd.FileName + "} не существует!", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Enabled = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Указан неверный путь!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
+            }
+            ofd.Dispose();
         }
 
         // кнопка ВВОД КЛЮЧЕЙ
@@ -452,7 +509,26 @@ namespace infbez3
         // кнопка ОЧИСТИТЬ у Асимметричного ШИФРОВАНИЯ
         private void btn_Asim_clear_Click(object sender, EventArgs e)
         {
-
+            //========очистка ключа======
+            // меняем кнопку ввод ключа на обычную
+            this.btn_Asim_entryKey.Text = "Ввести ключ и IV (не введенны)";
+            this.btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Black);
+            // очищаем ключ и вектор
+            global.Asim_byte_keyPublic = new byte[0];
+            global.Asim_byte_keyPrivate = new byte[0];
+            // флаг меняем что не введенны
+            global.Asim_Keys_isEntry = false;
+            //===================================
+            // входные данные стираем
+            global.Asim_byte_in = new byte[0];
+            this.txt_Asim_text_in.Text = "";
+            this.txt_Asim_file_in.Text = "";
+            this.txt_Asim_byte_in_num.Text = "0";
+            // ВЫходные данные стираем
+            global.Asim_byte_out = new byte[0];
+            this.txt_Asim_text_out.Text = "";
+            // очистили расширение входного файла
+            global.Asim_file_extension = "";
         }
 
         // Сохранить шифр/текст в файл у Асимм шифрования

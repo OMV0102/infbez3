@@ -42,7 +42,7 @@
             this.btn_choice_fileinAsim = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.btn_Asim_clear = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
+            this.txt_Asim_byte_in_num = new System.Windows.Forms.Label();
             this.label_Asim_caption1 = new System.Windows.Forms.Label();
             this.btn_AsimEncrypt = new System.Windows.Forms.Button();
             this.radioBtn_AsimAlg1 = new System.Windows.Forms.RadioButton();
@@ -101,6 +101,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txt_hesh_file_in = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.toolTip_Asim_file = new System.Windows.Forms.ToolTip(this.components);
             this.tab_AsimAlg.SuspendLayout();
             this.tab_eds.SuspendLayout();
             this.tabControl_eds_make.SuspendLayout();
@@ -128,7 +129,7 @@
             this.tab_AsimAlg.Controls.Add(this.radioBtn_AsimAlg1);
             this.tab_AsimAlg.Controls.Add(this.btn_AsimEncrypt);
             this.tab_AsimAlg.Controls.Add(this.label_Asim_caption1);
-            this.tab_AsimAlg.Controls.Add(this.label16);
+            this.tab_AsimAlg.Controls.Add(this.txt_Asim_byte_in_num);
             this.tab_AsimAlg.Controls.Add(this.btn_Asim_clear);
             this.tab_AsimAlg.Controls.Add(this.label17);
             this.tab_AsimAlg.Controls.Add(this.btn_choice_fileinAsim);
@@ -249,14 +250,14 @@
             this.btn_Asim_clear.UseVisualStyleBackColor = true;
             this.btn_Asim_clear.Click += new System.EventHandler(this.btn_Asim_clear_Click);
             // 
-            // label16
+            // txt_Asim_byte_in_num
             // 
-            this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.Location = new System.Drawing.Point(230, 193);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(146, 30);
-            this.label16.TabIndex = 60;
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_Asim_byte_in_num.BackColor = System.Drawing.Color.Transparent;
+            this.txt_Asim_byte_in_num.Location = new System.Drawing.Point(230, 193);
+            this.txt_Asim_byte_in_num.Name = "txt_Asim_byte_in_num";
+            this.txt_Asim_byte_in_num.Size = new System.Drawing.Size(146, 30);
+            this.txt_Asim_byte_in_num.TabIndex = 60;
+            this.txt_Asim_byte_in_num.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label_Asim_caption1
             // 
@@ -1063,7 +1064,7 @@
         private System.Windows.Forms.RadioButton radioBtn_AsimAlg1;
         private System.Windows.Forms.Button btn_AsimEncrypt;
         private System.Windows.Forms.Label label_Asim_caption1;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label txt_Asim_byte_in_num;
         private System.Windows.Forms.Button btn_Asim_clear;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button btn_choice_fileinAsim;
@@ -1120,6 +1121,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.ToolTip toolTip_Asim_file;
     }
 }
 
