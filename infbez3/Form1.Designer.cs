@@ -224,6 +224,7 @@
             this.btn_choice_fileinAsim.Tag = "";
             this.btn_choice_fileinAsim.Text = "Выбрать файл с данными";
             this.btn_choice_fileinAsim.UseVisualStyleBackColor = true;
+            this.btn_choice_fileinAsim.Click += new System.EventHandler(this.btn_choice_fileinAsim_Click);
             // 
             // label17
             // 
@@ -246,6 +247,7 @@
             this.btn_Asim_clear.Tag = "";
             this.btn_Asim_clear.Text = "Очистить";
             this.btn_Asim_clear.UseVisualStyleBackColor = true;
+            this.btn_Asim_clear.Click += new System.EventHandler(this.btn_Asim_clear_Click);
             // 
             // label16
             // 
@@ -280,6 +282,7 @@
             this.btn_AsimEncrypt.Tag = "";
             this.btn_AsimEncrypt.Text = "🡻 Шифровать 🡻";
             this.btn_AsimEncrypt.UseVisualStyleBackColor = false;
+            this.btn_AsimEncrypt.Click += new System.EventHandler(this.btn_AsimEncrypt_Click);
             // 
             // radioBtn_AsimAlg1
             // 
@@ -292,6 +295,7 @@
             this.radioBtn_AsimAlg1.TabIndex = 70;
             this.radioBtn_AsimAlg1.Text = "Шифрование";
             this.radioBtn_AsimAlg1.UseVisualStyleBackColor = true;
+            this.radioBtn_AsimAlg1.CheckedChanged += new System.EventHandler(this.radioBtn_AsimAlg1_CheckedChanged);
             // 
             // radioBtn_AsimAlg2
             // 
@@ -304,6 +308,7 @@
             this.radioBtn_AsimAlg2.TabIndex = 71;
             this.radioBtn_AsimAlg2.Text = "Расшифровка";
             this.radioBtn_AsimAlg2.UseVisualStyleBackColor = true;
+            this.radioBtn_AsimAlg2.CheckedChanged += new System.EventHandler(this.radioBtn_AsimAlg2_CheckedChanged);
             // 
             // comboBox_AsimAlg
             // 
@@ -321,6 +326,7 @@
             this.comboBox_AsimAlg.Size = new System.Drawing.Size(211, 32);
             this.comboBox_AsimAlg.TabIndex = 63;
             this.comboBox_AsimAlg.TabStop = false;
+            this.comboBox_AsimAlg.SelectedIndexChanged += new System.EventHandler(this.comboBox_AsimAlg_SelectedIndexChanged);
             // 
             // txt_Asim_file_in
             // 
@@ -354,6 +360,7 @@
             this.btn_Asim_entryKey.Tag = "";
             this.btn_Asim_entryKey.Text = "Ввести ключ и IV (не введенны)";
             this.btn_Asim_entryKey.UseVisualStyleBackColor = false;
+            this.btn_Asim_entryKey.Click += new System.EventHandler(this.btn_Asim_entryKey_Click);
             // 
             // txt_Asim_text_in
             // 
@@ -398,6 +405,7 @@
             this.btn_Asim_saveData.Tag = "";
             this.btn_Asim_saveData.Text = "Сохранить шифр в файл";
             this.btn_Asim_saveData.UseVisualStyleBackColor = false;
+            this.btn_Asim_saveData.Click += new System.EventHandler(this.btn_Asim_saveData_Click);
             // 
             // label_Asim_onText_out
             // 

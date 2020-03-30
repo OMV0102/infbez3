@@ -410,8 +410,55 @@ namespace infbez3
                 return;
             }
         }
+
         //===========================================================================
 
+        // кнопка ШИФРОВАТЬ/РАСшифровать Асимметрично
+        private void btn_AsimEncrypt_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        // кнопка режим Асимметричного Шифрования
+        private void radioBtn_AsimAlg1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // кнопка режим Асимметричной Расшифровки
+        private void radioBtn_AsimAlg2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // кнопка ПРОЧИТАТЬ ИЗ ФАЙЛА при Асимм. Шифровании
+        private void btn_choice_fileinAsim_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // кнопка ВВОД КЛЮЧЕЙ
+        private void btn_Asim_entryKey_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // если меняем алгоритм Асим ШИФРОВАНИЯ
+        private void comboBox_AsimAlg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // кнопка ОЧИСТИТЬ у Асимметричного ШИФРОВАНИЯ
+        private void btn_Asim_clear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Сохранить шифр/текст в файл у Асимм шифрования
+        private void btn_Asim_saveData_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
