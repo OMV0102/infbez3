@@ -53,25 +53,31 @@ namespace infbez3
                 this.txt_iv.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_iv);
             }
 
-            // Инструкция сверху формы
-            this.label_simm_entryKeyIV.Text = "> Ключом могут быть только 16-ричные цифры (0-9, A-F).\n";
-            this.label_simm_entryKeyIV.Text += "> Длина ключа должна быть обязательно равна " + txt_key.MaxLength + " знакам!\n\n";
-            this.label_simm_entryKeyIV.Text += "> В векторе могут быть только 16-ричные цифры (0-9, A-F).\n";
-            this.label_simm_entryKeyIV.Text += "> Длина должна быть обязательно равна "+ txt_iv.MaxLength + " знакам!\n\n";
-            this.label_simm_entryKeyIV.Text += "> Стрелки - случайное заполнение.";
-
             // Подсказка у кнопки загрузки ключа
             this.toolTip_LoadKeyIV.ToolTipTitle = this.btn_loadKeyIV.Text;
             this.toolTip_LoadKeyIV.ToolTipIcon = ToolTipIcon.Info;
             this.toolTip_LoadKeyIV.SetToolTip(this.btn_loadKeyIV, "В файле должно быть две строки в 16-ричном виде.\n1-ая строка: Ключ длинной 64 знака.\n2-ая строка: Вектор(IV) длиной 32 знакак.");
 
+            // Инструкция сверху формы
+            this.label_simm_entryKeyIV.Text = "> Ключом могут быть только 16-ричные цифры (0-9, A-F).\n";
+            this.label_simm_entryKeyIV.Text += "> Длина ключа должна быть обязательно равна " + txt_key.MaxLength + " знакам!\n\n";
+            this.label_simm_entryKeyIV.Text += "> В векторе могут быть только 16-ричные цифры (0-9, A-F).\n";
+            this.label_simm_entryKeyIV.Text += "> Длина должна быть обязательно равна "+ txt_iv.MaxLength + " знакам!\n";
+            
+
             if (global.Simm_EncryptOrDecrypt) // если загрузили для ШИФРОВАНИЯ
             {
                 this.Text = "ШИФРОВАНИЕ: Ввод ключа (Key) и вектора инициализации (IV)";
+                // показать кнопки случайно генерации
+                this.btn_generate_key.Visible = true;
+                this.btn_generate_iv.Visible = true;
+                this.label_simm_entryKeyIV.Text += "\n> Стрелки - случайное заполнение ключа и вектора (IV).";
             }
             else  // если загрузили для РАСШИФРОВКИ
             {
                 this.Text = "РАСШИФРОВКА: Ввод ключа (Key) и вектора инициализации (IV)";
+                this.btn_generate_key.Visible = false;
+                this.btn_generate_iv.Visible = false;
             }
         }
 
