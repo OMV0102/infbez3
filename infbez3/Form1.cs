@@ -497,13 +497,26 @@ namespace infbez3
         // кнопка ВВОД КЛЮЧЕЙ
         private void btn_Asim_entryKey_Click(object sender, EventArgs e)
         {
-
+            Form3 form = new Form3(comboBox_AsimAlg.SelectedItem.ToString());
+            form.Owner = this;
+            form.form1_btn_Asim_entryKey = this.btn_Asim_entryKey; // передали ссылку на управление кнопкой
+            form.ShowDialog(this);
         }
 
-        // если меняем алгоритм Асим ШИФРОВАНИЯ
+        // если меняем алгоритм Асим ШИФРОВАНИЯ 
+        // так как всего один алгоритма (RSA) по факту не используется *для будущих фич*
         private void comboBox_AsimAlg_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            //========очистка ключа======
+            // меняем кнопку ввод ключа на обычную
+            this.btn_Asim_entryKey.Text = "Ввести ключ (отсутствует)";
+            this.btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Black);
+            // очищаем ключ и вектор
+            global.Asim_byte_keyPublic = new byte[0];
+            global.Asim_byte_keyPrivate = new byte[0];
+            // флаг меняем что не введенны
+            global.Asim_Keys_isEntry = false;
+            //===================================
         }
 
         // кнопка ОЧИСТИТЬ у Асимметричного ШИФРОВАНИЯ
@@ -511,7 +524,7 @@ namespace infbez3
         {
             //========очистка ключа======
             // меняем кнопку ввод ключа на обычную
-            this.btn_Asim_entryKey.Text = "Ввести ключ и IV (не введенны)";
+            this.btn_Asim_entryKey.Text = "Ввести ключ (отсутствует)";
             this.btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Black);
             // очищаем ключ и вектор
             global.Asim_byte_keyPublic = new byte[0];
