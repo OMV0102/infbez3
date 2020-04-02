@@ -170,7 +170,7 @@ namespace infbez3
                         global.Simm_byte_out = alg.SimmAlg(global.Simm_byte_in, global.Simm_byte_key, global.Simm_byte_iv, comboBox_SimmAlg.SelectedItem.ToString(), global.Simm_EncryptOrDecrypt);
 
                         // Вывести выходные байты 
-                        if (global.Simm_EncryptOrDecrypt) // Если шифруем
+                        if (global.Simm_EncryptOrDecrypt == true) // Если шифруем
                         {
                             // вывели байты на форму виде 16-ричной строки
                             this.txt_simm_text_out.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_out);
@@ -420,7 +420,61 @@ namespace infbez3
         // кнопка ШИФРОВАТЬ/РАСшифровать Асимметрично
         private void btn_AsimEncrypt_Click(object sender, EventArgs e)
         {
+            this.txt_Asim_byte_in_num.Text = "1";  // ААААААААААААААААА УДАЛИТЬ
+            global.Asim_Keys_isEntry = true; // ААААААААААААААААА УДАЛИТЬ
 
+            if (this.txt_Asim_byte_in_num.Text != "0")  // Если входные данные не пусты
+            {
+                if (global.Asim_Keys_isEntry == true)  // Если введен ключ и вектор
+                {
+                    try
+                    {
+                        RSACryptoServiceProvider rs = new RSACryptoServiceProvider(global.Asim_size_key_bit);
+                        global.Asim_byte_keyPrivate = rs.ExportCspBlob(true);
+                        global.Asim_byte_keyPublic = rs.ExportCspBlob(false);
+                        global.Asim_byte_in = new byte[9] {97, 98, 99, 100, 101, 102, 103, 104, 105};
+                        
+
+                        // Вывести выходные байты 
+                        //if (global.Asim_EncryptOrDecrypt == true) // Если шифруем
+                        {
+                            // шифруем
+                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPublic, this.comboBox_AsimAlg.SelectedItem.ToString(), true);
+                            //global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPrivate, this.comboBox_AsimAlg.SelectedItem.ToString(), true);
+                            // вывели байты на форму виде 16-ричной строки
+                            //this.txt_Asim_text_out.Text = alg.ByteArrayTOStringHEX(global.Asim_byte_out);
+                        }
+                        //else // Если расшифровываем
+                        {
+                            //global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPublic, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
+                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPrivate, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
+                            // вывели байты на форму виде строки с кодировкой UTF8
+                            //this.txt_Asim_text_out.Text = Encoding.UTF8.GetString(global.Asim_byte_out).Replace("\0", "0");
+                        }
+                    }
+                    catch (Exception error)
+                    {
+                        this.Enabled = false;
+                        MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Enabled = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Сначала укажите ключ!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
+            }
+            else
+            {
+                this.Enabled = false;
+                MessageBox.Show("Сначала укажите входные данные!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Enabled = true;
+                return;
+            }
         }
 
         // кнопка режим Асимметричного Шифрования

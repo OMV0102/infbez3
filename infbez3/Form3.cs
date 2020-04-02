@@ -30,7 +30,7 @@ namespace infbez3
         {
             // Выделили память и установили длину ключей и IV
             // в зависимости от алгоритма
-            rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key);
+            //rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key);
             
             if (AlgName == "RSA")
             {
@@ -104,15 +104,10 @@ namespace infbez3
         {
             if(AlgName == "AES")
             {
-                aescng.GenerateKey();
-                this.txt_keyPublic.Text = alg.ByteArrayTOStringHEX(aescng.Key);
+                //aescng.GenerateKey();
+                //this.txt_keyPublic.Text = alg.ByteArrayTOStringHEX(aescng.Key);
             }
 
-            if (AlgName == "3DES")
-            {
-                tripledes.GenerateKey();
-                this.txt_keyPublic.Text = alg.ByteArrayTOStringHEX(tripledes.Key);
-            }
         }
 
         // Ввод символа в поле ключа (только 16-ричные символы)
@@ -194,8 +189,8 @@ namespace infbez3
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Освободили память от aes и 3des
-            aescng.Dispose();
-            tripledes.Dispose();
+            //aescng.Dispose();
+            //tripledes.Dispose();
         }
     }
 }

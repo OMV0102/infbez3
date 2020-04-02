@@ -115,7 +115,6 @@ namespace infbez3
                         }
                         // получили байты на выходе
                         arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
-                        //cryptoTransform.TransformBlock(arrayByte_in, 0, arrayByte_in.Length, arrayByte_out, 0);
 
                         aescng.Dispose(); // освобождаем ресурсы
                         cryptoTransform.Dispose(); // освобождаем ресурсы
@@ -158,57 +157,56 @@ namespace infbez3
         }
 
         // функция для Асим. Шифрования 
-        // аргументы: вход. байты; ключ; вектор инициализации; алгоритм AES / 3DES; режим шифруем / расшифровываем
+        // аргументы: вход. байты; ключ; ; алгоритм RSA; режим шифруем / расшифровываем
         public static Byte[] AsimAlg(Byte[] arrayByte_in, Byte[] key, string selectedAlgSimm, bool EncryptIsTrue)
         {
             byte[] arrayByte_out = new byte[0]; // Выходная последовательность байт после шифрования/расшифровки
-            ICryptoTransform cryptoTransform;
 
             try
             {
+                /*try
+                {
+                    if (key.Length != global.Asim_size_key_byte)
+                    {
+                        throw new Exception("Длина ключа не соответствует требованиям!\nДлина ключа в данном приложении = " + global.Asim_size_key_byte + " байт."); 
+                    }
+                }
+                catch
+                {
+                    throw;
+                }*/
+
                 switch (selectedAlgSimm) // Получение хеша определенным алгоритмом
                 {
-                    case "AES":
-                        AesCng aescng = new AesCng(); // объект класса у алгоритма AES
-                        aescng.Key = key; // присваиваем ключ из аргумента
-                        aescng.IV = iv; // присваиваем вектор из аргумента
+                    case "RSA":
+                        RSACryptoServiceProvider rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key_bit);  // объект класса у алгоритма RSA
+                        rsacrypto.ImportCspBlob(key); // присваиваем ключ из аргумента
+
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
                         {
-                            // создали объект-шифратор
-                            cryptoTransform = aescng.CreateEncryptor();
+                            try
+                            {
+                                arrayByte_out = rsacrypto.Encrypt(arrayByte_in, RSAEncryptionPadding.OaepSHA1);
+                            }
+                            catch
+                            {
+                                throw;
+                            }
                         }
                         else  // если вызвали для РАСшифровки AES
                         {
-                            // создали объект-расшифратор
-                            cryptoTransform = aescng.CreateDecryptor();
+                            //try
+                            //{
+                                arrayByte_out = rsacrypto.Decrypt(arrayByte_in, RSAEncryptionPadding.OaepSHA1);
+                            //}
+                            //catch
+                            //{
+                            //    throw new Exception("Заданный ключ не подходит для заданного шифра!\nРасшифровка возможна только секретным ключом.");
+                            //}
                         }
                         // получили байты на выходе
-                        arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
-                        //cryptoTransform.TransformBlock(arrayByte_in, 0, arrayByte_in.Length, arrayByte_out, 0);
 
-                        aescng.Dispose(); // освобождаем ресурсы
-                        cryptoTransform.Dispose(); // освобождаем ресурсы
-                        break;
-
-                    case "3DES":
-                        TripleDESCng tripledescng = new TripleDESCng(); // объект класса у алгоритма AES
-                        tripledescng.Key = key; //  присваиваем ключ из аргумента
-                        tripledescng.IV = iv; //  присваиваем вектор из аргумента
-                        if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
-                        {
-                            // создали объект-шифратор
-                            cryptoTransform = tripledescng.CreateEncryptor();
-                        }
-                        else  // если вызвали для РАСшифровки 3DES
-                        {
-                            // создали объект-расшифратор
-                            cryptoTransform = tripledescng.CreateDecryptor();
-                        }
-                        // получили байты на выходе
-                        arrayByte_out = cryptoTransform.TransformFinalBlock(arrayByte_in, 0, arrayByte_in.Length);
-
-                        tripledescng.Dispose(); // освобождаем ресурсы
-                        cryptoTransform.Dispose(); // освобождаем ресурсы
+                        rsacrypto.Dispose(); // освобождаем ресурсы
                         break;
 
                     default: break;
@@ -216,12 +214,7 @@ namespace infbez3
             }
             catch (Exception error)
             {
-                //MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (EncryptIsTrue == true) // если шифрование
-                    MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //MessageBox.Show("Ключ или вектор инициализации не подходят", "Ошибка шифрования", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else
-                    MessageBox.Show("Заданные ключ или вектор инициализации не подходят для заданного шифра!\nРасшифровка не возможна.", "Ошибка расшифровки", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return arrayByte_out;
         }
