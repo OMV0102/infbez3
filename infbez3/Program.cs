@@ -164,29 +164,17 @@ namespace infbez3
 
             try
             {
-                /*try
-                {
-                    if (key.Length != global.Asim_size_key_byte)
-                    {
-                        throw new Exception("Длина ключа не соответствует требованиям!\nДлина ключа в данном приложении = " + global.Asim_size_key_byte + " байт."); 
-                    }
-                }
-                catch
-                {
-                    throw;
-                }*/
-
                 switch (selectedAlgSimm) // Получение хеша определенным алгоритмом
                 {
                     case "RSA":
-                        RSACryptoServiceProvider rsacrypto = new RSACryptoServiceProvider();  // объект класса у алгоритма RSA
+                        RSACryptoServiceProvider rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key_bit);  // объект класса у алгоритма RSA
                         rsacrypto.ImportCspBlob(key); // присваиваем ключ из аргумента
 
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
                         {
                             try
                             {
-                                arrayByte_out = rsacrypto.Encrypt(arrayByte_in, true);
+                                arrayByte_out = rsacrypto.Encrypt(arrayByte_in, RSAEncryptionPadding.OaepSHA1);
                             }
                             catch
                             {
@@ -195,14 +183,14 @@ namespace infbez3
                         }
                         else  // если вызвали для РАСшифровки AES
                         {
-                            //try
-                            //{
-                            arrayByte_out = rsacrypto.Decrypt(arrayByte_in, true);
-                            //}
-                            //catch
-                            //{
-                            //    throw new Exception("Заданный ключ не подходит для заданного шифра!\nРасшифровка возможна только секретным ключом.");
-                            //}
+                            try
+                            {
+                                arrayByte_out = rsacrypto.Decrypt(arrayByte_in, RSAEncryptionPadding.OaepSHA1);
+                            }
+                            catch
+                            {
+                                throw new Exception("Введенный ключ не подходит для заданного шифра!\nРасшифровка возможна только секретным ключом.");
+                            }
                         }
                         // получили байты на выходе
 

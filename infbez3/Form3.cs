@@ -25,20 +25,11 @@ namespace infbez3
         public Button form1_btn_Asim_entryKey;
 
 
-        // при ЗАГРУЗКЕ ФОРМЫ для ввода ключа и IV
+        // при ЗАГРУЗКЕ ФОРМЫ для ввода ключа Ассим шифрование
         private void Form3_Load(object sender, EventArgs e)
         {
-            // Выделили память и установили длину ключей и IV
-            // в зависимости от алгоритма
-            //rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key);
+            rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key_bit);
             
-            if (AlgName == "RSA")
-            {
-                this.txt_keyPublic.MaxLength = 64;
-                this.txt_keyPrivate.MaxLength = 32;
-
-            }
-
             // если раннее были введенны ключи то вывести их на форму
             if (global.Simm_KeyIV_isEntry)
             {
@@ -60,14 +51,14 @@ namespace infbez3
 
             if (global.Simm_EncryptOrDecrypt) // если загрузили для ШИФРОВАНИЯ
             {
-                this.Text = "ШИФРОВАНИЕ: Ввод ключа (Key) и вектора инициализации (IV)";
+                this.Text = "ШИФРОВАНИЕ: Ввод ключа (Public/Private Key)";
                 // показать кнопки случайно генерации
                 this.btn_generate_key.Visible = true;
                 this.label_simm_entryKeyIV.Text += "\n> Стрелки - случайное заполнение ключа и вектора (IV).";
             }
             else  // если загрузили для РАСШИФРОВКИ
             {
-                this.Text = "РАСШИФРОВКА: Ввод ключа (Key) и вектора инициализации (IV)";
+                this.Text = "РАСШИФРОВКА: Ввод секретного ключа (Private Key)";
                 this.btn_generate_key.Visible = false;
             }
         }

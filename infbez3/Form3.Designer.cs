@@ -76,7 +76,7 @@
             this.txt_keyPublic.MaxLength = 64;
             this.txt_keyPublic.Name = "txt_keyPublic";
             this.txt_keyPublic.Size = new System.Drawing.Size(884, 26);
-            this.txt_keyPublic.TabIndex = 81;
+            this.txt_keyPublic.TabIndex = 32767;
             this.txt_keyPublic.TabStop = false;
             this.txt_keyPublic.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_key_KeyPress);
             // 
@@ -88,7 +88,7 @@
             this.txt_keyPrivate.MaxLength = 32;
             this.txt_keyPrivate.Name = "txt_keyPrivate";
             this.txt_keyPrivate.Size = new System.Drawing.Size(490, 26);
-            this.txt_keyPrivate.TabIndex = 82;
+            this.txt_keyPrivate.TabIndex = 32767;
             this.txt_keyPrivate.TabStop = false;
             this.txt_keyPrivate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_iv_KeyPress);
             // 

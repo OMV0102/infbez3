@@ -403,7 +403,10 @@ namespace infbez3
                     System.IO.File.WriteAllBytes(filename, global.Simm_byte_out);
 
                     this.Enabled = false;
-                    MessageBox.Show("ЗАПИСАН в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (global.Simm_EncryptOrDecrypt == true)
+                        MessageBox.Show("Шифр записан в файл ЗАПИСАН в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Расшифрованное сообщение записано в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Enabled = true;
                 }
                 sfd.Dispose();
@@ -420,36 +423,25 @@ namespace infbez3
         // кнопка ШИФРОВАТЬ/РАСшифровать Асимметрично
         private void btn_AsimEncrypt_Click(object sender, EventArgs e)
         {
-            this.txt_Asim_byte_in_num.Text = "1";  // ААААААААААААААААА УДАЛИТЬ
-            global.Asim_Keys_isEntry = true; // ААААААААААААААААА УДАЛИТЬ
-
             if (this.txt_Asim_byte_in_num.Text != "0")  // Если входные данные не пусты
             {
                 if (global.Asim_Keys_isEntry == true)  // Если введен ключ и вектор
                 {
                     try
                     {
-                        RSACryptoServiceProvider rs = new RSACryptoServiceProvider();
-                        global.Asim_byte_keyPrivate = rs.ExportCspBlob(true);
-                        global.Asim_byte_keyPublic = rs.ExportCspBlob(false);
-                        global.Asim_byte_in = new byte[9] {97, 98, 99, 100, 101, 102, 103, 104, 105};
-                        
-
                         // Вывести выходные байты 
                         //if (global.Asim_EncryptOrDecrypt == true) // Если шифруем
                         {
                             // шифруем
                             global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPublic, this.comboBox_AsimAlg.SelectedItem.ToString(), true);
-                            //global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPrivate, this.comboBox_AsimAlg.SelectedItem.ToString(), true);
                             // вывели байты на форму виде 16-ричной строки
-                            //this.txt_Asim_text_out.Text = alg.ByteArrayTOStringHEX(global.Asim_byte_out);
+                            this.txt_Asim_text_out.Text = alg.ByteArrayTOStringHEX(global.Asim_byte_out);
                         }
                         //else // Если расшифровываем
                         {
-                            //global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_out, global.Asim_byte_keyPublic, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
                             global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_out, global.Asim_byte_keyPrivate, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
                             // вывели байты на форму виде строки с кодировкой UTF8
-                            //this.txt_Asim_text_out.Text = Encoding.UTF8.GetString(global.Asim_byte_out).Replace("\0", "0");
+                            this.txt_Asim_text_out.Text = Encoding.UTF8.GetString(global.Asim_byte_out).Replace("\0", "0");
                         }
                     }
                     catch (Exception error)
@@ -568,6 +560,8 @@ namespace infbez3
             // очищаем ключ и вектор
             global.Asim_byte_keyPublic = new byte[0];
             global.Asim_byte_keyPrivate = new byte[0];
+            global.Asim_file_keyPublic = "";
+            global.Asim_file_keyPrivate = "";
             // флаг меняем что не введенны
             global.Asim_Keys_isEntry = false;
             //===================================
@@ -583,6 +577,8 @@ namespace infbez3
             // очищаем ключ и вектор
             global.Asim_byte_keyPublic = new byte[0];
             global.Asim_byte_keyPrivate = new byte[0];
+            global.Asim_file_keyPublic = "";
+            global.Asim_file_keyPrivate = "";
             // флаг меняем что не введенны
             global.Asim_Keys_isEntry = false;
             //===================================
@@ -600,6 +596,53 @@ namespace infbez3
 
         // Сохранить шифр/текст в файл у Асимм шифрования
         private void btn_Asim_saveData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Если выходные байты пусты 
+                if (global.Asim_EncryptOrDecrypt == true)
+                {
+                    this.Enabled = false;
+                    if (global.Asim_EncryptOrDecrypt == true)
+                        MessageBox.Show("Сначала зашифруйте данные!\nЗатем можете сохранить полученный шифр.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    else
+                        MessageBox.Show("Сначала расшифруйте шифр!\nЗатем можете сохранить полученные данные.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    this.Enabled = true;
+                    return;
+                }
+
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Title = "Выберите папку и введите название файла (БЕЗ расширения) ...";
+                sfd.InitialDirectory = Application.StartupPath;
+                sfd.Filter = "Files(*" + global.Simm_file_extension + ")|*" + global.Simm_file_extension; // Сохранять только c расширением как и у входного файла
+                sfd.AddExtension = true;  //Добавить расширение к имени если не указали
+
+                DialogResult res = sfd.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    // получаем выбранный файл
+                    string filename = sfd.FileName;
+                    // сохраняем байты в файл
+                    System.IO.File.WriteAllBytes(filename, global.Asim_byte_out);
+
+                    this.Enabled = false;
+                    if (global.Asim_EncryptOrDecrypt == true)
+                        MessageBox.Show("Шифр записан в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Расшифрованное сообщение записано в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Enabled = true;
+                }
+                sfd.Dispose();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        // ААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }
