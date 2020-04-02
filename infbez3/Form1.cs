@@ -429,7 +429,7 @@ namespace infbez3
                 {
                     try
                     {
-                        RSACryptoServiceProvider rs = new RSACryptoServiceProvider(global.Asim_size_key_bit);
+                        RSACryptoServiceProvider rs = new RSACryptoServiceProvider();
                         global.Asim_byte_keyPrivate = rs.ExportCspBlob(true);
                         global.Asim_byte_keyPublic = rs.ExportCspBlob(false);
                         global.Asim_byte_in = new byte[9] {97, 98, 99, 100, 101, 102, 103, 104, 105};
@@ -446,8 +446,8 @@ namespace infbez3
                         }
                         //else // Если расшифровываем
                         {
-                            //global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPublic, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
-                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPrivate, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
+                            //global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_out, global.Asim_byte_keyPublic, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
+                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_out, global.Asim_byte_keyPrivate, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
                             // вывели байты на форму виде строки с кодировкой UTF8
                             //this.txt_Asim_text_out.Text = Encoding.UTF8.GetString(global.Asim_byte_out).Replace("\0", "0");
                         }

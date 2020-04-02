@@ -179,14 +179,14 @@ namespace infbez3
                 switch (selectedAlgSimm) // Получение хеша определенным алгоритмом
                 {
                     case "RSA":
-                        RSACryptoServiceProvider rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key_bit);  // объект класса у алгоритма RSA
+                        RSACryptoServiceProvider rsacrypto = new RSACryptoServiceProvider();  // объект класса у алгоритма RSA
                         rsacrypto.ImportCspBlob(key); // присваиваем ключ из аргумента
 
                         if (EncryptIsTrue == true) // если вызвали для ШИФРования AES
                         {
                             try
                             {
-                                arrayByte_out = rsacrypto.Encrypt(arrayByte_in, RSAEncryptionPadding.OaepSHA1);
+                                arrayByte_out = rsacrypto.Encrypt(arrayByte_in, true);
                             }
                             catch
                             {
@@ -197,7 +197,7 @@ namespace infbez3
                         {
                             //try
                             //{
-                                arrayByte_out = rsacrypto.Decrypt(arrayByte_in, RSAEncryptionPadding.OaepSHA1);
+                            arrayByte_out = rsacrypto.Decrypt(arrayByte_in, true);
                             //}
                             //catch
                             //{
