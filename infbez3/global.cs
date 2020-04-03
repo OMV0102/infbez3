@@ -33,5 +33,7 @@ namespace infbez3
         public static bool Asim_EncryptOrDecrypt; // Режим либо шифруем либо расшифровываем для Асимметричного ШИФРОВАНИЯ
         public static bool Asim_Keys_isEntry; // Введенны ли ключи или нет для Асимметричного ШИФРОВАНИЯ
         public static string Asim_file_extension = "";  // Расширение считанного файла данных для Асимметричного ШИФРОВАНИЯ
+        //=====================================
+
     }
 }

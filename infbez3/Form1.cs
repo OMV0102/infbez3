@@ -429,17 +429,17 @@ namespace infbez3
                 {
                     try
                     {
+                        // шифруем/расшифровываем
+                        global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_key, this.comboBox_AsimAlg.SelectedItem.ToString(), global.Asim_EncryptOrDecrypt);
+
                         // Вывести выходные байты 
                         if (global.Asim_EncryptOrDecrypt == true) // Если шифруем
                         {
-                            // шифруем
-                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_key, this.comboBox_AsimAlg.SelectedItem.ToString(), true);
                             // вывели байты на форму виде 16-ричной строки
                             this.txt_Asim_text_out.Text = alg.ByteArrayTOStringHEX(global.Asim_byte_out);
                         }
                         else // Если расшифровываем
                         {
-                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_key, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
                             // вывели байты на форму виде строки с кодировкой UTF8
                             this.txt_Asim_text_out.Text = Encoding.UTF8.GetString(global.Asim_byte_out).Replace("\0", "0");
                         }
@@ -652,11 +652,11 @@ namespace infbez3
             bool res = false;
 
             rs.ImportCspBlob(prKey);
-            outmes = rs.SignData(inmes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            outmes = rs.SignData(inmes, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
 
 
             rs.ImportCspBlob(pbKey);
-            res = rs.VerifyData(inmes, outmes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            res = rs.VerifyData(inmes, outmes, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
         }
     }
 }

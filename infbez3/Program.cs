@@ -206,7 +206,31 @@ namespace infbez3
             }
             return arrayByte_out;
         }
-        
+
+        // функция для создания ЭЦП
+        // аргументы: вход. байты сообщения; ключ (приватный)
+        public static Byte[] edsAlg_signData(Byte[] message, Byte[] key)
+        {
+            byte[] sign_out = new byte[0]; // Выходная последовательность байт  ЭЦП
+
+            try
+            {
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return arrayByte_out;
+        }
+
+        // функция для создания ЭЦП
+        // аргументы: вход. байты сообщения; ключ (приватный/публичный), сама сформированная ЭЦП
+        public static bool edsAlg_verifyData(Byte[] message, Byte[] key, Byte[] sign)
+        {
+            return arrayByte_in;
+        }
+
         // Переводит 16-ричную строку в байты
         public static byte[] StringHEXToByteArray(string strHEX)
         {
