@@ -430,16 +430,16 @@ namespace infbez3
                     try
                     {
                         // Вывести выходные байты 
-                        //if (global.Asim_EncryptOrDecrypt == true) // Если шифруем
+                        if (global.Asim_EncryptOrDecrypt == true) // Если шифруем
                         {
                             // шифруем
                             global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_key, this.comboBox_AsimAlg.SelectedItem.ToString(), true);
                             // вывели байты на форму виде 16-ричной строки
                             this.txt_Asim_text_out.Text = alg.ByteArrayTOStringHEX(global.Asim_byte_out);
                         }
-                        //else // Если расшифровываем
+                        else // Если расшифровываем
                         {
-                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_out, global.Asim_byte_key, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
+                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_key, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
                             // вывели байты на форму виде строки с кодировкой UTF8
                             this.txt_Asim_text_out.Text = Encoding.UTF8.GetString(global.Asim_byte_out).Replace("\0", "0");
                         }
@@ -546,7 +546,9 @@ namespace infbez3
             Form3 form = new Form3(comboBox_AsimAlg.SelectedItem.ToString());
             form.Owner = this;
             form.form1_btn_Asim_entryKey = this.btn_Asim_entryKey; // передали ссылку на управление кнопкой
+            this.Enabled = false;
             form.ShowDialog(this);
+            this.Enabled = true;
         }
 
         // если меняем алгоритм Асим ШИФРОВАНИЯ 
@@ -596,7 +598,7 @@ namespace infbez3
             try
             {
                 //Если выходные байты пусты 
-                if (global.Asim_EncryptOrDecrypt == true)
+                if (global.Asim_byte_out.Length == 0)
                 {
                     this.Enabled = false;
                     if (global.Asim_EncryptOrDecrypt == true)
@@ -610,7 +612,7 @@ namespace infbez3
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Title = "Выберите папку и введите название файла (БЕЗ расширения) ...";
                 sfd.InitialDirectory = Application.StartupPath;
-                sfd.Filter = "Files(*" + global.Simm_file_extension + ")|*" + global.Simm_file_extension; // Сохранять только c расширением как и у входного файла
+                sfd.Filter = "Files(*" + global.Asim_file_extension + ")|*" + global.Asim_file_extension; // Сохранять только c расширением как и у входного файла
                 sfd.AddExtension = true;  //Добавить расширение к имени если не указали
 
                 DialogResult res = sfd.ShowDialog();

@@ -29,31 +29,37 @@ namespace infbez3
         private void Form3_Load(object sender, EventArgs e)
         {
             key = new byte[0];
+            this.txt_key_file.Text = "";
 
             // если раннее были введенны ключи то вывести их на форму
-            if (global.Simm_KeyIV_isEntry)
+            if (global.Asim_Keys_isEntry == true)
             {
                 this.txt_key_file.Text = global.Asim_file_key;
                 this.key = global.Asim_byte_key;
             }
 
-            // Инструкция сверху формы
-            this.label_simm_entryKeyIV.Text = "> Ключом могут быть только 16-ричные цифры (0-9, A-F).\n";
-            this.label_simm_entryKeyIV.Text += "> Длина ключа должна быть обязательно равна " + txt_key_file.MaxLength + " знакам!\n\n";
-            this.label_simm_entryKeyIV.Text += "> В векторе могут быть только 16-ричные цифры (0-9, A-F).\n";
-            this.label_simm_entryKeyIV.Text += "> Длина должна быть обязательно равна "+ txt_keyPrivate.MaxLength + " знакам!\n";
-            
-
-            if (global.Simm_EncryptOrDecrypt) // если загрузили для ШИФРОВАНИЯ
+            if (global.Asim_EncryptOrDecrypt) // если загрузили для ШИФРОВАНИЯ
             {
+                // Инструкция сверху формы
+                this.label_Asim_entryKey.Text = "> Шифровать можно как публичным, так и секретным ключой.\n";
+                this.label_Asim_entryKey.Text += "> Выберите один из ключей и нажмите кнопку Подтвердить.\n";
+                this.label_Asim_entryKey.Text += "> Если вы шифруете впервые, можете сгенерировать публичный и приватный ключи.\n";
+                // заголовок формы
                 this.Text = "ШИФРОВАНИЕ: Ввод ключа (Public/Private Key)";
                 // показать кнопки случайно генерации
                 this.btn_generate_key.Visible = true;
+                this.label_or.Visible = true;
             }
             else  // если загрузили для РАСШИФРОВКИ
             {
+                // Инструкция сверху формы
+                this.label_Asim_entryKey.Text = "> Расшифровывать можно только секретным ключой.\n";
+                this.label_Asim_entryKey.Text += "> Выберите секретный ключ и нажмите кнопку Подтвердить.\n";
+                // заголовок формы
                 this.Text = "РАСШИФРОВКА: Ввод секретного ключа (Private Key)";
+                // скрыть кнопки случайно генерации
                 this.btn_generate_key.Visible = false;
+                this.label_or.Visible = false;
             }
         }
 
@@ -65,7 +71,7 @@ namespace infbez3
 
                 global.Asim_byte_key = this.key; // Запомнили ключ
                 global.Asim_file_key = this.txt_key_file.Text; // Запомнили путь к ключу
-                global.Simm_KeyIV_isEntry = true;
+                global.Asim_Keys_isEntry = true;
 
                 form1_btn_Asim_entryKey.Text = "Изменить ключ (введенно)"; // Изменили название кнопки на основной форме
                 form1_btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Green); // Цвет изменили
@@ -75,13 +81,21 @@ namespace infbez3
             }
             else
             {
-                MessageBox.Show("Число символов в ключе должно быть " + txt_key_file.MaxLength.ToString() + "!\nОтредактируйте ключ или сгенерируйте случайно.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("Ключ не введен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
         }
 
         // Генерировать ключ
         private void btn_generate_key_Click(object sender, EventArgs e)
         {
+            DialogResult res;
+            res = MessageBox.Show("Генерация ключей займет несколько секунд.\n\nЗатем выберите место для сохранение\nи введите имя ключей БЕЗ расширения.\n\nГенерировать?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (res == DialogResult.No) return;
+
+            // ждущий режим формы
+            this.Enabled = false;
+            this.Cursor = Cursors.WaitCursor;
+
             byte[] keyPrivate = new byte[0];
             byte[] keyPublic = new byte[0];
 
@@ -97,18 +111,20 @@ namespace infbez3
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Title = "Выберите место и введите название файла (БЕЗ РАСШИРЕНИЯ) для сохранения сгенерированных ключей ...";
                 sfd.InitialDirectory = Application.StartupPath;
-                sfd.Filter = "Files(*.public)|*.public"; // Сохранять только c расширением public
-                sfd.AddExtension = false;  //НЕ Добавлять расширение к имени если не указали
+                sfd.AddExtension = true;  //Добавлять расширение к имени если не указали
+                sfd.Filter = "Keys(*.public;*.private)|*.public;*.private"; // Сохранять только c расширением public
+                
 
-                DialogResult res = sfd.ShowDialog();
+                res = sfd.ShowDialog();
                 if (res == DialogResult.OK)
                 {
                     // получаем выбранный файл
                     string filename = sfd.FileName;
+                    filename = filename.Remove(filename.LastIndexOf('.'));
                     // сохраняем байты в файл
                     System.IO.File.WriteAllBytes(filename+ ".public", keyPublic);
                     System.IO.File.WriteAllBytes(filename+ ".private", keyPrivate);
-
+                    
 
                     this.Enabled = false;
                     string message = "Ключи сохранены.Публичный ключ записан в файл:\n" +
@@ -122,7 +138,7 @@ namespace infbez3
                     if(res == DialogResult.Yes) // Если ответ да (ввести ключ)
                     {
                         this.key = keyPublic;
-                        this.txt_key_file.Text = filename + filename + ".public";
+                        this.txt_key_file.Text = filename + ".public";
                     }
                 }
                 sfd.Dispose();
@@ -131,7 +147,9 @@ namespace infbez3
             {
                 MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            // включаем форму
+            this.Enabled = true;
+            this.Cursor = Cursors.Arrow;
         }
 
         // кнопка ЗАГРУЗИТЬ ключ
@@ -142,13 +160,13 @@ namespace infbez3
             {
                 ofd.Title = "ШИФРОВАНИЕ: Выбрать файл c ключом ..."; // Заголовок окна
                 ofd.InitialDirectory = Application.StartupPath; // Папка проекта
-                ofd.Filter = "Files(*.public)|*.public|Files(*.private|*.private"; // расширения public/private
+                ofd.Filter = "Keys(*.public;*.private)|*.public;*.private"; // расширения public/private
             }
             else
             {
                 ofd.Title = "РАСШИФРОВКА: Выбрать файл c секретным ключом ..."; // Заголовок окна
                 ofd.InitialDirectory = Application.StartupPath; // Папка проекта
-                ofd.Filter = "Files(*.private|*.private"; // расширения public/private
+                ofd.Filter = "Files(*.private)|*.private"; // расширения public/private
             }
             if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
             {
