@@ -20,31 +20,26 @@ namespace infbez3
             AlgName = Alg;
         }
 
-        public static RSACryptoServiceProvider rsacrypto;
         public static string AlgName;
         public Button form1_btn_Asim_entryKey;
+        byte[] key;
 
 
         // при ЗАГРУЗКЕ ФОРМЫ для ввода ключа Ассим шифрование
         private void Form3_Load(object sender, EventArgs e)
         {
-            rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key_bit);
-            
+            key = new byte[0];
+
             // если раннее были введенны ключи то вывести их на форму
             if (global.Simm_KeyIV_isEntry)
             {
-                this.txt_keyPublic.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_key);
-                this.txt_keyPrivate.Text = alg.ByteArrayTOStringHEX(global.Simm_byte_iv);
+                this.txt_key_file.Text = global.Asim_file_key;
+                this.key = global.Asim_byte_key;
             }
-
-            // Подсказка у кнопки загрузки ключа
-            this.toolTip_LoadKeyIV.ToolTipTitle = this.btn_loadKeyIV.Text;
-            this.toolTip_LoadKeyIV.ToolTipIcon = ToolTipIcon.Info;
-            this.toolTip_LoadKeyIV.SetToolTip(this.btn_loadKeyIV, "В файле должно быть две строки в 16-ричном виде.\n1-ая строка: Ключ длинной 64 знака.\n2-ая строка: Вектор(IV) длиной 32 знакак.");
 
             // Инструкция сверху формы
             this.label_simm_entryKeyIV.Text = "> Ключом могут быть только 16-ричные цифры (0-9, A-F).\n";
-            this.label_simm_entryKeyIV.Text += "> Длина ключа должна быть обязательно равна " + txt_keyPublic.MaxLength + " знакам!\n\n";
+            this.label_simm_entryKeyIV.Text += "> Длина ключа должна быть обязательно равна " + txt_key_file.MaxLength + " знакам!\n\n";
             this.label_simm_entryKeyIV.Text += "> В векторе могут быть только 16-ричные цифры (0-9, A-F).\n";
             this.label_simm_entryKeyIV.Text += "> Длина должна быть обязательно равна "+ txt_keyPrivate.MaxLength + " знакам!\n";
             
@@ -54,7 +49,6 @@ namespace infbez3
                 this.Text = "ШИФРОВАНИЕ: Ввод ключа (Public/Private Key)";
                 // показать кнопки случайно генерации
                 this.btn_generate_key.Visible = true;
-                this.label_simm_entryKeyIV.Text += "\n> Стрелки - случайное заполнение ключа и вектора (IV).";
             }
             else  // если загрузили для РАСШИФРОВКИ
             {
@@ -66,74 +60,96 @@ namespace infbez3
         // кнопка ПОДТВЕРДИТЬ
         private void btn_confirm_entry_Click(object sender, EventArgs e)
         {
-            if(txt_keyPublic.Text.Length == txt_keyPublic.MaxLength)
+            if(txt_key_file.Text.Length > 0 && (this.key != null || this.key.Length > 0))
             {
-                if (txt_keyPrivate.Text.Length == txt_keyPrivate.MaxLength)
-                {
-                    global.Simm_byte_key = alg.StringHEXToByteArray(txt_keyPublic.Text); // Запомнили ключ
-                    global.Simm_byte_iv = alg.StringHEXToByteArray(txt_keyPrivate.Text); // Запомнили IV
-                    global.Simm_KeyIV_isEntry = true;
 
-                    form1_btn_Asim_entryKey.Text = "Изменить ключ и IV (введенно)"; // Изменили название кнопки на основной форме
-                    form1_btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Green); // Цвет изменили
+                global.Asim_byte_key = this.key; // Запомнили ключ
+                global.Asim_file_key = this.txt_key_file.Text; // Запомнили путь к ключу
+                global.Simm_KeyIV_isEntry = true;
 
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Число символов в IV должно быть " + txt_keyPrivate.MaxLength.ToString() + "!\nОтредактируйте IV или сгенерируйте случайно.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                }
+                form1_btn_Asim_entryKey.Text = "Изменить ключ (введенно)"; // Изменили название кнопки на основной форме
+                form1_btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Green); // Цвет изменили
+
+                this.Close();
+
             }
             else
             {
-                MessageBox.Show("Число символов в ключе должно быть " + txt_keyPublic.MaxLength.ToString() + "!\nОтредактируйте ключ или сгенерируйте случайно.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("Число символов в ключе должно быть " + txt_key_file.MaxLength.ToString() + "!\nОтредактируйте ключ или сгенерируйте случайно.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
             }
         }
 
         // Генерировать ключ
         private void btn_generate_key_Click(object sender, EventArgs e)
         {
-            if(AlgName == "AES")
+            byte[] keyPrivate = new byte[0];
+            byte[] keyPublic = new byte[0];
+
+            if(AlgName == "RSA")
             {
-                //aescng.GenerateKey();
-                //this.txt_keyPublic.Text = alg.ByteArrayTOStringHEX(aescng.Key);
+                RSACryptoServiceProvider rsacrypto = new RSACryptoServiceProvider(global.Asim_size_key_bit);
+                keyPrivate = rsacrypto.ExportCspBlob(true); // запомнили приватный ключ
+                keyPublic = rsacrypto.ExportCspBlob(false); // запомнили публичный ключ
+            }
+
+            try
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Title = "Выберите место и введите название файла (БЕЗ РАСШИРЕНИЯ) для сохранения сгенерированных ключей ...";
+                sfd.InitialDirectory = Application.StartupPath;
+                sfd.Filter = "Files(*.public)|*.public"; // Сохранять только c расширением public
+                sfd.AddExtension = false;  //НЕ Добавлять расширение к имени если не указали
+
+                DialogResult res = sfd.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    // получаем выбранный файл
+                    string filename = sfd.FileName;
+                    // сохраняем байты в файл
+                    System.IO.File.WriteAllBytes(filename+ ".public", keyPublic);
+                    System.IO.File.WriteAllBytes(filename+ ".private", keyPrivate);
+
+
+                    this.Enabled = false;
+                    string message = "Ключи сохранены.Публичный ключ записан в файл:\n" +
+                        filename + ".public\n" +
+                        "Приватный ключ записан в файл:\n" + 
+                        filename + ".private\n" +
+                        "\nВвести сгенерированный (публичный) ключ сейчас для шифрования?";
+                    res = MessageBox.Show(message, "Сообщение", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    this.Enabled = true;
+                    
+                    if(res == DialogResult.Yes) // Если ответ да (ввести ключ)
+                    {
+                        this.key = keyPublic;
+                        this.txt_key_file.Text = filename + filename + ".public";
+                    }
+                }
+                sfd.Dispose();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "НЕПРЕДВИДЕННАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
-        // Ввод символа в поле ключа (только 16-ричные символы)
-        private void txt_key_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if((e.KeyChar >= 48 && e.KeyChar <= 57) || (e.KeyChar >= 65 && e.KeyChar <= 70) || (e.KeyChar >= 97 && e.KeyChar <= 102) || e.KeyChar == 8 || e.KeyChar == 127)
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
-        // Ввод символа в поле iv (только 16-ричные символы)
-        private void txt_iv_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar >= 48 && e.KeyChar <= 57) || (e.KeyChar >= 65 && e.KeyChar <= 70) || (e.KeyChar >= 97 && e.KeyChar <= 102) || e.KeyChar == 8 || e.KeyChar == 127)
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
-        // кнопка ЗАГРУЗИТЬ ключ и IV из файла
+        // кнопка ЗАГРУЗИТЬ ключ
         private void btn_loadKeyIV_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Выбрать файл ..."; // Заголовок окна
-            ofd.InitialDirectory = Application.StartupPath; // Папка проекта
-
+            if(global.Asim_EncryptOrDecrypt == true) // Если шифруем
+            {
+                ofd.Title = "ШИФРОВАНИЕ: Выбрать файл c ключом ..."; // Заголовок окна
+                ofd.InitialDirectory = Application.StartupPath; // Папка проекта
+                ofd.Filter = "Files(*.public)|*.public|Files(*.private|*.private"; // расширения public/private
+            }
+            else
+            {
+                ofd.Title = "РАСШИФРОВКА: Выбрать файл c секретным ключом ..."; // Заголовок окна
+                ofd.InitialDirectory = Application.StartupPath; // Папка проекта
+                ofd.Filter = "Files(*.private|*.private"; // расширения public/private
+            }
             if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
             {
                 // читаем байты из файла
@@ -141,23 +157,17 @@ namespace infbez3
                 {
                     if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
                     {
-                        string temp1 = "";
-                        string temp2 = "";
-                        using (StreamReader sr = new StreamReader(ofd.FileName, Encoding.UTF8))
+                        byte[] tempKey = new byte[0];
+                        tempKey = File.ReadAllBytes(ofd.FileName);
+                        if(tempKey == null || tempKey.Length < global.Asim_size_key_byte)
                         {
-                            temp1 = sr.ReadLine();
-                            temp2 = sr.ReadLine();
-                            if(temp1 == null || temp2 == null || temp1.Length != txt_keyPublic.MaxLength || temp2.Length != txt_keyPrivate.MaxLength)
-                            {
-                                MessageBox.Show("Ошибка считывания данных!\nПосмотрите подсказку при наведении на кнопку загрузки.", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-
-                            // Выводим в форму считанные данные
-                            this.txt_keyPublic.Text = temp1;
-                            this.txt_keyPrivate.Text = temp2;
-
+                            MessageBox.Show("Ошибка считывания ключа!\n", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
                         }
+
+                        // Выводим в форму считанные данные
+                        this.txt_key_file.Text = ofd.FileName;
+                        this.key = tempKey;
                     }
                     else
                     {
@@ -174,14 +184,6 @@ namespace infbez3
                 }
             }
             ofd.Dispose();
-        }
-
-        // При закрытии формы
-        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // Освободили память от aes и 3des
-            //aescng.Dispose();
-            //tripledes.Dispose();
         }
     }
 }

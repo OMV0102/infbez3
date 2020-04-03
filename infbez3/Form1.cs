@@ -433,13 +433,13 @@ namespace infbez3
                         //if (global.Asim_EncryptOrDecrypt == true) // Если шифруем
                         {
                             // шифруем
-                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_keyPublic, this.comboBox_AsimAlg.SelectedItem.ToString(), true);
+                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_in, global.Asim_byte_key, this.comboBox_AsimAlg.SelectedItem.ToString(), true);
                             // вывели байты на форму виде 16-ричной строки
                             this.txt_Asim_text_out.Text = alg.ByteArrayTOStringHEX(global.Asim_byte_out);
                         }
                         //else // Если расшифровываем
                         {
-                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_out, global.Asim_byte_keyPrivate, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
+                            global.Asim_byte_out = alg.AsimAlg(global.Asim_byte_out, global.Asim_byte_key, this.comboBox_AsimAlg.SelectedItem.ToString(), false);
                             // вывели байты на форму виде строки с кодировкой UTF8
                             this.txt_Asim_text_out.Text = Encoding.UTF8.GetString(global.Asim_byte_out).Replace("\0", "0");
                         }
@@ -558,10 +558,8 @@ namespace infbez3
             this.btn_Asim_entryKey.Text = "Ввести ключ (отсутствует)";
             this.btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Black);
             // очищаем ключ и вектор
-            global.Asim_byte_keyPublic = new byte[0];
-            global.Asim_byte_keyPrivate = new byte[0];
-            global.Asim_file_keyPublic = "";
-            global.Asim_file_keyPrivate = "";
+            global.Asim_byte_key = new byte[0];
+            global.Asim_file_key = "";
             // флаг меняем что не введенны
             global.Asim_Keys_isEntry = false;
             //===================================
@@ -575,10 +573,8 @@ namespace infbez3
             this.btn_Asim_entryKey.Text = "Ввести ключ (отсутствует)";
             this.btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Black);
             // очищаем ключ и вектор
-            global.Asim_byte_keyPublic = new byte[0];
-            global.Asim_byte_keyPrivate = new byte[0];
-            global.Asim_file_keyPublic = "";
-            global.Asim_file_keyPrivate = "";
+            global.Asim_byte_key = new byte[0];
+            global.Asim_file_key = "";
             // флаг меняем что не введенны
             global.Asim_Keys_isEntry = false;
             //===================================
@@ -641,10 +637,24 @@ namespace infbez3
             }
         }
 
-        // ААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААААА
+        //===========================================================================
+
+        // работает ЛОЛ
         private void button1_Click(object sender, EventArgs e)
         {
+            RSACryptoServiceProvider rs = new RSACryptoServiceProvider();
+            byte[] pbKey = rs.ExportCspBlob(false);
+            byte[] prKey = rs.ExportCspBlob(true);
+            byte[] inmes = new byte[4] { 97, 98, 99, 100 };
+            byte[] outmes = new byte[0];
+            bool res = false;
 
+            rs.ImportCspBlob(prKey);
+            outmes = rs.SignData(inmes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+
+
+            rs.ImportCspBlob(pbKey);
+            res = rs.VerifyData(inmes, outmes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
         }
     }
 }

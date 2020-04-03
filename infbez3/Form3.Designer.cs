@@ -28,24 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.label_simm_entryKeyIV = new System.Windows.Forms.Label();
             this.btn_confirm_entry = new System.Windows.Forms.Button();
-            this.txt_keyPublic = new System.Windows.Forms.TextBox();
-            this.txt_keyPrivate = new System.Windows.Forms.TextBox();
+            this.txt_key_file = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.btn_generate_key = new System.Windows.Forms.Button();
             this.btn_loadKeyIV = new System.Windows.Forms.Button();
-            this.toolTip_LoadKeyIV = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label_simm_entryKeyIV
             // 
             this.label_simm_entryKeyIV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_simm_entryKeyIV.ForeColor = System.Drawing.Color.Maroon;
-            this.label_simm_entryKeyIV.Location = new System.Drawing.Point(5, 4);
+            this.label_simm_entryKeyIV.Location = new System.Drawing.Point(5, 8);
             this.label_simm_entryKeyIV.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label_simm_entryKeyIV.Name = "label_simm_entryKeyIV";
             this.label_simm_entryKeyIV.Size = new System.Drawing.Size(693, 148);
@@ -68,65 +64,40 @@
             this.btn_confirm_entry.UseVisualStyleBackColor = true;
             this.btn_confirm_entry.Click += new System.EventHandler(this.btn_confirm_entry_Click);
             // 
-            // txt_keyPublic
+            // txt_key_file
             // 
-            this.txt_keyPublic.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txt_keyPublic.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_keyPublic.Location = new System.Drawing.Point(164, 158);
-            this.txt_keyPublic.MaxLength = 64;
-            this.txt_keyPublic.Name = "txt_keyPublic";
-            this.txt_keyPublic.Size = new System.Drawing.Size(884, 26);
-            this.txt_keyPublic.TabIndex = 32767;
-            this.txt_keyPublic.TabStop = false;
-            this.txt_keyPublic.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_key_KeyPress);
-            // 
-            // txt_keyPrivate
-            // 
-            this.txt_keyPrivate.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txt_keyPrivate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_keyPrivate.Location = new System.Drawing.Point(164, 200);
-            this.txt_keyPrivate.MaxLength = 32;
-            this.txt_keyPrivate.Name = "txt_keyPrivate";
-            this.txt_keyPrivate.Size = new System.Drawing.Size(490, 26);
-            this.txt_keyPrivate.TabIndex = 32767;
-            this.txt_keyPrivate.TabStop = false;
-            this.txt_keyPrivate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_iv_KeyPress);
+            this.txt_key_file.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txt_key_file.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_key_file.Location = new System.Drawing.Point(235, 161);
+            this.txt_key_file.MaxLength = 64;
+            this.txt_key_file.Name = "txt_key_file";
+            this.txt_key_file.Size = new System.Drawing.Size(817, 26);
+            this.txt_key_file.TabIndex = 32767;
+            this.txt_key_file.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(24, 160);
+            this.label1.Location = new System.Drawing.Point(12, 164);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(141, 20);
+            this.label1.Size = new System.Drawing.Size(222, 20);
             this.label1.TabIndex = 84;
-            this.label1.Text = "Публичный ключ:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(24, 200);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 20);
-            this.label2.TabIndex = 85;
-            this.label2.Text = "Секретный ключ:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label1.Text = "Выбранный файл с ключом:";
             // 
             // btn_generate_key
             // 
-            this.btn_generate_key.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_generate_key.BackgroundImage")));
             this.btn_generate_key.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_generate_key.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_generate_key.Location = new System.Drawing.Point(1054, 153);
+            this.btn_generate_key.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_generate_key.Location = new System.Drawing.Point(522, 192);
             this.btn_generate_key.Name = "btn_generate_key";
-            this.btn_generate_key.Size = new System.Drawing.Size(35, 35);
+            this.btn_generate_key.Size = new System.Drawing.Size(266, 83);
             this.btn_generate_key.TabIndex = 86;
             this.btn_generate_key.TabStop = false;
+            this.btn_generate_key.Text = "Сгенерировать\r\nпубличный и секретный\r\nключ";
             this.btn_generate_key.UseVisualStyleBackColor = true;
             this.btn_generate_key.Click += new System.EventHandler(this.btn_generate_key_Click);
             // 
@@ -135,23 +106,16 @@
             this.btn_loadKeyIV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_loadKeyIV.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Green;
             this.btn_loadKeyIV.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LimeGreen;
-            this.btn_loadKeyIV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_loadKeyIV.Location = new System.Drawing.Point(858, 200);
+            this.btn_loadKeyIV.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_loadKeyIV.Location = new System.Drawing.Point(858, 192);
             this.btn_loadKeyIV.Margin = new System.Windows.Forms.Padding(6);
             this.btn_loadKeyIV.Name = "btn_loadKeyIV";
-            this.btn_loadKeyIV.Size = new System.Drawing.Size(173, 51);
+            this.btn_loadKeyIV.Size = new System.Drawing.Size(173, 61);
             this.btn_loadKeyIV.TabIndex = 88;
             this.btn_loadKeyIV.TabStop = false;
-            this.btn_loadKeyIV.Text = "Загрузить ключ и IV из файла";
+            this.btn_loadKeyIV.Text = "Загрузить ключ\r\nиз файла";
             this.btn_loadKeyIV.UseVisualStyleBackColor = true;
             this.btn_loadKeyIV.Click += new System.EventHandler(this.btn_loadKeyIV_Click);
-            // 
-            // toolTip_LoadKeyIV
-            // 
-            this.toolTip_LoadKeyIV.AutoPopDelay = 20000;
-            this.toolTip_LoadKeyIV.InitialDelay = 300;
-            this.toolTip_LoadKeyIV.ReshowDelay = 100;
-            this.toolTip_LoadKeyIV.ShowAlways = true;
             // 
             // Form3
             // 
@@ -160,9 +124,7 @@
             this.ClientSize = new System.Drawing.Size(1122, 288);
             this.Controls.Add(this.btn_loadKeyIV);
             this.Controls.Add(this.btn_generate_key);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txt_keyPrivate);
-            this.Controls.Add(this.txt_keyPublic);
+            this.Controls.Add(this.txt_key_file);
             this.Controls.Add(this.btn_confirm_entry);
             this.Controls.Add(this.label_simm_entryKeyIV);
             this.Controls.Add(this.label1);
@@ -171,8 +133,7 @@
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ШИФРОВАНИЕ: Ввод ключа (Key) и вектора инициализации (IV)";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
+            this.Text = "ШИФРОВАНИЕ: Ввод ключа (Key)";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -182,12 +143,9 @@
         #endregion
         private System.Windows.Forms.Label label_simm_entryKeyIV;
         private System.Windows.Forms.Button btn_confirm_entry;
-        private System.Windows.Forms.TextBox txt_keyPublic;
-        private System.Windows.Forms.TextBox txt_keyPrivate;
+        private System.Windows.Forms.TextBox txt_key_file;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_generate_key;
         private System.Windows.Forms.Button btn_loadKeyIV;
-        private System.Windows.Forms.ToolTip toolTip_LoadKeyIV;
     }
 }
