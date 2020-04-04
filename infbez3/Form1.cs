@@ -658,10 +658,5 @@ namespace infbez3
             rs.ImportCspBlob(pbKey);
             res = rs.VerifyData(inmes, outmes, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
         }
-
-        private void tabControl_eds_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.tabControl_eds.SelectedIndex = 1;
-        }
     }
 }

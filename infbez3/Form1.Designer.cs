@@ -56,10 +56,7 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label_Asim_underText_out = new System.Windows.Forms.Label();
             this.tab_eds = new System.Windows.Forms.TabPage();
-            this.tabControl_eds = new System.Windows.Forms.TabControl();
-            this.tabControl_eds_make = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
-            this.tabPage_eds_check = new System.Windows.Forms.TabPage();
             this.tab_SimAlg = new System.Windows.Forms.TabPage();
             this.label_simm_onText_out = new System.Windows.Forms.Label();
             this.btn_simm_saveData = new System.Windows.Forms.Button();
@@ -105,8 +102,6 @@
             this.toolTip_Asim_file = new System.Windows.Forms.ToolTip(this.components);
             this.tab_AsimAlg.SuspendLayout();
             this.tab_eds.SuspendLayout();
-            this.tabControl_eds.SuspendLayout();
-            this.tabControl_eds_make.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
             this.tabControl_main.SuspendLayout();
@@ -422,7 +417,7 @@
             // tab_eds
             // 
             this.tab_eds.BackColor = System.Drawing.Color.LightGray;
-            this.tab_eds.Controls.Add(this.tabControl_eds);
+            this.tab_eds.Controls.Add(this.button1);
             this.tab_eds.Cursor = System.Windows.Forms.Cursors.Default;
             this.tab_eds.Location = new System.Drawing.Point(4, 33);
             this.tab_eds.Margin = new System.Windows.Forms.Padding(4);
@@ -432,52 +427,16 @@
             this.tab_eds.TabIndex = 3;
             this.tab_eds.Text = "ЭЦП (RSA)";
             // 
-            // tabControl_eds
-            // 
-            this.tabControl_eds.Controls.Add(this.tabControl_eds_make);
-            this.tabControl_eds.Controls.Add(this.tabPage_eds_check);
-            this.tabControl_eds.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tabControl_eds.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl_eds.Location = new System.Drawing.Point(4, 4);
-            this.tabControl_eds.Name = "tabControl_eds";
-            this.tabControl_eds.SelectedIndex = 0;
-            this.tabControl_eds.Size = new System.Drawing.Size(825, 421);
-            this.tabControl_eds.TabIndex = 0;
-            this.tabControl_eds.SelectedIndexChanged += new System.EventHandler(this.tabControl_eds_SelectedIndexChanged);
-            // 
-            // tabControl_eds_make
-            // 
-            this.tabControl_eds_make.Controls.Add(this.button1);
-            this.tabControl_eds_make.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.tabControl_eds_make.Location = new System.Drawing.Point(4, 33);
-            this.tabControl_eds_make.Name = "tabControl_eds_make";
-            this.tabControl_eds_make.Padding = new System.Windows.Forms.Padding(3);
-            this.tabControl_eds_make.Size = new System.Drawing.Size(817, 384);
-            this.tabControl_eds_make.TabIndex = 0;
-            this.tabControl_eds_make.Text = "Подписать документ";
-            this.tabControl_eds_make.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(393, 135);
+            this.button1.Location = new System.Drawing.Point(303, 77);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 40);
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // tabPage_eds_check
-            // 
-            this.tabPage_eds_check.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.tabPage_eds_check.Location = new System.Drawing.Point(4, 33);
-            this.tabPage_eds_check.Name = "tabPage_eds_check";
-            this.tabPage_eds_check.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_eds_check.Size = new System.Drawing.Size(817, 384);
-            this.tabPage_eds_check.TabIndex = 1;
-            this.tabPage_eds_check.Text = "Проверка подписи";
-            this.tabPage_eds_check.UseVisualStyleBackColor = true;
             // 
             // tab_SimAlg
             // 
@@ -1053,8 +1012,6 @@
             this.tab_AsimAlg.ResumeLayout(false);
             this.tab_AsimAlg.PerformLayout();
             this.tab_eds.ResumeLayout(false);
-            this.tabControl_eds.ResumeLayout(false);
-            this.tabControl_eds_make.ResumeLayout(false);
             this.tab_SimAlg.ResumeLayout(false);
             this.tab_SimAlg.PerformLayout();
             this.tab_Hesh.ResumeLayout(false);
@@ -1092,9 +1049,6 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label_Asim_underText_out;
         private System.Windows.Forms.TabPage tab_eds;
-        private System.Windows.Forms.TabControl tabControl_eds;
-        private System.Windows.Forms.TabPage tabControl_eds_make;
-        private System.Windows.Forms.TabPage tabPage_eds_check;
         private System.Windows.Forms.TabPage tab_SimAlg;
         private System.Windows.Forms.Label label_simm_onText_out;
         private System.Windows.Forms.Button btn_simm_saveData;
