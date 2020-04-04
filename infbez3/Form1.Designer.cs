@@ -55,8 +55,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label_Asim_underText_out = new System.Windows.Forms.Label();
-            this.tab_eds = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.tab_SimAlg = new System.Windows.Forms.TabPage();
             this.label_simm_onText_out = new System.Windows.Forms.Label();
             this.btn_simm_saveData = new System.Windows.Forms.Button();
@@ -100,11 +98,28 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.toolTip_Asim_file = new System.Windows.Forms.ToolTip(this.components);
+            this.tabPage_eds = new System.Windows.Forms.TabPage();
+            this.btn_eds_saveSign = new System.Windows.Forms.Button();
+            this.txt_eds_file_in = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label_eds_caption2 = new System.Windows.Forms.Label();
+            this.radioButton_eds2 = new System.Windows.Forms.RadioButton();
+            this.radioBtn_eds1 = new System.Windows.Forms.RadioButton();
+            this.btn_edsDO = new System.Windows.Forms.Button();
+            this.label_eds_caption1 = new System.Windows.Forms.Label();
+            this.btn_eds_clear = new System.Windows.Forms.Button();
+            this.btn_eds_choice_in = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label_eds_lineDown = new System.Windows.Forms.Label();
+            this.label_eds_lineUp = new System.Windows.Forms.Label();
             this.tab_AsimAlg.SuspendLayout();
-            this.tab_eds.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
             this.tabControl_main.SuspendLayout();
+            this.tabPage_eds.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolTip_hesh_file
@@ -413,30 +428,6 @@
             this.label_Asim_underText_out.Size = new System.Drawing.Size(400, 62);
             this.label_Asim_underText_out.TabIndex = 86;
             this.label_Asim_underText_out.Text = "(В файл шифр сохраниться в виде бинарных данных)";
-            // 
-            // tab_eds
-            // 
-            this.tab_eds.BackColor = System.Drawing.Color.LightGray;
-            this.tab_eds.Controls.Add(this.button1);
-            this.tab_eds.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tab_eds.Location = new System.Drawing.Point(4, 33);
-            this.tab_eds.Margin = new System.Windows.Forms.Padding(4);
-            this.tab_eds.Name = "tab_eds";
-            this.tab_eds.Padding = new System.Windows.Forms.Padding(4);
-            this.tab_eds.Size = new System.Drawing.Size(833, 429);
-            this.tab_eds.TabIndex = 3;
-            this.tab_eds.Text = "ЭЦП (RSA)";
-            // 
-            // button1
-            // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(303, 77);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 40);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tab_SimAlg
             // 
@@ -980,7 +971,7 @@
             this.tabControl_main.Controls.Add(this.tab_Hesh);
             this.tabControl_main.Controls.Add(this.tab_SimAlg);
             this.tabControl_main.Controls.Add(this.tab_AsimAlg);
-            this.tabControl_main.Controls.Add(this.tab_eds);
+            this.tabControl_main.Controls.Add(this.tabPage_eds);
             this.tabControl_main.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tabControl_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl_main.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -992,6 +983,213 @@
             this.tabControl_main.Size = new System.Drawing.Size(841, 466);
             this.tabControl_main.TabIndex = 1;
             this.tabControl_main.TabStop = false;
+            // 
+            // tabPage_eds
+            // 
+            this.tabPage_eds.BackColor = System.Drawing.Color.LightGray;
+            this.tabPage_eds.Controls.Add(this.btn_eds_saveSign);
+            this.tabPage_eds.Controls.Add(this.txt_eds_file_in);
+            this.tabPage_eds.Controls.Add(this.button2);
+            this.tabPage_eds.Controls.Add(this.label_eds_caption2);
+            this.tabPage_eds.Controls.Add(this.radioButton_eds2);
+            this.tabPage_eds.Controls.Add(this.radioBtn_eds1);
+            this.tabPage_eds.Controls.Add(this.btn_edsDO);
+            this.tabPage_eds.Controls.Add(this.label_eds_caption1);
+            this.tabPage_eds.Controls.Add(this.btn_eds_clear);
+            this.tabPage_eds.Controls.Add(this.btn_eds_choice_in);
+            this.tabPage_eds.Controls.Add(this.label25);
+            this.tabPage_eds.Controls.Add(this.label27);
+            this.tabPage_eds.Controls.Add(this.label31);
+            this.tabPage_eds.Controls.Add(this.label28);
+            this.tabPage_eds.Controls.Add(this.label_eds_lineDown);
+            this.tabPage_eds.Controls.Add(this.label_eds_lineUp);
+            this.tabPage_eds.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tabPage_eds.Location = new System.Drawing.Point(4, 33);
+            this.tabPage_eds.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage_eds.Name = "tabPage_eds";
+            this.tabPage_eds.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage_eds.Size = new System.Drawing.Size(833, 429);
+            this.tabPage_eds.TabIndex = 5;
+            this.tabPage_eds.Text = "ЭЦП (RSA)";
+            // 
+            // btn_eds_saveSign
+            // 
+            this.btn_eds_saveSign.BackColor = System.Drawing.Color.LightGray;
+            this.btn_eds_saveSign.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_eds_saveSign.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_eds_saveSign.Location = new System.Drawing.Point(337, 362);
+            this.btn_eds_saveSign.Name = "btn_eds_saveSign";
+            this.btn_eds_saveSign.Size = new System.Drawing.Size(271, 38);
+            this.btn_eds_saveSign.TabIndex = 84;
+            this.btn_eds_saveSign.TabStop = false;
+            this.btn_eds_saveSign.Tag = "";
+            this.btn_eds_saveSign.Text = "Сохранить подпись в файл";
+            this.btn_eds_saveSign.UseVisualStyleBackColor = false;
+            // 
+            // txt_eds_file_in
+            // 
+            this.txt_eds_file_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_eds_file_in.Location = new System.Drawing.Point(6, 46);
+            this.txt_eds_file_in.Name = "txt_eds_file_in";
+            this.txt_eds_file_in.ReadOnly = true;
+            this.txt_eds_file_in.Size = new System.Drawing.Size(381, 26);
+            this.txt_eds_file_in.TabIndex = 72;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(30, 107);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(308, 48);
+            this.button2.TabIndex = 77;
+            this.button2.TabStop = false;
+            this.button2.Tag = "";
+            this.button2.Text = "Ввести ключ (не введен)";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // label_eds_caption2
+            // 
+            this.label_eds_caption2.AutoSize = true;
+            this.label_eds_caption2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_eds_caption2.Location = new System.Drawing.Point(59, 244);
+            this.label_eds_caption2.Name = "label_eds_caption2";
+            this.label_eds_caption2.Size = new System.Drawing.Size(261, 25);
+            this.label_eds_caption2.TabIndex = 75;
+            this.label_eds_caption2.Text = "Обработанные данные";
+            // 
+            // radioButton_eds2
+            // 
+            this.radioButton_eds2.AutoSize = true;
+            this.radioButton_eds2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton_eds2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton_eds2.Location = new System.Drawing.Point(645, 78);
+            this.radioButton_eds2.Name = "radioButton_eds2";
+            this.radioButton_eds2.Size = new System.Drawing.Size(135, 29);
+            this.radioButton_eds2.TabIndex = 71;
+            this.radioButton_eds2.Text = "Проверка";
+            this.radioButton_eds2.UseVisualStyleBackColor = true;
+            // 
+            // radioBtn_eds1
+            // 
+            this.radioBtn_eds1.AutoSize = true;
+            this.radioBtn_eds1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioBtn_eds1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioBtn_eds1.Location = new System.Drawing.Point(645, 43);
+            this.radioBtn_eds1.Name = "radioBtn_eds1";
+            this.radioBtn_eds1.Size = new System.Drawing.Size(162, 29);
+            this.radioBtn_eds1.TabIndex = 70;
+            this.radioBtn_eds1.Text = "Подписание";
+            this.radioBtn_eds1.UseVisualStyleBackColor = true;
+            // 
+            // btn_edsDO
+            // 
+            this.btn_edsDO.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_edsDO.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_edsDO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_edsDO.Font = new System.Drawing.Font("Microsoft PhagsPa", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_edsDO.Location = new System.Drawing.Point(582, 231);
+            this.btn_edsDO.Name = "btn_edsDO";
+            this.btn_edsDO.Size = new System.Drawing.Size(225, 51);
+            this.btn_edsDO.TabIndex = 67;
+            this.btn_edsDO.TabStop = false;
+            this.btn_edsDO.Tag = "";
+            this.btn_edsDO.Text = "🡻 Подписать 🡻";
+            this.btn_edsDO.UseVisualStyleBackColor = false;
+            this.btn_edsDO.Click += new System.EventHandler(this.btn_edsDO_Click);
+            // 
+            // label_eds_caption1
+            // 
+            this.label_eds_caption1.AutoSize = true;
+            this.label_eds_caption1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_eds_caption1.Location = new System.Drawing.Point(68, 13);
+            this.label_eds_caption1.Name = "label_eds_caption1";
+            this.label_eds_caption1.Size = new System.Drawing.Size(195, 25);
+            this.label_eds_caption1.TabIndex = 61;
+            this.label_eds_caption1.Text = "Входные данные";
+            // 
+            // btn_eds_clear
+            // 
+            this.btn_eds_clear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_eds_clear.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_eds_clear.Location = new System.Drawing.Point(432, 120);
+            this.btn_eds_clear.Name = "btn_eds_clear";
+            this.btn_eds_clear.Size = new System.Drawing.Size(106, 35);
+            this.btn_eds_clear.TabIndex = 58;
+            this.btn_eds_clear.TabStop = false;
+            this.btn_eds_clear.Tag = "";
+            this.btn_eds_clear.Text = "Очистить";
+            this.btn_eds_clear.UseVisualStyleBackColor = true;
+            // 
+            // btn_eds_choice_in
+            // 
+            this.btn_eds_choice_in.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_eds_choice_in.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_eds_choice_in.Location = new System.Drawing.Point(401, 26);
+            this.btn_eds_choice_in.Name = "btn_eds_choice_in";
+            this.btn_eds_choice_in.Size = new System.Drawing.Size(149, 62);
+            this.btn_eds_choice_in.TabIndex = 56;
+            this.btn_eds_choice_in.TabStop = false;
+            this.btn_eds_choice_in.Tag = "";
+            this.btn_eds_choice_in.Text = "Выбрать файл с данными";
+            this.btn_eds_choice_in.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(679, 9);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(76, 24);
+            this.label25.TabIndex = 74;
+            this.label25.Text = "Режим:";
+            // 
+            // label27
+            // 
+            this.label27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label27.Enabled = false;
+            this.label27.Location = new System.Drawing.Point(-4, 211);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(431, 21);
+            this.label27.TabIndex = 73;
+            // 
+            // label28
+            // 
+            this.label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label28.Enabled = false;
+            this.label28.Location = new System.Drawing.Point(565, -2);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(2, 433);
+            this.label28.TabIndex = 76;
+            // 
+            // label31
+            // 
+            this.label31.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label31.Location = new System.Drawing.Point(3, 362);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(400, 62);
+            this.label31.TabIndex = 86;
+            this.label31.Text = "(В файл шифр сохраниться в виде бинарных данных)";
+            // 
+            // label_eds_lineDown
+            // 
+            this.label_eds_lineDown.AutoSize = true;
+            this.label_eds_lineDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_eds_lineDown.Location = new System.Drawing.Point(600, 285);
+            this.label_eds_lineDown.Name = "label_eds_lineDown";
+            this.label_eds_lineDown.Size = new System.Drawing.Size(85, 108);
+            this.label_eds_lineDown.TabIndex = 87;
+            this.label_eds_lineDown.Text = "⮠";
+            // 
+            // label_eds_lineUp
+            // 
+            this.label_eds_lineUp.AutoSize = true;
+            this.label_eds_lineUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_eds_lineUp.Location = new System.Drawing.Point(636, 120);
+            this.label_eds_lineUp.Name = "label_eds_lineUp";
+            this.label_eds_lineUp.Size = new System.Drawing.Size(96, 108);
+            this.label_eds_lineUp.TabIndex = 88;
+            this.label_eds_lineUp.Text = "⮧";
             // 
             // Form_main
             // 
@@ -1011,12 +1209,13 @@
             this.Load += new System.EventHandler(this.Form_main_Load);
             this.tab_AsimAlg.ResumeLayout(false);
             this.tab_AsimAlg.PerformLayout();
-            this.tab_eds.ResumeLayout(false);
             this.tab_SimAlg.ResumeLayout(false);
             this.tab_SimAlg.PerformLayout();
             this.tab_Hesh.ResumeLayout(false);
             this.tab_Hesh.PerformLayout();
             this.tabControl_main.ResumeLayout(false);
+            this.tabPage_eds.ResumeLayout(false);
+            this.tabPage_eds.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1048,7 +1247,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label_Asim_underText_out;
-        private System.Windows.Forms.TabPage tab_eds;
         private System.Windows.Forms.TabPage tab_SimAlg;
         private System.Windows.Forms.Label label_simm_onText_out;
         private System.Windows.Forms.Button btn_simm_saveData;
@@ -1092,7 +1290,23 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabControl tabControl_main;
         private System.Windows.Forms.ToolTip toolTip_Asim_file;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage_eds;
+        private System.Windows.Forms.Button btn_eds_saveSign;
+        private System.Windows.Forms.TextBox txt_eds_file_in;
+        public System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label_eds_caption2;
+        private System.Windows.Forms.RadioButton radioButton_eds2;
+        private System.Windows.Forms.RadioButton radioBtn_eds1;
+        private System.Windows.Forms.Button btn_edsDO;
+        private System.Windows.Forms.Label label_eds_caption1;
+        private System.Windows.Forms.Button btn_eds_clear;
+        private System.Windows.Forms.Button btn_eds_choice_in;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label_eds_lineDown;
+        private System.Windows.Forms.Label label_eds_lineUp;
     }
 }
 

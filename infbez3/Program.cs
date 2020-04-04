@@ -219,7 +219,7 @@ namespace infbez3
                 {
                     if(key.Length < global.eds_size_key_byte)
                     {
-                        throw new Exception("\nВведенный ключ не подходит этому приложению!\nНе соответствие размера.");
+                        throw new Exception("Введенный ключ не подходит этому приложению! (Не соответствие размера)");
                     }
                 }
                 catch
@@ -227,16 +227,25 @@ namespace infbez3
                     throw;
                 }
                 RSACryptoServiceProvider rsaeds = new RSACryptoServiceProvider(global.eds_size_key_bit);  // объект класса у алгоритма RSA
+                // ввод ключа
                 try
                 {
                     rsaeds.ImportCspBlob(key); // присваиваем ключ из аргумента
+                }
+                catch
+                {
+                    rsaeds.Dispose();
+                    throw new Exception("Произошла ошибка при импортировании ключа в метод RSA!");
+                }
+                // само создание подписи
+                try
+                {
                     sign_out = rsaeds.SignData(message, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1); // получаем ЭЦП в байтах
                 }
                 catch
                 {
                     rsaeds.Dispose();
-                    throw;
-                }
+                    throw new Exception("Произошла ошибка при подписи данных!\nПроверьте правильность введенного ключа. Подписать можно только секретным ключом!");                }
                 rsaeds.Dispose();
 
             }
@@ -251,7 +260,61 @@ namespace infbez3
         // аргументы: вход. байты сообщения; ключ (приватный/публичный), сама сформированная ЭЦП
         public static bool edsAlg_verifyData(Byte[] message, Byte[] key, Byte[] sign)
         {
-            bool result_check = false;
+            bool result_check = false; // На выходе либо ДА либо НЕТ
+
+            try
+            {
+                try
+                {
+                    if (key.Length < global.eds_size_key_byte)
+                    {
+                        throw new Exception("Введенный ключ не подходит этому приложению! (Не соответствие размера)");
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+                try
+                {
+                    if (sign.Length < global.eds_size_key_byte)
+                    {
+                        throw new Exception("Формат заданной подписи не подходит этому приложению! (Не соответствие размера)");
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
+
+                RSACryptoServiceProvider rsaeds = new RSACryptoServiceProvider(global.eds_size_key_bit);  // объект класса у алгоритма RSA
+                // ввод ключа
+                try
+                {
+                    rsaeds.ImportCspBlob(key); // присваиваем ключ из аргумента
+                }
+                catch
+                {
+                    rsaeds.Dispose();
+                    throw new Exception("Произошла ошибка при импортировании ключа в метод RSA!");
+                }
+                // проверка подписи для исходного сообщения
+                try
+                {
+                    result_check = rsaeds.VerifyData(message, sign, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
+                }
+                catch
+                {
+                    rsaeds.Dispose();
+                    throw new Exception("Произошла ошибка при проверке подписи!\nПроверьте правильность введенных данных:\n> Документ с ообщением;\n> Ключ\n> Подпись, которую проверяем для сообщения;");
+                }
+                rsaeds.Dispose();
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             return result_check;
         }

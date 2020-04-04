@@ -289,7 +289,7 @@ namespace infbez3
         {
             //========очистка ключа======
             // меняем кнопку ввод ключа на обычную
-            this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV (не введенны)";
+            this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV (отсутствуют)";
             this.btn_simm_entryKeyIV.ForeColor = Color.FromKnownColor(KnownColor.Black);
             // очищаем ключ и вектор
             global.Simm_byte_key = new byte[0];
@@ -304,7 +304,7 @@ namespace infbez3
         {
             //========очистка ключа======
             // меняем кнопку ввод ключа на обычную
-            this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV (не введенны)";
+            this.btn_simm_entryKeyIV.Text = "Ввести ключ и IV (отсутствуют)";
             this.btn_simm_entryKeyIV.ForeColor = Color.FromKnownColor(KnownColor.Black);
             // очищаем ключ и вектор
             global.Simm_byte_key = new byte[0];
@@ -647,7 +647,8 @@ namespace infbez3
             RSACryptoServiceProvider rs = new RSACryptoServiceProvider(global.eds_size_key_bit);
             byte[] pbKey = rs.ExportCspBlob(false);
             byte[] prKey = rs.ExportCspBlob(true);
-            byte[] inmes = new byte[4] { 97, 98, 99, 100 };
+            //byte[] inmes = new byte[4] { 97, 98, 99, 100 };
+            byte[] inmes = new byte[0];
             byte[] outmes = new byte[0];
             bool res = false;
 
@@ -657,6 +658,12 @@ namespace infbez3
 
             rs.ImportCspBlob(pbKey);
             res = rs.VerifyData(inmes, outmes, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
+        }
+
+        // кнопка ПОДПИСАТЬ/ПРОВЕРИТЬ у ЭЦП
+        private void btn_edsDO_Click(object sender, EventArgs e)
+        {
+            this.button1_Click(null, null);
         }
     }
 }
