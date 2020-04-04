@@ -215,9 +215,28 @@ namespace infbez3
 
             try
             {
+                try
+                {
+                    if(key.Length < global.eds_size_key_byte)
+                    {
+                        throw new Exception("\nВведенный ключ не подходит этому приложению!\nНе соответствие размера.");
+                    }
+                }
+                catch
+                {
+                    throw;
+                }
                 RSACryptoServiceProvider rsaeds = new RSACryptoServiceProvider(global.eds_size_key_bit);  // объект класса у алгоритма RSA
-                rsaeds.ImportCspBlob(key); // присваиваем ключ из аргумента
-                sign_out = rsaeds.SignData(message, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1); // получаем ЭЦП в байтах
+                try
+                {
+                    rsaeds.ImportCspBlob(key); // присваиваем ключ из аргумента
+                    sign_out = rsaeds.SignData(message, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1); // получаем ЭЦП в байтах
+                }
+                catch
+                {
+                    rsaeds.Dispose();
+                    throw;
+                }
                 rsaeds.Dispose();
 
             }

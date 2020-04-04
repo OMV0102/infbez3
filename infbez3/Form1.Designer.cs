@@ -56,8 +56,8 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label_Asim_underText_out = new System.Windows.Forms.Label();
             this.tab_eds = new System.Windows.Forms.TabPage();
-            this.tabControl_eds_make = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabControl_eds = new System.Windows.Forms.TabControl();
+            this.tabControl_eds_make = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage_eds_check = new System.Windows.Forms.TabPage();
             this.tab_SimAlg = new System.Windows.Forms.TabPage();
@@ -101,15 +101,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl_main = new System.Windows.Forms.TabControl();
             this.toolTip_Asim_file = new System.Windows.Forms.ToolTip(this.components);
             this.tab_AsimAlg.SuspendLayout();
             this.tab_eds.SuspendLayout();
+            this.tabControl_eds.SuspendLayout();
             this.tabControl_eds_make.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControl_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolTip_hesh_file
@@ -422,7 +422,7 @@
             // tab_eds
             // 
             this.tab_eds.BackColor = System.Drawing.Color.LightGray;
-            this.tab_eds.Controls.Add(this.tabControl_eds_make);
+            this.tab_eds.Controls.Add(this.tabControl_eds);
             this.tab_eds.Cursor = System.Windows.Forms.Cursors.Default;
             this.tab_eds.Location = new System.Drawing.Point(4, 33);
             this.tab_eds.Margin = new System.Windows.Forms.Padding(4);
@@ -432,29 +432,30 @@
             this.tab_eds.TabIndex = 3;
             this.tab_eds.Text = "ЭЦП (RSA)";
             // 
+            // tabControl_eds
+            // 
+            this.tabControl_eds.Controls.Add(this.tabControl_eds_make);
+            this.tabControl_eds.Controls.Add(this.tabPage_eds_check);
+            this.tabControl_eds.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tabControl_eds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl_eds.Location = new System.Drawing.Point(4, 4);
+            this.tabControl_eds.Name = "tabControl_eds";
+            this.tabControl_eds.SelectedIndex = 0;
+            this.tabControl_eds.Size = new System.Drawing.Size(825, 421);
+            this.tabControl_eds.TabIndex = 0;
+            this.tabControl_eds.SelectedIndexChanged += new System.EventHandler(this.tabControl_eds_SelectedIndexChanged);
+            // 
             // tabControl_eds_make
             // 
-            this.tabControl_eds_make.Controls.Add(this.tabPage1);
-            this.tabControl_eds_make.Controls.Add(this.tabPage_eds_check);
-            this.tabControl_eds_make.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tabControl_eds_make.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl_eds_make.Location = new System.Drawing.Point(4, 4);
+            this.tabControl_eds_make.Controls.Add(this.button1);
+            this.tabControl_eds_make.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.tabControl_eds_make.Location = new System.Drawing.Point(4, 33);
             this.tabControl_eds_make.Name = "tabControl_eds_make";
-            this.tabControl_eds_make.SelectedIndex = 0;
-            this.tabControl_eds_make.Size = new System.Drawing.Size(825, 421);
+            this.tabControl_eds_make.Padding = new System.Windows.Forms.Padding(3);
+            this.tabControl_eds_make.Size = new System.Drawing.Size(817, 384);
             this.tabControl_eds_make.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.tabPage1.Location = new System.Drawing.Point(4, 33);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(817, 384);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Подписать документ";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabControl_eds_make.Text = "Подписать документ";
+            this.tabControl_eds_make.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -1015,23 +1016,23 @@
             this.label4.Size = new System.Drawing.Size(815, 200);
             this.label4.TabIndex = 55;
             // 
-            // tabControl1
+            // tabControl_main
             // 
-            this.tabControl1.Controls.Add(this.tab_Hesh);
-            this.tabControl1.Controls.Add(this.tab_SimAlg);
-            this.tabControl1.Controls.Add(this.tab_AsimAlg);
-            this.tabControl1.Controls.Add(this.tab_eds);
-            this.tabControl1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabControl1.HotTrack = true;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(841, 466);
-            this.tabControl1.TabIndex = 1;
-            this.tabControl1.TabStop = false;
+            this.tabControl_main.Controls.Add(this.tab_Hesh);
+            this.tabControl_main.Controls.Add(this.tab_SimAlg);
+            this.tabControl_main.Controls.Add(this.tab_AsimAlg);
+            this.tabControl_main.Controls.Add(this.tab_eds);
+            this.tabControl_main.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tabControl_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl_main.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tabControl_main.HotTrack = true;
+            this.tabControl_main.Location = new System.Drawing.Point(0, 0);
+            this.tabControl_main.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl_main.Name = "tabControl_main";
+            this.tabControl_main.SelectedIndex = 0;
+            this.tabControl_main.Size = new System.Drawing.Size(841, 466);
+            this.tabControl_main.TabIndex = 1;
+            this.tabControl_main.TabStop = false;
             // 
             // Form_main
             // 
@@ -1039,7 +1040,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(841, 466);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl_main);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
@@ -1052,13 +1053,13 @@
             this.tab_AsimAlg.ResumeLayout(false);
             this.tab_AsimAlg.PerformLayout();
             this.tab_eds.ResumeLayout(false);
+            this.tabControl_eds.ResumeLayout(false);
             this.tabControl_eds_make.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.tab_SimAlg.ResumeLayout(false);
             this.tab_SimAlg.PerformLayout();
             this.tab_Hesh.ResumeLayout(false);
             this.tab_Hesh.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl_main.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1091,8 +1092,8 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label_Asim_underText_out;
         private System.Windows.Forms.TabPage tab_eds;
-        private System.Windows.Forms.TabControl tabControl_eds_make;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl tabControl_eds;
+        private System.Windows.Forms.TabPage tabControl_eds_make;
         private System.Windows.Forms.TabPage tabPage_eds_check;
         private System.Windows.Forms.TabPage tab_SimAlg;
         private System.Windows.Forms.Label label_simm_onText_out;
@@ -1135,7 +1136,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl_main;
         private System.Windows.Forms.ToolTip toolTip_Asim_file;
         private System.Windows.Forms.Button button1;
     }
