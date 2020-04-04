@@ -43,5 +43,6 @@ namespace infbez3
         public static bool eds_signORcheck; // Режим либо подписываем либо проверяем
         public static bool eds_Keys_isEntry; // Введенн ли ключ или нет для ЭЦП
         public static bool eds_data_isSign; // Успешно ли прошло создание ЭЦП или нет
+        public static bool eds_data_isCheck; // Успешно ли прошла проверка ЭЦП или нет
     }
 }

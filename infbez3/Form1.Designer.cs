@@ -101,20 +101,25 @@
             this.tabPage_eds = new System.Windows.Forms.TabPage();
             this.btn_eds_saveSign = new System.Windows.Forms.Button();
             this.txt_eds_file_in = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_eds_entryKey = new System.Windows.Forms.Button();
             this.label_eds_caption2 = new System.Windows.Forms.Label();
             this.radioButton_eds2 = new System.Windows.Forms.RadioButton();
             this.radioBtn_eds1 = new System.Windows.Forms.RadioButton();
             this.btn_edsDO = new System.Windows.Forms.Button();
             this.label_eds_caption1 = new System.Windows.Forms.Label();
             this.btn_eds_clear = new System.Windows.Forms.Button();
-            this.btn_eds_choice_in = new System.Windows.Forms.Button();
+            this.btn_eds_load_in = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label_eds_lineDown = new System.Windows.Forms.Label();
             this.label_eds_lineUp = new System.Windows.Forms.Label();
+            this.txt_eds_sign_in = new System.Windows.Forms.TextBox();
+            this.btn_eds_load_eds = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label_eds_result = new System.Windows.Forms.Label();
             this.tab_AsimAlg.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
@@ -217,6 +222,7 @@
             // 
             // txt_Asim_file_in
             // 
+            this.txt_Asim_file_in.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.txt_Asim_file_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_Asim_file_in.Location = new System.Drawing.Point(12, 111);
             this.txt_Asim_file_in.Name = "txt_Asim_file_in";
@@ -521,6 +527,7 @@
             // 
             // txt_simm_file_in
             // 
+            this.txt_simm_file_in.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.txt_simm_file_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_simm_file_in.Location = new System.Drawing.Point(12, 111);
             this.txt_simm_file_in.Name = "txt_simm_file_in";
@@ -925,7 +932,7 @@
             "SHA256",
             "SHA384",
             "SHA512"});
-            this.comboBox_HeshAlg.Location = new System.Drawing.Point(56, 266);
+            this.comboBox_HeshAlg.Location = new System.Drawing.Point(56, 262);
             this.comboBox_HeshAlg.MaxDropDownItems = 10;
             this.comboBox_HeshAlg.Name = "comboBox_HeshAlg";
             this.comboBox_HeshAlg.Size = new System.Drawing.Size(211, 32);
@@ -987,22 +994,27 @@
             // tabPage_eds
             // 
             this.tabPage_eds.BackColor = System.Drawing.Color.LightGray;
+            this.tabPage_eds.Controls.Add(this.label_eds_result);
+            this.tabPage_eds.Controls.Add(this.label13);
+            this.tabPage_eds.Controls.Add(this.btn_eds_load_eds);
+            this.tabPage_eds.Controls.Add(this.txt_eds_sign_in);
             this.tabPage_eds.Controls.Add(this.btn_eds_saveSign);
             this.tabPage_eds.Controls.Add(this.txt_eds_file_in);
-            this.tabPage_eds.Controls.Add(this.button2);
+            this.tabPage_eds.Controls.Add(this.btn_eds_entryKey);
             this.tabPage_eds.Controls.Add(this.label_eds_caption2);
             this.tabPage_eds.Controls.Add(this.radioButton_eds2);
             this.tabPage_eds.Controls.Add(this.radioBtn_eds1);
             this.tabPage_eds.Controls.Add(this.btn_edsDO);
             this.tabPage_eds.Controls.Add(this.label_eds_caption1);
             this.tabPage_eds.Controls.Add(this.btn_eds_clear);
-            this.tabPage_eds.Controls.Add(this.btn_eds_choice_in);
+            this.tabPage_eds.Controls.Add(this.btn_eds_load_in);
             this.tabPage_eds.Controls.Add(this.label25);
             this.tabPage_eds.Controls.Add(this.label27);
             this.tabPage_eds.Controls.Add(this.label31);
             this.tabPage_eds.Controls.Add(this.label28);
             this.tabPage_eds.Controls.Add(this.label_eds_lineDown);
             this.tabPage_eds.Controls.Add(this.label_eds_lineUp);
+            this.tabPage_eds.Controls.Add(this.label11);
             this.tabPage_eds.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tabPage_eds.Location = new System.Drawing.Point(4, 33);
             this.tabPage_eds.Margin = new System.Windows.Forms.Padding(4);
@@ -1017,9 +1029,9 @@
             this.btn_eds_saveSign.BackColor = System.Drawing.Color.LightGray;
             this.btn_eds_saveSign.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_eds_saveSign.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_eds_saveSign.Location = new System.Drawing.Point(337, 362);
+            this.btn_eds_saveSign.Location = new System.Drawing.Point(387, 365);
             this.btn_eds_saveSign.Name = "btn_eds_saveSign";
-            this.btn_eds_saveSign.Size = new System.Drawing.Size(271, 38);
+            this.btn_eds_saveSign.Size = new System.Drawing.Size(163, 57);
             this.btn_eds_saveSign.TabIndex = 84;
             this.btn_eds_saveSign.TabStop = false;
             this.btn_eds_saveSign.Tag = "";
@@ -1029,35 +1041,36 @@
             // txt_eds_file_in
             // 
             this.txt_eds_file_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_eds_file_in.Location = new System.Drawing.Point(6, 46);
+            this.txt_eds_file_in.Location = new System.Drawing.Point(6, 66);
             this.txt_eds_file_in.Name = "txt_eds_file_in";
             this.txt_eds_file_in.ReadOnly = true;
-            this.txt_eds_file_in.Size = new System.Drawing.Size(381, 26);
+            this.txt_eds_file_in.Size = new System.Drawing.Size(385, 26);
             this.txt_eds_file_in.TabIndex = 72;
             // 
-            // button2
+            // btn_eds_entryKey
             // 
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(30, 107);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(308, 48);
-            this.button2.TabIndex = 77;
-            this.button2.TabStop = false;
-            this.button2.Tag = "";
-            this.button2.Text = "Ввести ключ (не введен)";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btn_eds_entryKey.BackColor = System.Drawing.Color.Transparent;
+            this.btn_eds_entryKey.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_eds_entryKey.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_eds_entryKey.Location = new System.Drawing.Point(117, 190);
+            this.btn_eds_entryKey.Name = "btn_eds_entryKey";
+            this.btn_eds_entryKey.Size = new System.Drawing.Size(274, 38);
+            this.btn_eds_entryKey.TabIndex = 77;
+            this.btn_eds_entryKey.TabStop = false;
+            this.btn_eds_entryKey.Tag = "";
+            this.btn_eds_entryKey.Text = "Ввести ключ (не введен)";
+            this.btn_eds_entryKey.UseVisualStyleBackColor = false;
+            this.btn_eds_entryKey.Click += new System.EventHandler(this.btn_eds_entryKey_Click);
             // 
             // label_eds_caption2
             // 
             this.label_eds_caption2.AutoSize = true;
             this.label_eds_caption2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_eds_caption2.Location = new System.Drawing.Point(59, 244);
+            this.label_eds_caption2.Location = new System.Drawing.Point(61, 285);
             this.label_eds_caption2.Name = "label_eds_caption2";
-            this.label_eds_caption2.Size = new System.Drawing.Size(261, 25);
+            this.label_eds_caption2.Size = new System.Drawing.Size(104, 25);
             this.label_eds_caption2.TabIndex = 75;
-            this.label_eds_caption2.Text = "Обработанные данные";
+            this.label_eds_caption2.Text = "Подпись";
             // 
             // radioButton_eds2
             // 
@@ -1070,6 +1083,7 @@
             this.radioButton_eds2.TabIndex = 71;
             this.radioButton_eds2.Text = "Проверка";
             this.radioButton_eds2.UseVisualStyleBackColor = true;
+            this.radioButton_eds2.CheckedChanged += new System.EventHandler(this.radioButton_eds2_CheckedChanged);
             // 
             // radioBtn_eds1
             // 
@@ -1082,6 +1096,7 @@
             this.radioBtn_eds1.TabIndex = 70;
             this.radioBtn_eds1.Text = "Подписание";
             this.radioBtn_eds1.UseVisualStyleBackColor = true;
+            this.radioBtn_eds1.CheckedChanged += new System.EventHandler(this.radioBtn_eds1_CheckedChanged);
             // 
             // btn_edsDO
             // 
@@ -1089,7 +1104,7 @@
             this.btn_edsDO.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_edsDO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_edsDO.Font = new System.Drawing.Font("Microsoft PhagsPa", 17.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_edsDO.Location = new System.Drawing.Point(582, 231);
+            this.btn_edsDO.Location = new System.Drawing.Point(589, 231);
             this.btn_edsDO.Name = "btn_edsDO";
             this.btn_edsDO.Size = new System.Drawing.Size(225, 51);
             this.btn_edsDO.TabIndex = 67;
@@ -1103,7 +1118,7 @@
             // 
             this.label_eds_caption1.AutoSize = true;
             this.label_eds_caption1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_eds_caption1.Location = new System.Drawing.Point(68, 13);
+            this.label_eds_caption1.Location = new System.Drawing.Point(61, 9);
             this.label_eds_caption1.Name = "label_eds_caption1";
             this.label_eds_caption1.Size = new System.Drawing.Size(195, 25);
             this.label_eds_caption1.TabIndex = 61;
@@ -1113,27 +1128,28 @@
             // 
             this.btn_eds_clear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_eds_clear.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_eds_clear.Location = new System.Drawing.Point(432, 120);
+            this.btn_eds_clear.Location = new System.Drawing.Point(645, 386);
             this.btn_eds_clear.Name = "btn_eds_clear";
-            this.btn_eds_clear.Size = new System.Drawing.Size(106, 35);
+            this.btn_eds_clear.Size = new System.Drawing.Size(135, 35);
             this.btn_eds_clear.TabIndex = 58;
             this.btn_eds_clear.TabStop = false;
             this.btn_eds_clear.Tag = "";
-            this.btn_eds_clear.Text = "Очистить";
+            this.btn_eds_clear.Text = "Очистить всё";
             this.btn_eds_clear.UseVisualStyleBackColor = true;
+            this.btn_eds_clear.Click += new System.EventHandler(this.btn_eds_clear_Click);
             // 
-            // btn_eds_choice_in
+            // btn_eds_load_in
             // 
-            this.btn_eds_choice_in.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_eds_choice_in.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_eds_choice_in.Location = new System.Drawing.Point(401, 26);
-            this.btn_eds_choice_in.Name = "btn_eds_choice_in";
-            this.btn_eds_choice_in.Size = new System.Drawing.Size(149, 62);
-            this.btn_eds_choice_in.TabIndex = 56;
-            this.btn_eds_choice_in.TabStop = false;
-            this.btn_eds_choice_in.Tag = "";
-            this.btn_eds_choice_in.Text = "Выбрать файл с данными";
-            this.btn_eds_choice_in.UseVisualStyleBackColor = true;
+            this.btn_eds_load_in.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_eds_load_in.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_eds_load_in.Location = new System.Drawing.Point(401, 46);
+            this.btn_eds_load_in.Name = "btn_eds_load_in";
+            this.btn_eds_load_in.Size = new System.Drawing.Size(149, 62);
+            this.btn_eds_load_in.TabIndex = 56;
+            this.btn_eds_load_in.TabStop = false;
+            this.btn_eds_load_in.Tag = "";
+            this.btn_eds_load_in.Text = "Выбрать файл с данными";
+            this.btn_eds_load_in.UseVisualStyleBackColor = true;
             // 
             // label25
             // 
@@ -1148,9 +1164,9 @@
             // 
             this.label27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label27.Enabled = false;
-            this.label27.Location = new System.Drawing.Point(-4, 211);
+            this.label27.Location = new System.Drawing.Point(-1, 254);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(431, 21);
+            this.label27.Size = new System.Drawing.Size(568, 2);
             this.label27.TabIndex = 73;
             // 
             // label28
@@ -1164,10 +1180,10 @@
             // 
             // label31
             // 
-            this.label31.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label31.Location = new System.Drawing.Point(3, 362);
+            this.label31.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.label31.Location = new System.Drawing.Point(8, 343);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(400, 62);
+            this.label31.Size = new System.Drawing.Size(373, 76);
             this.label31.TabIndex = 86;
             this.label31.Text = "(В файл шифр сохраниться в виде бинарных данных)";
             // 
@@ -1190,6 +1206,57 @@
             this.label_eds_lineUp.Size = new System.Drawing.Size(96, 108);
             this.label_eds_lineUp.TabIndex = 88;
             this.label_eds_lineUp.Text = "⮧";
+            // 
+            // txt_eds_sign_in
+            // 
+            this.txt_eds_sign_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_eds_sign_in.Location = new System.Drawing.Point(6, 144);
+            this.txt_eds_sign_in.Name = "txt_eds_sign_in";
+            this.txt_eds_sign_in.ReadOnly = true;
+            this.txt_eds_sign_in.Size = new System.Drawing.Size(385, 26);
+            this.txt_eds_sign_in.TabIndex = 89;
+            // 
+            // btn_eds_load_eds
+            // 
+            this.btn_eds_load_eds.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_eds_load_eds.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_eds_load_eds.Location = new System.Drawing.Point(401, 124);
+            this.btn_eds_load_eds.Name = "btn_eds_load_eds";
+            this.btn_eds_load_eds.Size = new System.Drawing.Size(149, 62);
+            this.btn_eds_load_eds.TabIndex = 90;
+            this.btn_eds_load_eds.TabStop = false;
+            this.btn_eds_load_eds.Tag = "";
+            this.btn_eds_load_eds.Text = "Выбрать файл с подписью";
+            this.btn_eds_load_eds.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(5, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(129, 18);
+            this.label11.TabIndex = 91;
+            this.label11.Text = "Файл с данными:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(6, 124);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(135, 18);
+            this.label13.TabIndex = 92;
+            this.label13.Text = "Файл с подписью:";
+            // 
+            // label_eds_result
+            // 
+            this.label_eds_result.AutoSize = true;
+            this.label_eds_result.Location = new System.Drawing.Point(213, 297);
+            this.label_eds_result.Name = "label_eds_result";
+            this.label_eds_result.Size = new System.Drawing.Size(295, 24);
+            this.label_eds_result.TabIndex = 93;
+            this.label_eds_result.Text = "Подпись еще не сформирована";
             // 
             // Form_main
             // 
@@ -1293,20 +1360,25 @@
         private System.Windows.Forms.TabPage tabPage_eds;
         private System.Windows.Forms.Button btn_eds_saveSign;
         private System.Windows.Forms.TextBox txt_eds_file_in;
-        public System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Button btn_eds_entryKey;
         private System.Windows.Forms.Label label_eds_caption2;
         private System.Windows.Forms.RadioButton radioButton_eds2;
         private System.Windows.Forms.RadioButton radioBtn_eds1;
         private System.Windows.Forms.Button btn_edsDO;
         private System.Windows.Forms.Label label_eds_caption1;
         private System.Windows.Forms.Button btn_eds_clear;
-        private System.Windows.Forms.Button btn_eds_choice_in;
+        private System.Windows.Forms.Button btn_eds_load_in;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label_eds_lineDown;
         private System.Windows.Forms.Label label_eds_lineUp;
+        private System.Windows.Forms.TextBox txt_eds_sign_in;
+        private System.Windows.Forms.Button btn_eds_load_eds;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label_eds_result;
     }
 }
 

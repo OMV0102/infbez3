@@ -34,6 +34,9 @@ namespace infbez3
             this.comboBox_AsimAlg.SelectedIndex = 0; // выбираем по умолчанию первый алгоритм Асимм. шифрования
             this.radioBtn_AsimAlg1.Checked = true; ; // режим шифрования при запуске Асимм. шифрования
             this.btn_Asim_clear_Click(null, null); // жмем кнопку очистить для Асимм. шифрования
+            //======================================
+            this.radioBtn_eds1.Checked = true; // при запуске режим подписания документа ЭЦП
+            this.btn_eds_clear_Click(null, null); // Очистить всё на ЭЦП при запуске
         }
 
         //=====================================================================
@@ -574,7 +577,7 @@ namespace infbez3
             // меняем кнопку ввод ключа на обычную
             this.btn_Asim_entryKey.Text = "Ввести ключ (отсутствует)";
             this.btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Black);
-            // очищаем ключ и вектор
+            // очищаем ключ и его файл
             global.Asim_byte_key = new byte[0];
             global.Asim_file_key = "";
             // флаг меняем что не введенны
@@ -664,6 +667,51 @@ namespace infbez3
         private void btn_edsDO_Click(object sender, EventArgs e)
         {
             this.button1_Click(null, null);
+        }
+
+        // смена режима: создания ЭЦП
+        private void radioBtn_eds1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // смена режима: проверки ЭЦП
+        private void radioButton_eds2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // кнопка ОЧИСТИТЬ у ЭЦП
+        private void btn_eds_clear_Click(object sender, EventArgs e)
+        {
+            //========очистка ключа======
+            // меняем кнопку ввод ключа на обычную
+            this.btn_eds_entryKey.Text = "Ввести ключ (отсутствует)";
+            this.btn_eds_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Black);
+            // очищаем ключ и его файл
+            global.eds_byte_key = new byte[0];
+            global.eds_file_key = "";
+            // флаг меняем что не введенны
+            global.eds_Keys_isEntry = false;
+            //===================================
+            // Подпись не получена false
+            global.eds_data_isSign = false;
+            // входные данные стираем
+            global.eds_byte_message = new byte[0];
+            this.txt_eds_file_in.Text = "";
+            // ВЫходные данные стираем
+            global.eds_byte_sign = new byte[0];
+            global.eds_data_isSign = false;
+            global.eds_data_isCheck = false;
+            this.txt_Asim_text_out.Text = "";
+            // очистили расширение входного файла
+            global.Asim_file_extension = "";
+        }
+
+        // ввод ключа ЭЦП
+        private void btn_eds_entryKey_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

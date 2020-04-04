@@ -241,6 +241,7 @@ namespace infbez3
                 try
                 {
                     sign_out = rsaeds.SignData(message, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1); // получаем ЭЦП в байтах
+                    global.eds_data_isSign = true;
                 }
                 catch
                 {
