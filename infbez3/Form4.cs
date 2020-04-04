@@ -72,7 +72,7 @@ namespace infbez3
                 global.eds_Keys_isEntry = true;
 
                 form1_btn_eds_entryKey.Text = "Изменить ключ (введен)"; // Изменили название кнопки на основной форме
-                form1_btn_eds_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Green); // Цвет изменили
+                form1_btn_eds_entryKey.ForeColor = Color.Green; // Цвет изменили
 
                 this.Close();
 

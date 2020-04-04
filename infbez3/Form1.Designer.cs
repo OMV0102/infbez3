@@ -97,8 +97,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tabControl_main = new System.Windows.Forms.TabControl();
-            this.toolTip_Asim_file = new System.Windows.Forms.ToolTip(this.components);
             this.tabPage_eds = new System.Windows.Forms.TabPage();
+            this.label_eds_result = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btn_eds_load_eds = new System.Windows.Forms.Button();
+            this.txt_eds_sign_in = new System.Windows.Forms.TextBox();
             this.btn_eds_saveSign = new System.Windows.Forms.Button();
             this.txt_eds_file_in = new System.Windows.Forms.TextBox();
             this.btn_eds_entryKey = new System.Windows.Forms.Button();
@@ -111,15 +114,13 @@
             this.btn_eds_load_in = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
+            this.label_eds_info = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
             this.label_eds_lineDown = new System.Windows.Forms.Label();
             this.label_eds_lineUp = new System.Windows.Forms.Label();
-            this.txt_eds_sign_in = new System.Windows.Forms.TextBox();
-            this.btn_eds_load_eds = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label_eds_result = new System.Windows.Forms.Label();
+            this.toolTip_Asim_file = new System.Windows.Forms.ToolTip(this.components);
+            this.label15 = new System.Windows.Forms.Label();
             this.tab_AsimAlg.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
@@ -994,6 +995,7 @@
             // tabPage_eds
             // 
             this.tabPage_eds.BackColor = System.Drawing.Color.LightGray;
+            this.tabPage_eds.Controls.Add(this.label15);
             this.tabPage_eds.Controls.Add(this.label_eds_result);
             this.tabPage_eds.Controls.Add(this.label13);
             this.tabPage_eds.Controls.Add(this.btn_eds_load_eds);
@@ -1010,7 +1012,7 @@
             this.tabPage_eds.Controls.Add(this.btn_eds_load_in);
             this.tabPage_eds.Controls.Add(this.label25);
             this.tabPage_eds.Controls.Add(this.label27);
-            this.tabPage_eds.Controls.Add(this.label31);
+            this.tabPage_eds.Controls.Add(this.label_eds_info);
             this.tabPage_eds.Controls.Add(this.label28);
             this.tabPage_eds.Controls.Add(this.label_eds_lineDown);
             this.tabPage_eds.Controls.Add(this.label_eds_lineUp);
@@ -1024,12 +1026,54 @@
             this.tabPage_eds.TabIndex = 5;
             this.tabPage_eds.Text = "ЭЦП (RSA)";
             // 
+            // label_eds_result
+            // 
+            this.label_eds_result.AutoSize = true;
+            this.label_eds_result.Location = new System.Drawing.Point(141, 298);
+            this.label_eds_result.Name = "label_eds_result";
+            this.label_eds_result.Size = new System.Drawing.Size(255, 24);
+            this.label_eds_result.TabIndex = 93;
+            this.label_eds_result.Text = "Подпись не сформирована";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(6, 186);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(135, 18);
+            this.label13.TabIndex = 92;
+            this.label13.Text = "Файл с подписью:";
+            // 
+            // btn_eds_load_eds
+            // 
+            this.btn_eds_load_eds.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_eds_load_eds.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btn_eds_load_eds.Location = new System.Drawing.Point(401, 186);
+            this.btn_eds_load_eds.Name = "btn_eds_load_eds";
+            this.btn_eds_load_eds.Size = new System.Drawing.Size(149, 62);
+            this.btn_eds_load_eds.TabIndex = 90;
+            this.btn_eds_load_eds.TabStop = false;
+            this.btn_eds_load_eds.Tag = "";
+            this.btn_eds_load_eds.Text = "Выбрать файл с подписью";
+            this.btn_eds_load_eds.UseVisualStyleBackColor = true;
+            this.btn_eds_load_eds.Click += new System.EventHandler(this.btn_eds_load_eds_Click);
+            // 
+            // txt_eds_sign_in
+            // 
+            this.txt_eds_sign_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_eds_sign_in.Location = new System.Drawing.Point(6, 206);
+            this.txt_eds_sign_in.Name = "txt_eds_sign_in";
+            this.txt_eds_sign_in.ReadOnly = true;
+            this.txt_eds_sign_in.Size = new System.Drawing.Size(385, 26);
+            this.txt_eds_sign_in.TabIndex = 89;
+            // 
             // btn_eds_saveSign
             // 
             this.btn_eds_saveSign.BackColor = System.Drawing.Color.LightGray;
             this.btn_eds_saveSign.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_eds_saveSign.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_eds_saveSign.Location = new System.Drawing.Point(387, 365);
+            this.btn_eds_saveSign.Location = new System.Drawing.Point(174, 349);
             this.btn_eds_saveSign.Name = "btn_eds_saveSign";
             this.btn_eds_saveSign.Size = new System.Drawing.Size(163, 57);
             this.btn_eds_saveSign.TabIndex = 84;
@@ -1037,6 +1081,7 @@
             this.btn_eds_saveSign.Tag = "";
             this.btn_eds_saveSign.Text = "Сохранить подпись в файл";
             this.btn_eds_saveSign.UseVisualStyleBackColor = false;
+            this.btn_eds_saveSign.Click += new System.EventHandler(this.btn_eds_saveSign_Click);
             // 
             // txt_eds_file_in
             // 
@@ -1052,7 +1097,7 @@
             this.btn_eds_entryKey.BackColor = System.Drawing.Color.Transparent;
             this.btn_eds_entryKey.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_eds_entryKey.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_eds_entryKey.Location = new System.Drawing.Point(117, 190);
+            this.btn_eds_entryKey.Location = new System.Drawing.Point(9, 132);
             this.btn_eds_entryKey.Name = "btn_eds_entryKey";
             this.btn_eds_entryKey.Size = new System.Drawing.Size(274, 38);
             this.btn_eds_entryKey.TabIndex = 77;
@@ -1066,7 +1111,7 @@
             // 
             this.label_eds_caption2.AutoSize = true;
             this.label_eds_caption2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_eds_caption2.Location = new System.Drawing.Point(61, 285);
+            this.label_eds_caption2.Location = new System.Drawing.Point(152, 267);
             this.label_eds_caption2.Name = "label_eds_caption2";
             this.label_eds_caption2.Size = new System.Drawing.Size(104, 25);
             this.label_eds_caption2.TabIndex = 75;
@@ -1118,7 +1163,7 @@
             // 
             this.label_eds_caption1.AutoSize = true;
             this.label_eds_caption1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_eds_caption1.Location = new System.Drawing.Point(61, 9);
+            this.label_eds_caption1.Location = new System.Drawing.Point(170, 10);
             this.label_eds_caption1.Name = "label_eds_caption1";
             this.label_eds_caption1.Size = new System.Drawing.Size(195, 25);
             this.label_eds_caption1.TabIndex = 61;
@@ -1128,7 +1173,7 @@
             // 
             this.btn_eds_clear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_eds_clear.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_eds_clear.Location = new System.Drawing.Point(645, 386);
+            this.btn_eds_clear.Location = new System.Drawing.Point(629, 378);
             this.btn_eds_clear.Name = "btn_eds_clear";
             this.btn_eds_clear.Size = new System.Drawing.Size(135, 35);
             this.btn_eds_clear.TabIndex = 58;
@@ -1150,6 +1195,7 @@
             this.btn_eds_load_in.Tag = "";
             this.btn_eds_load_in.Text = "Выбрать файл с данными";
             this.btn_eds_load_in.UseVisualStyleBackColor = true;
+            this.btn_eds_load_in.Click += new System.EventHandler(this.btn_eds_load_in_Click);
             // 
             // label25
             // 
@@ -1169,6 +1215,16 @@
             this.label27.Size = new System.Drawing.Size(568, 2);
             this.label27.TabIndex = 73;
             // 
+            // label_eds_info
+            // 
+            this.label_eds_info.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.label_eds_info.Location = new System.Drawing.Point(8, 334);
+            this.label_eds_info.Name = "label_eds_info";
+            this.label_eds_info.Size = new System.Drawing.Size(450, 90);
+            this.label_eds_info.TabIndex = 86;
+            this.label_eds_info.Text = "Возможные причины:\r\n> Неверно введенные данные (возможно их подделали);\r\n> Неверн" +
+    "о введенная подпись;\r\n> Введен ошибочно не тот ключ.";
+            // 
             // label28
             // 
             this.label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1178,20 +1234,11 @@
             this.label28.Size = new System.Drawing.Size(2, 433);
             this.label28.TabIndex = 76;
             // 
-            // label31
-            // 
-            this.label31.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.label31.Location = new System.Drawing.Point(8, 343);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(373, 76);
-            this.label31.TabIndex = 86;
-            this.label31.Text = "(В файл шифр сохраниться в виде бинарных данных)";
-            // 
             // label_eds_lineDown
             // 
             this.label_eds_lineDown.AutoSize = true;
             this.label_eds_lineDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_eds_lineDown.Location = new System.Drawing.Point(600, 285);
+            this.label_eds_lineDown.Location = new System.Drawing.Point(629, 267);
             this.label_eds_lineDown.Name = "label_eds_lineDown";
             this.label_eds_lineDown.Size = new System.Drawing.Size(85, 108);
             this.label_eds_lineDown.TabIndex = 87;
@@ -1201,33 +1248,11 @@
             // 
             this.label_eds_lineUp.AutoSize = true;
             this.label_eds_lineUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_eds_lineUp.Location = new System.Drawing.Point(636, 120);
+            this.label_eds_lineUp.Location = new System.Drawing.Point(652, 124);
             this.label_eds_lineUp.Name = "label_eds_lineUp";
             this.label_eds_lineUp.Size = new System.Drawing.Size(96, 108);
             this.label_eds_lineUp.TabIndex = 88;
             this.label_eds_lineUp.Text = "⮧";
-            // 
-            // txt_eds_sign_in
-            // 
-            this.txt_eds_sign_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.txt_eds_sign_in.Location = new System.Drawing.Point(6, 144);
-            this.txt_eds_sign_in.Name = "txt_eds_sign_in";
-            this.txt_eds_sign_in.ReadOnly = true;
-            this.txt_eds_sign_in.Size = new System.Drawing.Size(385, 26);
-            this.txt_eds_sign_in.TabIndex = 89;
-            // 
-            // btn_eds_load_eds
-            // 
-            this.btn_eds_load_eds.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_eds_load_eds.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btn_eds_load_eds.Location = new System.Drawing.Point(401, 124);
-            this.btn_eds_load_eds.Name = "btn_eds_load_eds";
-            this.btn_eds_load_eds.Size = new System.Drawing.Size(149, 62);
-            this.btn_eds_load_eds.TabIndex = 90;
-            this.btn_eds_load_eds.TabStop = false;
-            this.btn_eds_load_eds.Tag = "";
-            this.btn_eds_load_eds.Text = "Выбрать файл с подписью";
-            this.btn_eds_load_eds.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -1239,24 +1264,15 @@
             this.label11.TabIndex = 91;
             this.label11.Text = "Файл с данными:";
             // 
-            // label13
+            // label15
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(6, 124);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(135, 18);
-            this.label13.TabIndex = 92;
-            this.label13.Text = "Файл с подписью:";
-            // 
-            // label_eds_result
-            // 
-            this.label_eds_result.AutoSize = true;
-            this.label_eds_result.Location = new System.Drawing.Point(213, 297);
-            this.label_eds_result.Name = "label_eds_result";
-            this.label_eds_result.Size = new System.Drawing.Size(295, 24);
-            this.label_eds_result.TabIndex = 93;
-            this.label_eds_result.Text = "Подпись еще не сформирована";
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Location = new System.Drawing.Point(5, 107);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(50, 18);
+            this.label15.TabIndex = 94;
+            this.label15.Text = "Ключ:";
             // 
             // Form_main
             // 
@@ -1371,7 +1387,7 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label_eds_info;
         private System.Windows.Forms.Label label_eds_lineDown;
         private System.Windows.Forms.Label label_eds_lineUp;
         private System.Windows.Forms.TextBox txt_eds_sign_in;
@@ -1379,6 +1395,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label_eds_result;
+        private System.Windows.Forms.Label label15;
     }
 }
 
