@@ -711,7 +711,13 @@ namespace infbez3
         // ввод ключа ЭЦП
         private void btn_eds_entryKey_Click(object sender, EventArgs e)
         {
-
+            Form4 form = new Form4();
+            form.Owner = this;
+            form.form1_btn_eds_entryKey = this.btn_eds_entryKey; // передали ссылку на управление кнопкой
+            this.Enabled = false;
+            form.ShowDialog(this);
+            this.Enabled = true;
         }
     }
+    
 }

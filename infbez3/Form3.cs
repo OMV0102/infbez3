@@ -41,8 +41,8 @@ namespace infbez3
             if (global.Asim_EncryptOrDecrypt) // если загрузили для ШИФРОВАНИЯ
             {
                 // Инструкция сверху формы
-                this.label_Asim_entryKey.Text = "> Шифровать можно как публичным, так и секретным ключой.\n";
-                this.label_Asim_entryKey.Text += "> Выберите один из ключей и нажмите кнопку Подтвердить.\n";
+                this.label_Asim_entryKey.Text = "> Шифровать можно как публичным, так и секретным ключом.\n";
+                this.label_Asim_entryKey.Text += "> Выберите файл с одним из ключей и нажмите кнопку Подтвердить.\n";
                 this.label_Asim_entryKey.Text += "> Если вы шифруете впервые, можете сгенерировать публичный и приватный ключи.\n";
                 // заголовок формы
                 this.Text = "ШИФРОВАНИЕ: Ввод ключа (Public/Private Key)";
@@ -53,7 +53,7 @@ namespace infbez3
             else  // если загрузили для РАСШИФРОВКИ
             {
                 // Инструкция сверху формы
-                this.label_Asim_entryKey.Text = "> Расшифровывать можно только секретным ключой.\n";
+                this.label_Asim_entryKey.Text = "> Расшифровывать можно только секретным ключом.\n";
                 this.label_Asim_entryKey.Text += "> Выберите секретный ключ и нажмите кнопку Подтвердить.\n";
                 // заголовок формы
                 this.Text = "РАСШИФРОВКА: Ввод секретного ключа (Private Key)";
@@ -73,7 +73,7 @@ namespace infbez3
                 global.Asim_file_key = this.txt_key_file.Text; // Запомнили путь к ключу
                 global.Asim_Keys_isEntry = true;
 
-                form1_btn_Asim_entryKey.Text = "Изменить ключ (введенно)"; // Изменили название кнопки на основной форме
+                form1_btn_Asim_entryKey.Text = "Изменить ключ (введенн)"; // Изменили название кнопки на основной форме
                 form1_btn_Asim_entryKey.ForeColor = Color.FromKnownColor(KnownColor.Green); // Цвет изменили
 
                 this.Close();
@@ -89,8 +89,6 @@ namespace infbez3
         private void btn_generate_key_Click(object sender, EventArgs e)
         {
             DialogResult res;
-            res = MessageBox.Show("Генерация ключей займет несколько секунд.\n\nЗатем выберите место для сохранение\nи введите имя ключей БЕЗ расширения.\n\nГенерировать?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (res == DialogResult.No) return;
 
             // ждущий режим формы
             this.Enabled = false;

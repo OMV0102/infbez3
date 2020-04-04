@@ -67,6 +67,7 @@
             // txt_key_file
             // 
             this.txt_key_file.BackColor = System.Drawing.Color.White;
+            this.txt_key_file.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.txt_key_file.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_key_file.Location = new System.Drawing.Point(9, 128);
             this.txt_key_file.Name = "txt_key_file";

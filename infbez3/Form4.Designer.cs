@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_Asim_entryKey = new System.Windows.Forms.Label();
+            this.label_eds_entryKey = new System.Windows.Forms.Label();
             this.btn_confirm_entry = new System.Windows.Forms.Button();
             this.txt_key_file = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,16 +37,16 @@
             this.label_or = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label_Asim_entryKey
+            // label_eds_entryKey
             // 
-            this.label_Asim_entryKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_Asim_entryKey.ForeColor = System.Drawing.Color.Maroon;
-            this.label_Asim_entryKey.Location = new System.Drawing.Point(5, 9);
-            this.label_Asim_entryKey.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label_Asim_entryKey.Name = "label_Asim_entryKey";
-            this.label_Asim_entryKey.Size = new System.Drawing.Size(834, 86);
-            this.label_Asim_entryKey.TabIndex = 79;
-            this.label_Asim_entryKey.Text = "N\r\nN\r\nN\r\nN";
+            this.label_eds_entryKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_eds_entryKey.ForeColor = System.Drawing.Color.Maroon;
+            this.label_eds_entryKey.Location = new System.Drawing.Point(5, 9);
+            this.label_eds_entryKey.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label_eds_entryKey.Name = "label_eds_entryKey";
+            this.label_eds_entryKey.Size = new System.Drawing.Size(834, 86);
+            this.label_eds_entryKey.TabIndex = 79;
+            this.label_eds_entryKey.Text = "N\r\nN\r\nN\r\nN";
             // 
             // btn_confirm_entry
             // 
@@ -67,6 +67,7 @@
             // txt_key_file
             // 
             this.txt_key_file.BackColor = System.Drawing.Color.White;
+            this.txt_key_file.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.txt_key_file.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_key_file.Location = new System.Drawing.Point(9, 128);
             this.txt_key_file.Name = "txt_key_file";
@@ -139,14 +140,14 @@
             this.Controls.Add(this.btn_generate_key);
             this.Controls.Add(this.txt_key_file);
             this.Controls.Add(this.btn_confirm_entry);
-            this.Controls.Add(this.label_Asim_entryKey);
+            this.Controls.Add(this.label_eds_entryKey);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form4";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ШИФРОВАНИЕ: Ввод ключа (Key)";
+            this.Text = "ЭЦП: Ввод ключа (Key)";
             this.Load += new System.EventHandler(this.Form4_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -154,7 +155,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label_Asim_entryKey;
+        private System.Windows.Forms.Label label_eds_entryKey;
         private System.Windows.Forms.Button btn_confirm_entry;
         private System.Windows.Forms.TextBox txt_key_file;
         private System.Windows.Forms.Label label1;
