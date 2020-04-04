@@ -430,7 +430,7 @@
             this.tab_eds.Padding = new System.Windows.Forms.Padding(4);
             this.tab_eds.Size = new System.Drawing.Size(833, 429);
             this.tab_eds.TabIndex = 3;
-            this.tab_eds.Text = "ЭЦП (DSA)";
+            this.tab_eds.Text = "ЭЦП (RSA)";
             // 
             // tabControl_eds_make
             // 

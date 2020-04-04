@@ -215,20 +215,26 @@ namespace infbez3
 
             try
             {
+                RSACryptoServiceProvider rsaeds = new RSACryptoServiceProvider(global.eds_size_key_bit);  // объект класса у алгоритма RSA
+                rsaeds.ImportCspBlob(key); // присваиваем ключ из аргумента
+                sign_out = rsaeds.SignData(message, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1); // получаем ЭЦП в байтах
+                rsaeds.Dispose();
 
             }
             catch (Exception error)
             {
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return arrayByte_out;
+            return sign_out;
         }
 
-        // функция для создания ЭЦП
+        // функция для ПРОВЕРКИ ЭЦП
         // аргументы: вход. байты сообщения; ключ (приватный/публичный), сама сформированная ЭЦП
         public static bool edsAlg_verifyData(Byte[] message, Byte[] key, Byte[] sign)
         {
-            return arrayByte_in;
+            bool result_check = false;
+
+            return result_check;
         }
 
         // Переводит 16-ричную строку в байты

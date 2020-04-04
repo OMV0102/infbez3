@@ -644,7 +644,7 @@ namespace infbez3
         // работает ЛОЛ
         private void button1_Click(object sender, EventArgs e)
         {
-            RSACryptoServiceProvider rs = new RSACryptoServiceProvider();
+            RSACryptoServiceProvider rs = new RSACryptoServiceProvider(global.eds_size_key_bit);
             byte[] pbKey = rs.ExportCspBlob(false);
             byte[] prKey = rs.ExportCspBlob(true);
             byte[] inmes = new byte[4] { 97, 98, 99, 100 };

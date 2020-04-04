@@ -26,14 +26,15 @@ namespace infbez3
         //=====================================
         public static byte[] Asim_byte_in; // Входной массив байтов для Асимметричного ШИФРОВАНИЯ
         public static byte[] Asim_byte_out; // ВЫходной массив байтов после Асимметричного ШИФРОВАНИЯ
-        public static int Asim_size_key_bit = 4096;  // Размер ключа в битах для rsa (16384 бит = 2048 байт указан макс. размер)
-        public static int Asim_size_key_byte = Asim_size_key_bit / 8;  // Размер ключа в байтах для rsa (16384 бит = 2048 байт указан макс. размер)
+        public static int Asim_size_key_bit = 4096;  // Размер ключа в битах для rsa (4096 бит = 512 байт указан макс. размер)
+        public static int Asim_size_key_byte = Asim_size_key_bit / 8;  // Размер ключа в байтах для rsa 
         public static byte[] Asim_byte_key;  // Ключ для Асимметричного ШИФРОВАНИЯ
         public static string Asim_file_key = "";   // путь файла с ключом для Асимметричного ШИФРОВАНИЯ
         public static bool Asim_EncryptOrDecrypt; // Режим либо шифруем либо расшифровываем для Асимметричного ШИФРОВАНИЯ
         public static bool Asim_Keys_isEntry; // Введенны ли ключи или нет для Асимметричного ШИФРОВАНИЯ
         public static string Asim_file_extension = "";  // Расширение считанного файла данных для Асимметричного ШИФРОВАНИЯ
         //=====================================
-
+        public static int eds_size_key_bit = 2048;  // Размер ключа в битах для rsa (2048 бит = 256 байт указан макс. размер)
+        public static int eds_size_key_byte = Asim_size_key_bit / 8;  // Размер ключа в байтах для rsa 
     }
 }
