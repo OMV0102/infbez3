@@ -104,7 +104,7 @@ namespace infbez3
                 sfd.Title = "Выберите место и введите название файла (БЕЗ РАСШИРЕНИЯ) для сохранения сгенерированных ключей ...";
                 sfd.InitialDirectory = Application.StartupPath;
                 sfd.AddExtension = true;  //Добавлять расширение к имени если не указали
-                sfd.Filter = "Keys(*.public;*.private)|*.public;*.private"; // Сохранять только c расширением public или private
+                sfd.Filter = "Keys(*.private;*.public)| *.private;*.public"; // Сохранять только c расширением public или private
 
 
                 res = sfd.ShowDialog();
@@ -153,13 +153,13 @@ namespace infbez3
             {
                 ofd.Title = "ЭЦП: Выберите файл c ключом ..."; // Заголовок окна
                 ofd.InitialDirectory = Application.StartupPath; // Папка проекта
-                ofd.Filter = "Keys(*.public;*.private)|*.public;*.private"; // расширения public/private
+                ofd.Filter = "Keys(*.private)|*.private"; // расширения private
             }
             else
             {
                 ofd.Title = "ЭЦП: Выберите файл c секретным ключом ..."; // Заголовок окна
                 ofd.InitialDirectory = Application.StartupPath; // Папка проекта
-                ofd.Filter = "Keys(*.private)|*.private"; // расширения public/private
+                ofd.Filter = "Keys(*.public;*.private)|*.public;*.private"; // расширения public/private
             }
 
             if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл

@@ -693,7 +693,7 @@ namespace infbez3
                                     this.label_eds_result.Text = "Проверка пройдена";
                                     this.label_eds_result.ForeColor = Color.Green;
                                     this.label_eds_info.Text = "Пояснение:\n";
-                                    this.label_eds_info.Text += "> ЭЦП соответсвует введенным данным;\n";
+                                    this.label_eds_info.Text += "> ЭЦП соответствует введенным данным;\n";
                                     this.label_eds_info.Text += "> Данные не были подмененны;\n";
                                     this.label_eds_info.Text += "> Человек, чей ключ введен, именно он подписал эти данные;\n";
                                     this.label_eds_info.Visible = true;
