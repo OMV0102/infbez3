@@ -655,28 +655,59 @@ namespace infbez3
                 {
                     try
                     {
-                        if(global.eds_signORcheck == true) // если подписание
+                        if (global.eds_signORcheck == true) // если подписание
                         {
-                            if(this.txt_eds_sign_in.Text.Length > 0)
+                            // подписание
+                            global.eds_data_isSign = false; // не подписано
+                            global.eds_byte_sign = alg.edsAlg_signData(global.eds_byte_message, global.eds_byte_key);
+                            // смотрим создалось ли или вдруг было исключение
+                            if (global.eds_data_isSign == true)
                             {
-                                // подписание
-                                global.eds_data_isSign = false; // не подписано
-                                global.eds_byte_sign = alg.edsAlg_signData(global.eds_byte_message, global.eds_byte_key);
-                                // смотрим создалось ли или вдруг было исключение
-                                if(global.eds_data_isSign == true)
+                                this.label_eds_result.Text = "Подпись сформирована";
+                                this.label_eds_result.ForeColor = Color.Green;
+                                this.label_eds_info.Visible = false;
+                                this.btn_eds_saveSign.Visible = true;
+                            }
+                            else // при подписании выскочило исключение и не подписалось
+                            {
+                                this.label_eds_result.Text = "Подпись НЕ сформирована";
+                                this.label_eds_result.ForeColor = Color.Red;
+                                this.label_eds_info.Text = "Возможные причины:\n";
+                                this.label_eds_info.Text += "> Введен ключ, сгенерированный не этим приложением;\n";
+                                this.label_eds_info.Text += "> Введен ключ, который не является приватным;\n";
+                                this.label_eds_info.Text += "> Возможно данные слишком велики для подписи их алгоритмом RSA;";
+                                this.label_eds_info.Visible = true;
+                                this.btn_eds_saveSign.Visible = false;
+                            }
+                        }
+                        else // если проверка
+                        {
+                            if (this.txt_eds_sign_in.Text.Length > 0)
+                            {
+                                // проверка подписи
+                                global.eds_data_isCheck = false; // проверка false
+                                global.eds_data_isCheck = alg.edsAlg_verifyData(global.eds_byte_message, global.eds_byte_key, global.eds_byte_sign);
+                                // проверяем успешность проверки подписи
+                                if (global.eds_data_isCheck == true)
                                 {
-                                    this.label_eds_result.Text = "Подпись сформирована";
+                                    this.label_eds_result.Text = "Проверка пройдена";
                                     this.label_eds_result.ForeColor = Color.Green;
-                                    this.label_eds_info.Visible = false;
-                                    this.btn_eds_saveSign.Visible = true;
+                                    this.label_eds_info.Text = "Пояснение:\n";
+                                    this.label_eds_info.Text += "> ЭЦП соответсвует введенным данным;\n";
+                                    this.label_eds_info.Text += "> Данные не были подмененны;\n";
+                                    this.label_eds_info.Text += "> Человек, чей ключ введен, именно он подписал эти данные;\n";
+                                    this.label_eds_info.Visible = true;
+                                    this.btn_eds_saveSign.Visible = false;
                                 }
-                                else // при подписании выскочило исключение и не подписалось
+                                else
                                 {
-                                    this.label_eds_result.Text = "Подпись НЕ сформирована";
+                                    // проверку не прошла
+                                    this.label_eds_result.Text = "Подпись не прошла проверку";
                                     this.label_eds_result.ForeColor = Color.Red;
                                     this.label_eds_info.Text = "Возможные причины:\n";
-                                    this.label_eds_info.Text += "> Введен ключ, сгенерированный не этим приложением;\n";
-                                    this.label_eds_info.Text += "> Введен ключ, который не является приватным;";
+                                    this.label_eds_info.Text += "> Неверно введенные данные (возможно их подделали);\n";
+                                    this.label_eds_info.Text += "> Введена ошибочно подпись не к этим данным;\n";
+                                    this.label_eds_info.Text += "> Введен ошибочно не тот ключ.;";
                                     this.label_eds_info.Visible = true;
                                     this.btn_eds_saveSign.Visible = false;
                                 }
@@ -687,36 +718,6 @@ namespace infbez3
                                 MessageBox.Show("Укажите файл с подписью!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 this.Enabled = true;
                                 return;
-                            }
-                        }
-                        else // если проверка
-                        {
-                            // проверка подписи
-                            global.eds_data_isCheck = false; // проверка false
-                            global.eds_data_isCheck = alg.edsAlg_verifyData(global.eds_byte_message, global.eds_byte_key, global.eds_byte_sign);
-                            // проверяем успешность проверки подписи
-                            if (global.eds_data_isCheck == true)
-                            {
-                                this.label_eds_result.Text = "Проверка пройдена";
-                                this.label_eds_result.ForeColor = Color.Green;
-                                this.label_eds_info.Text = "Пояснение:\n";
-                                this.label_eds_info.Text += "> ЭЦП соответсвует введенным данным;\n";
-                                this.label_eds_info.Text += "> Данные не были подмененны;\n";
-                                this.label_eds_info.Text += "> Человек, чей ключ введен, именно он подписал эти данные;\n";
-                                this.label_eds_info.Visible = true;
-                                this.btn_eds_saveSign.Visible = false;
-                            }
-                            else
-                            {
-                                // проверку не прошла
-                                this.label_eds_result.Text = "Подпись не прошла проверку";
-                                this.label_eds_result.ForeColor = Color.Red;
-                                this.label_eds_info.Text = "Возможные причины:\n";
-                                this.label_eds_info.Text += "> Неверно введенные данные (возможно их подделали);\n";
-                                this.label_eds_info.Text += "> Введена ошибочно подпись не к этим данным;\n";
-                                this.label_eds_info.Text += "> Введен ошибочно не тот ключ.;";
-                                this.label_eds_info.Visible = true;
-                                this.btn_eds_saveSign.Visible = false;
                             }
                         }
                     }

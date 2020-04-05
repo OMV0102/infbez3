@@ -119,7 +119,8 @@ namespace infbez3
                     
 
                     this.Enabled = false;
-                    string message = "Ключи сохранены.Публичный ключ записан в файл:\n" +
+                    string message = "Ключи сохранены.\n" +
+                        "Публичный ключ записан в файл:\n" +
                         filename + ".public\n" +
                         "Приватный ключ записан в файл:\n" + 
                         filename + ".private\n" +
