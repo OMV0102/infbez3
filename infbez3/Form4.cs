@@ -124,14 +124,14 @@ namespace infbez3
                         filename + ".public\n" +
                         "Приватный ключ записан в файл:\n" + 
                         filename + ".private\n" +
-                        "\nВвести сгенерированный (публичный) ключ сейчас для шифрования?";
+                        "\nВвести сгенерированный (приватный) ключ сейчас для подписания?";
                     res = MessageBox.Show(message, "Сообщение", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     this.Enabled = true;
                     
                     if(res == DialogResult.Yes) // Если ответ да (ввести ключ)
                     {
-                        this.key = keyPublic;
-                        this.txt_key_file.Text = filename + ".public";
+                        this.key = keyPrivate;
+                        this.txt_key_file.Text = filename + ".private";
                     }
                 }
                 sfd.Dispose();
