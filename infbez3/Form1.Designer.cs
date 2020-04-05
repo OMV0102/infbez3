@@ -1288,7 +1288,7 @@
             this.MaximizeBox = false;
             this.Name = "Form_main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Crypto";
+            this.Text = "CryptoApp";
             this.Load += new System.EventHandler(this.Form_main_Load);
             this.tab_AsimAlg.ResumeLayout(false);
             this.tab_AsimAlg.PerformLayout();
