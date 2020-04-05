@@ -98,6 +98,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tabControl_main = new System.Windows.Forms.TabControl();
             this.tabPage_eds = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
             this.label_eds_result = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.btn_eds_load_eds = new System.Windows.Forms.Button();
@@ -120,7 +121,6 @@
             this.label_eds_lineUp = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.toolTip_Asim_file = new System.Windows.Forms.ToolTip(this.components);
-            this.label15 = new System.Windows.Forms.Label();
             this.tab_AsimAlg.SuspendLayout();
             this.tab_SimAlg.SuspendLayout();
             this.tab_Hesh.SuspendLayout();
@@ -1026,6 +1026,16 @@
             this.tabPage_eds.TabIndex = 5;
             this.tabPage_eds.Text = "ЭЦП (RSA)";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Location = new System.Drawing.Point(5, 107);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(50, 18);
+            this.label15.TabIndex = 94;
+            this.label15.Text = "Ключ:";
+            // 
             // label_eds_result
             // 
             this.label_eds_result.AutoSize = true;
@@ -1061,11 +1071,11 @@
             // 
             // txt_eds_sign_in
             // 
-            this.txt_eds_sign_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_eds_sign_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_eds_sign_in.Location = new System.Drawing.Point(6, 206);
             this.txt_eds_sign_in.Name = "txt_eds_sign_in";
             this.txt_eds_sign_in.ReadOnly = true;
-            this.txt_eds_sign_in.Size = new System.Drawing.Size(385, 26);
+            this.txt_eds_sign_in.Size = new System.Drawing.Size(385, 24);
             this.txt_eds_sign_in.TabIndex = 89;
             // 
             // btn_eds_saveSign
@@ -1085,11 +1095,11 @@
             // 
             // txt_eds_file_in
             // 
-            this.txt_eds_file_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.txt_eds_file_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txt_eds_file_in.Location = new System.Drawing.Point(6, 66);
             this.txt_eds_file_in.Name = "txt_eds_file_in";
             this.txt_eds_file_in.ReadOnly = true;
-            this.txt_eds_file_in.Size = new System.Drawing.Size(385, 26);
+            this.txt_eds_file_in.Size = new System.Drawing.Size(385, 24);
             this.txt_eds_file_in.TabIndex = 72;
             // 
             // btn_eds_entryKey
@@ -1263,16 +1273,6 @@
             this.label11.Size = new System.Drawing.Size(129, 18);
             this.label11.TabIndex = 91;
             this.label11.Text = "Файл с данными:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(5, 107);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(50, 18);
-            this.label15.TabIndex = 94;
-            this.label15.Text = "Ключ:";
             // 
             // Form_main
             // 

@@ -170,7 +170,7 @@ namespace infbez3
         private void btn_loadKeyIV_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Выбрать файл ..."; // Заголовок окна
+            ofd.Title = "Выбрать файл с ключом и IV ..."; // Заголовок окна
             ofd.InitialDirectory = Application.StartupPath; // Папка проекта
 
             if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
@@ -218,9 +218,16 @@ namespace infbez3
         // При закрытии формы
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Освободили память от aes и 3des
-            aescng.Dispose();
-            tripledes.Dispose();
+            try
+            {
+                // Освободили память от aes и 3des
+                aescng.Dispose();
+                tripledes.Dispose();
+            }
+            catch (Exception error)
+            {
+
+            }
         }
     }
 }

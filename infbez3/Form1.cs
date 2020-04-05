@@ -251,6 +251,7 @@ namespace infbez3
                     {
                         // очистили ВЫходные байты
                         global.Simm_byte_out = new byte[0];
+                        this.txt_simm_text_out.Text = "";
                         // Считали байты из файла
                         global.Simm_byte_in = File.ReadAllBytes(ofd.FileName);
                         this.txt_simm_byte_in_num.Text = global.Simm_byte_in.Length.ToString(); // Вывели кол-во считанных байт
@@ -504,8 +505,8 @@ namespace infbez3
         private void btn_choice_fileinAsim_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Выбрать файл ..."; // Заголовок окна
-            ofd.InitialDirectory = Application.StartupPath; // Папка проекта
+            ofd.Title = "Выбрать файл с данными ..."; // Заголовок окна
+            ofd.InitialDirectory = Application.StartupPath; // Папка откуда запустили exe
 
             if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
             {
@@ -516,6 +517,7 @@ namespace infbez3
                     {
                         // очистили ВЫходные байты
                         global.Asim_byte_out = new byte[0];
+                        this.txt_Asim_text_out.Text = "";
                         // Считали байты из файла
                         global.Asim_byte_in = File.ReadAllBytes(ofd.FileName);
                         this.txt_Asim_byte_in_num.Text = global.Asim_byte_in.Length.ToString(); // Вывели кол-во считанных байт
@@ -835,20 +837,135 @@ namespace infbez3
         // кнопка ВЫБРАТЬ ДАННЫЕ
         private void btn_eds_load_in_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Выбрать файл с данными ..."; // Заголовок окна
+            ofd.InitialDirectory = Application.StartupPath; // Папка откуда запустили exe
 
+            if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
+            {
+                // читаем байты из файла
+                if (ofd.FileName.Length > 0) // Если путь не нулевой
+                {
+                    if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
+                    {
+                        // очистили ВЫходные байты // нейтралное положение нужно
+                        this.clearBeforeLoadDataORSign();
+                        // Считали байты из файла
+                        global.eds_byte_message = File.ReadAllBytes(ofd.FileName);
+                        this.txt_eds_file_in.Text = ofd.FileName; // вывели путь к файлу в textbox
+                    }
+                    else
+                    {
+                        this.Enabled = false;
+                        MessageBox.Show("Указанного файла\n{" + ofd.FileName + "}\nНЕ существует!", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Enabled = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Указан неверный путь!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
+            }
+            ofd.Dispose();
         }
 
         // кнопка ВЫБРАТЬ ПОДПИСЬ
         private void btn_eds_load_eds_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Выбрать файл с подписью ..."; // Заголовок окна
+            ofd.InitialDirectory = Application.StartupPath; // Папка откуда запустили exe
+            ofd.Filter = "EDS(*.)|*.eds"; // Сохранять только c расширением eds
 
+            if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
+            {
+                // читаем байты из файла
+                if (ofd.FileName.Length > 0) // Если путь не нулевой
+                {
+                    if (File.Exists(ofd.FileName) == true) // Если указанный файл существует
+                    {
+                        // очистили ВЫходные байты // нейтралное положение нужно
+                        this.clearBeforeLoadDataORSign();
+                        // Считали байты из файла
+                        global.eds_byte_sign = File.ReadAllBytes(ofd.FileName);
+                        this.txt_eds_sign_in.Text = ofd.FileName; // вывели путь к файлу в textbox
+                    }
+                    else
+                    {
+                        this.Enabled = false;
+                        MessageBox.Show("Указанного файла\n{" + ofd.FileName + "}\nНЕ существует!", " Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Enabled = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    this.Enabled = false;
+                    MessageBox.Show("Указан неверный путь!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
+                    return;
+                }
+            }
+            ofd.Dispose();
         }
 
         // кнопка СОХРАНИТЬ ПОДПИСЬ
         private void btn_eds_saveSign_Click(object sender, EventArgs e)
         {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "Выберите папку и введите название файла (БЕЗ расширения) ...";
+            sfd.InitialDirectory = Application.StartupPath;
+            sfd.Filter = "EDS(*.)|*.eds"; // Сохранять только c расширением eds
+            sfd.AddExtension = true;  //Добавить расширение к имени если не указали
 
+            DialogResult res = sfd.ShowDialog();
+            if (res == DialogResult.OK)
+            {
+                // получаем выбранный файл
+                string filename = sfd.FileName;
+                // сохраняем байты в файл
+                File.WriteAllBytes(filename, global.eds_byte_sign);
+
+                this.Enabled = false;
+                MessageBox.Show("Подпись записана в файл:\n" + filename, "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Enabled = true;
+            }
+            sfd.Dispose();
+        }
+
+        private void clearBeforeLoadDataORSign()
+        {
+            // ВЫходные данные стираем
+            global.eds_data_isSign = false;
+            global.eds_data_isCheck = false;
+            this.label_eds_result.ForeColor = Color.Black;
+            this.btn_eds_saveSign.Visible = false;
+            if (global.eds_signORcheck) // если подписание
+            {
+                global.eds_byte_sign = new byte[0];
+                // Результаты подписывания обнулить
+                this.label_eds_result.Text = "Подпись еще не сформирована";
+                this.label_eds_info.Text = "Для создания ЭЦП нужно:\n";
+                this.label_eds_info.Text += "> Указать файл с данными;\n";
+                this.label_eds_info.Text += "> Ввести секретный ключ;\n";
+                this.label_eds_info.Text += "> Нажать кнопку Подписать.";
+
+            }
+            else // если проверка ЭЦП
+            {
+                this.label_eds_result.Text = "Подпись еще не проверенна";
+                this.label_eds_info.Text = "Для проверки ЭЦП нужно:\n";
+                this.label_eds_info.Text += "> Указать файл с данными;\n";
+                this.label_eds_info.Text += "> Ввести публичный (или секретный) ключ;\n";
+                this.label_eds_info.Text += "> Указать файл с сформированной подписью;\n";
+                this.label_eds_info.Text += "> Нажать кнопку Проверить.";
+            }
         }
     }
+    
     
 }

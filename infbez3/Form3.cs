@@ -164,7 +164,7 @@ namespace infbez3
             {
                 ofd.Title = "РАСШИФРОВКА: Выбрать файл c секретным ключом ..."; // Заголовок окна
                 ofd.InitialDirectory = Application.StartupPath; // Папка проекта
-                ofd.Filter = "Files(*.private)|*.private"; // расширения public/private
+                ofd.Filter = "Keys(*.private)|*.private"; // расширения public/private
             }
             if (ofd.ShowDialog() == DialogResult.OK) // Если выбрали файл
             {
