@@ -822,6 +822,7 @@ namespace infbez3
                 this.label_eds_info.Text += "> Указать файл с сформированной подписью;\n";
                 this.label_eds_info.Text += "> Нажать кнопку Проверить.";
             }
+            this.label_eds_info.Visible = true;
         }
 
         // ввод ключа ЭЦП
